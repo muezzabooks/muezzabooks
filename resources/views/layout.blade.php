@@ -7,7 +7,7 @@
   <title>Laravel</title>
 
 	<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-	<link href="{{ URL::asset('css/one-page-wonder.min.css') }}" rel="stylesheet">
+	<link href="css/one-page-wonder.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+            <a class="nav-link" href="#">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Log In</a>
+            <a class="nav-link" href="#">Log In</a>
           </li>
         </ul>
       </div>
@@ -39,13 +39,13 @@
 
 	
 
-	<!-- Footer -->
-	<footer class="footer btn-warning">
-		<div class="container py-5 ">
+	 <!-- Footer -->
+	 <footer class="py-5 btn-warning">
+		<div class="container">
 		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
 		</div>
 		<!-- /.container -->
-	</footer>
+	  </footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 </body>
