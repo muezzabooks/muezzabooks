@@ -54,11 +54,7 @@
 	
 
 	 <!-- Footer -->
-<<<<<<< HEAD
 	 <footer class="py-5 btn-yellow">
-=======
-	 <footer class="py-5 bg-warning">
->>>>>>> upstream/master
 		<div class="container">
 		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
 		</div>
