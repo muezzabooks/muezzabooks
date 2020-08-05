@@ -92,11 +92,20 @@ section{
   background-color: white;
 }
 
+.btn-outline-grey {
+  color: #444;
+  border-color: #444;
+}
 
+.btn-outline-grey:hover {
+  color: #FFD801;
+  background-color: #444;
+  border-color: #444;
+}
 
 .btn-yellow{
-    background-color: #444;
-    color: #FFD801;
+    background-color: #FFD801;
+    color: #3f3d56;
 }
 
 .btn-outline-yellow {
