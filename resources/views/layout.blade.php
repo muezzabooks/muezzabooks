@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log In</a>
+            <a class="nav-link" href="{{ route('login') }}">Log In</a>
           </li>
         </ul>
       </div>
