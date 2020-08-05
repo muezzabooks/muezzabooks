@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="min-height: 100%">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
 	
 
 	 <!-- Footer -->
-	 <footer class="py-5 btn-warning">
+	 <footer class="footer py-5 bg-warning">
 		<div class="container">
 		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
 		</div>
