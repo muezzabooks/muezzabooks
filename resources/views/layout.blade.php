@@ -22,12 +22,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Log In</a>
-          </li>
+          @guest
+
+            @if (Route::has('register'))
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+              </li>
+            @endif
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">Log In</a>
+            </li>
+            @else
+              <li>
+                <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
+                </form>
+              </li>
+          @endguest
+          
+          
         </ul>
       </div>
     </div>
