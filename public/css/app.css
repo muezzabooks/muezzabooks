@@ -10996,9 +10996,13 @@ header.masthead .masthead-content .masthead-subheading {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .img-header {
     display: none;
+  }
+
+  .detail {
+    bottom: 10px;
   }
 }
 
@@ -11008,6 +11012,21 @@ header.masthead .masthead-content .masthead-subheading {
 
 .img-catalog {
   height: 200px;
+}
+
+.img-detail {
+  height: 300px;
+}
+
+.title-detail {
+  font-size: 3em;
+  color: #3f3d56;
+  position: relative;
+  bottom: 20px;
+}
+
+.detail {
+  bottom: 70px;
 }
 
 section {

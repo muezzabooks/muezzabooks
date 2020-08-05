@@ -33,8 +33,8 @@
         </div>
         <div class="col-lg-8">
           <div class="p-5">
-            <h4 class="display-4">QM - Quranic Motivation</h4>
-           <a href="" class="btn btn-outline-yellow">Warning</a>
+            <h4 class="display-4">Quranic Motivation</h4>
+           <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
       </div>
@@ -53,8 +53,8 @@
         </div>
         <div class="col-lg-8 order-lg-1">
           <div class="p-5">
-            <h4 class="display-4">BBA - Bahagia Bersama AlQuran</h4>            
-            <a href="" class="btn btn-outline-yellow">Warning</a>
+            <h4 class="display-4">Bahagia Bersama AlQuran</h4>            
+            <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
       </div>
@@ -72,8 +72,8 @@
         </div>
         <div class="col-lg-8">
           <div class="p-5">
-            <h2 class="display-4">QM - Quranic Motivation</h2>
-           <a href="" class="btn btn-outline-yellow">Warning</a>
+            <h2 class="display-4">Quranic Motivation</h2>
+           <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
       </div>
