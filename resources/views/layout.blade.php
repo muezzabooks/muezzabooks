@@ -40,7 +40,7 @@
 	
 
 	 <!-- Footer -->
-	 <footer class="footer py-5 bg-warning">
+	 <footer class="py-5 bg-warning">
 		<div class="container">
 		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
 		</div>
