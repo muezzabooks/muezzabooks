@@ -22,7 +22,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          @guest
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('cart') }}"><img class="" src="{{ ('assets/images/supermarket.png') }}" ></a>
+          </li>
+          {{-- @guest
 
             @if (Route::has('register'))
               <li class="nav-item">
@@ -39,7 +43,7 @@
                   <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
                 </form>
               </li>
-          @endguest
+          @endguest --}}
           
           
         </ul>

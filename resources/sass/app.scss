@@ -74,14 +74,7 @@ header.masthead {
   }
 }
 
-@media (max-width: 600px){
-  .img-header{
-    display: none;
-  }
-  .detail{
-    bottom: 10px;
-  }
-}
+
 
 .img-nav{
     height: 50px;
@@ -106,8 +99,21 @@ header.masthead {
   bottom:70px;
 }
 
+.card-header-yellow{
+  background-color: #FFD801;
+  border: 0;
+}
+
+.img-card{
+  height: 100px;
+}
+
 section{
   background-color: white;
+}
+
+.btn-delete{
+  margin-top:6em;
 }
 
 .btn-outline-grey {
@@ -137,3 +143,17 @@ section{
     border-color: #FFD801;
   }
   
+  @media (max-width: 600px){
+    .img-header{
+      display: none;
+    }
+    .detail{
+      bottom: 10px;
+    }
+    .img-card{
+      height: 50px;
+    }
+    .btn-delete{
+      margin-top: 0;
+    }
+  }

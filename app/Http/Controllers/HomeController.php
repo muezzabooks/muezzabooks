@@ -14,4 +14,8 @@ class HomeController extends Controller
     public function detail(){
         return view('detail');
     }
+
+    public function cart(){
+        return view('cart');
+    }
 }
