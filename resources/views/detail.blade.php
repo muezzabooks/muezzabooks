@@ -3,11 +3,10 @@
 @section('content')
 <section>
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-3">
-          <div class="p-5">
-            <img class="img-detail" src="{{ ('assets/images/cover-book.jpg') }}" > 
-          </div>
+      <div class="row align-items-center pb-5">
+        
+        <div class="col-lg-6 text-center pb-5">
+            <img style="height: 100%; width: 200px" src="{{ ('assets/images/cover-book.jpg') }}" > 
         </div>
         <div class="col-lg-5">
             <div class="p-5">
