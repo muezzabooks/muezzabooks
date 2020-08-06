@@ -7,7 +7,8 @@
   <title>Laravel</title>
 
 	<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-	<link href="css/one-page-wonder.min.css" rel="stylesheet">
+  <link href="css/one-page-wonder.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -22,11 +23,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('cart') }}"><img class="" src="{{ ('assets/images/supermarket.png') }}" ></a>
+          <li class="nav-item pr-5">
+            <a class="nav-link" href="{{ route('cart') }}">
+              <i class="fa fa-shopping-cart fa-lg"></i>
+            </a>
           </li>
-          {{-- @guest
+          @guest
 
             @if (Route::has('register'))
               <li class="nav-item">
@@ -43,8 +45,7 @@
                   <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
                 </form>
               </li>
-          @endguest --}}
-          
+          @endguest
           
         </ul>
       </div>
