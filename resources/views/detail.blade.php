@@ -14,11 +14,14 @@
            <h1 class="title pb-2"><strong>Quranic Motivation</strong></h1>
            <h3 class="pb-2">Rp 90.000</h3>
            <h5 class="pb-2">
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quam, ab dolorum recusandae voluptates mollitia dicta sunt ipsam dolore hic natus velit nihil explicabo impedit aliquam consectetur minima, beatae alias.
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+             Nisi quam, ab dolorum recusandae voluptates mollitia dicta sunt ipsam dolore hic natus velit nihil explicabo 
+             impedit aliquam consectetur minima, beatae alias. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
            </h5>
            <h5>Jumlah Halaman : 90 Halaman</h5>
-           <h5 class="pb-5">Kategori : lorem ipsum</h5>
-           <a href="#" class="btn btn-dark">Beli Sekarang</a>
+           <h5 class="pb-2">Kategori : lorem ipsum</h5>
+           <a href="#" class="btn btn-warning">Beli Sekarang</a>
            <a href="#" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
         </div>
       </div>
