@@ -4,28 +4,49 @@
 <section>
     <hr>
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-3">
-          <div class="p-5">
-            <img class="img-detail" src="{{ ('assets/images/cover-book.jpg') }}" > 
-          </div>
+      <div class="row align-items-center pb-5">
+        
+        <div class="col-lg-6 text-center pb-5">
+            <img style="height: 100%; width: 200px" src="{{ ('assets/images/cover-book.jpg') }}" > 
         </div>
-        <div class="col-lg-5 detail">
-            <h2 class="title-detail">Quranic Motivation</h2>
-           <h5>Jumlah Halaman: 90 Halaman</h5>
-           <h5>Harga : Rp 90.000</h5>
-
+        
+        <div class="col-lg-6">
+           <h1 class="title pb-2"><strong>Quranic Motivation</strong></h1>
+           <h3 class="pb-2">Rp 90.000</h3>
+           <h5 class="pb-2">
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quam, ab dolorum recusandae voluptates mollitia dicta sunt ipsam dolore hic natus velit nihil explicabo impedit aliquam consectetur minima, beatae alias.
+           </h5>
+           <h5>Jumlah Halaman : 90 Halaman</h5>
+           <h5 class="pb-5">Kategori : lorem ipsum</h5>
+           <a href="#" class="btn btn-dark">Beli Sekarang</a>
+           <a href="#" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
         </div>
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a><br>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
+      </div>
+      {{-- end of row --}}
+      <div class="row align-items-center pb-5">
+        <div class="col-lg-12">
+          <h5>
+            <strong>Username</strong>
+          </h5>
+          <p class="pb-2">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
+          </p>
+          {{-- -- --}}
+          <h5>
+            <strong>Username</strong>
+          </h5>
+          <p class="pb-2">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
+          </p>
+          {{-- -- --}}
+          <h5>
+            <strong>Username</strong>
+          </h5>
+          <p class="pb-2">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
+          </p>
+        </div>
+        
       </div>
     </div>
   </section>
