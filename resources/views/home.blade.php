@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-lg-6 order-lg-2 text-center">
             <div class="p-5">
-              <img class="img-header" src="{{ ('assets/images/read.svg') }}"> 
+              <img class="img-fluid" src="{{ ('assets/images/read.svg') }}"> 
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">
@@ -34,7 +34,10 @@
         <div class="col-lg-8">
           <div class="p-5">
             <h4 class="display-4">Quranic Motivation</h4>
-           <a href="detail" class="btn btn-outline-yellow">Warning</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis a sit maiores expedita nesciunt eius deleniti quidem enim culpa quas incidunt molestiae ut facere voluptas illum, similique consequatur labore. Harum.
+            </p>
+            <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
       </div>
@@ -53,7 +56,10 @@
         </div>
         <div class="col-lg-8 order-lg-1">
           <div class="p-5">
-            <h4 class="display-4">Bahagia Bersama AlQuran</h4>            
+            <h4 class="display-4">Bahagia Bersama AlQuran</h4>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis delectus commodi ipsum nam deleniti, odit dolorem soluta voluptatibus, vel alias, temporibus assumenda! Necessitatibus delectus laborum corrupti illum fugit porro rem.
+            </p>      
             <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
@@ -73,7 +79,10 @@
         <div class="col-lg-8">
           <div class="p-5">
             <h2 class="display-4">Quranic Motivation</h2>
-           <a href="detail" class="btn btn-outline-yellow">Warning</a>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident minus saepe quidem explicabo hic quas recusandae tempore, earum doloribus, repellat beatae culpa tenetur ex fuga adipisci! Provident veritatis laboriosam id.
+            </p>
+            <a href="detail" class="btn btn-outline-yellow">Warning</a>
           </div>
         </div>
       </div>
