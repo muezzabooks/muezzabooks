@@ -4,15 +4,15 @@
 <section>
     <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <div class="p-3">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-sm-8">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-sm-2">
                                         <img src="{{ ('assets/images/cover-book.jpg') }}" class="img-card" alt="">
                                     </div>
                                     <div class="col-md-8">
@@ -33,10 +33,10 @@
                             <hr>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-sm-2">
                                     <img src="{{ ('assets/images/cover-book.jpg') }}" class="img-card" alt="">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-8 col-sm-8">
                                     <h4>Bahagia Bersama Al-Quran</h4>
                                     <form>
                                         <div class="form-group">
