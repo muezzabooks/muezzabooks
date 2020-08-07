@@ -18,5 +18,6 @@ Route::get('/', 'HomeController@home')->name('home');
 Route::get('/catalog', 'CatalogController@index');
 Route::get('/detail','HomeController@detail')->name('detail');
 Route::get('/cart', 'HomeController@cart')->name('cart');
+Route::get('/checkout','HomeController@checkout');
 
 Auth::routes();

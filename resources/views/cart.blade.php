@@ -55,7 +55,7 @@
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Grand Total : 180.000</h5>
-                      <a href="#" class="btn btn-yellow btn-block">Go to Payment</a>
+                      <a href="checkout" class="btn btn-yellow btn-block">Go to Payment</a>
                     </div>
                   </div>
                 </div>
