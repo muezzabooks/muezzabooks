@@ -16,7 +16,7 @@ class ProductsController extends Controller
     {
         $products = Product::all();
 
-        return response()->json($products);
+        return view('home')->with('products', $products);
     }
 
     /**
@@ -53,7 +53,14 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $products = Product::where('id', $id)->get();
+
+        // return response()->json([
+        //     'product' => $products
+        // ]);
+
+        return view('detail')
+        ->with('products', $products);
     }
 
     /**
