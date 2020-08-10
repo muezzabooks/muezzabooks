@@ -20,7 +20,7 @@
          </h5>
          <h5>Stock : {{ $a->stock }}</h5>
          <a href="#" class="btn btn-warning">Beli Sekarang</a>
-         <a href="#" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
+         <a href="{{ route('cart.store',['id' => $a->id]) }}" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
       </div>
     </div>
     {{-- end of row --}}
