@@ -71,6 +71,7 @@
                           Rp. 660000
                       </div>
                   </div>
+                  <br>
                   <h4>Grand Total : Rp 660000</h4> 
                   <a href="#" class="btn btn-block btn-primary">Pay</a>
                 </div>

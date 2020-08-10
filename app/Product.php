@@ -11,8 +11,12 @@ class Product extends Model
         return $this->hasMany('App\Comment');
     }
 
-    public function category()
-    {
-        return $this->hasMany('App\Category');
-    }
+    // public function category()
+    // {
+    //     return $this->hasMany('App\Category');
+    // }
+
+    protected $table = 'products';
+
+    protected $fillable = (['product_name','description','stock','price','image']);
 }
