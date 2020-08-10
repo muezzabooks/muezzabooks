@@ -56,15 +56,14 @@
 		@yield('content')
 
 
-	
 
 	 <!-- Footer -->
-	 <footer class="py-5 btn-yellow">
+	<footer class="py-5 btn-yellow">
 		<div class="container">
 		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
 		</div>
 		<!-- /.container -->
-	  </footer>
+  </footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 </body>
