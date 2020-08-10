@@ -36,9 +36,6 @@
         <div class="col-lg-8">
           <div class="p-5">
             <h4 class="display-4">{{ $p->product_name }}</h4>
-            <p>
-              {{ $p->description }}
-              </p>
             <a href="show/{{ $p->id }}" class="btn btn-outline-yellow">detail</a>
           </div>
         </div>
@@ -58,10 +55,7 @@
         </div>
         <div class="col-lg-8 order-lg-1">
           <div class="p-5">
-            <h4 class="display-4">{{ $p->product_name }}</h4>
-            <p>
-              {{ $p->description }}
-            </p>      
+            <h4 class="display-4">{{ $p->product_name }}</h4>     
             <a href="show/{{ $p->id }}" class="btn btn-outline-yellow">Detail</a>
           </div>
         </div>
