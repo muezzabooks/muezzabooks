@@ -14,7 +14,9 @@ class productsController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $products = Product::all();
+
+        return response()->json($products);
     }
 
     /**
@@ -22,20 +24,8 @@ class productsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $products = new Product;
-
-        $products->product_name = $request->product_name;
-        $products->description = $request->desc;
-        $products->stock = $request->stock;
-        $products->price = $request->price;
-        $products->image = $request->image;
-        $products->save();
-
-        return response()->json([
-            "message" => "Data Berhasil Masuk"
-        ], 201);
 
     }
 
@@ -47,7 +37,12 @@ class productsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $products = Product::create($request->all());
+
+        return response()->json([
+            'message' => 'Data Berhasil Masuk',
+            'product' => $products
+        ], 201);
     }
 
     /**
@@ -81,7 +76,13 @@ class productsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $products = Product::create($request->all());
+
+        return response()->json([
+            'message' => 'Data Berhasil Update',
+            'product' => $products
+        ], 201);
     }
 
     /**
@@ -92,6 +93,11 @@ class productsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = Product::find($id);
+        $products->delete();
+
+        return response()->json([
+            'message' => 'Berhasil Dihapus'
+        ]);
     }
 }

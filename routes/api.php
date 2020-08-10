@@ -18,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::resource('products', 'productsController');
+
 
