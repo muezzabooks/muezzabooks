@@ -6,6 +6,7 @@ use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -47,7 +48,7 @@ class CartController extends Controller
                 $cart = [
                     $id = [
                         "product_id" => $product->id,
-                        "product_name" => $product->name,
+                        "product_name" => $product->product_name,
                         "price" => $product->price,
                         "quantity" => 1
                     ]
@@ -72,7 +73,7 @@ class CartController extends Controller
                     "price" => $product->price,
                     "quantity" => 1
                 ];
-
+            
             session()->put('cart', $cart);
             return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');
         }
@@ -125,20 +126,20 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        if($request->id) {
+        if(isset($id)) {
  
             $cart = session()->get('cart');
  
-            if(isset($cart[$request->id])) {
+            if(isset($cart[$id])) {
  
-                unset($cart[$request->id]);
+                unset($cart[$id]);
  
                 session()->put('cart', $cart);
             }
- 
-            session()->flash('success', 'Berhasil dihapus dari keranjang');
+            
+            return redirect()->back()->with('success','Berhasil dihapus dari keranjang');
         }
     }
 }
