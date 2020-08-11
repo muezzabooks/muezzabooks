@@ -108,15 +108,35 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function increase(Request $request, $id)
     {
-        if($request->id && $request->quantity)
+        if(isset($id))
         {
             $cart = session()->get('cart');
- 
-            $cart[$request->id]["quantity"] = $request->quantity;
- 
+            $quantity = $cart[$id]["quantity"];
+
+            $cart[$id]["quantity"] = $quantity + 1;
+
             session()->put('cart', $cart);
+            return redirect()->back();
+        }
+    }
+
+    public function decrease(Request $request, $id)
+    {
+        if(isset($id))
+        {
+            $cart = session()->get('cart');
+            $quantity = $cart[$id]["quantity"];
+
+            if ($quantity === 1) {
+                return redirect()->back();
+            }
+
+            $cart[$id]["quantity"] = $quantity - 1;
+
+            session()->put('cart', $cart);
+            return redirect()->back();
         }
     }
 
@@ -126,20 +146,20 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
-        if(isset($id)) {
+        if(isset($request->id)) {
  
             $cart = session()->get('cart');
  
-            if(isset($cart[$id])) {
+            if(isset($cart[$request->id])) {
  
-                unset($cart[$id]);
+                unset($cart[$request->id]);
  
                 session()->put('cart', $cart);
             }
             
-            return redirect()->back()->with('success','Berhasil dihapus dari keranjang');
+            session()->flash('success', 'Product removed successfully');
         }
     }
 }

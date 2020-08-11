@@ -25,21 +25,36 @@
                         </div>
                         <div class="col-md-8">
                           <h4>{{ $details['product_name'] }}</h4>
-                          <form>
-                            <div class="form-group">
-                              <input type="number" class="form-control" id="number" value="{{ $details['quantity'] }}">
-                            </div>
-                          </form>
+                          <div class="form-inline">
+                            <form action="{{ route('cart.increase',['id' => $id]) }}" method="POST" class="mt-auto">
+                              @csrf
+                              @method('patch')
+                              <button class="btn btn-success">+</button>
+                            </form>
+
+                            <form class="col-3">
+                                <input type="number" class="col-12 form-control quantity" id="number" value="{{ $details['quantity'] }}">
+                            </form>
+
+                            <form action="{{ route('cart.decrease',['id' => $id]) }}" method="POST" class="mt-auto">
+                                @csrf
+                                @method('patch')
+                                <button class="btn btn-secondary">-</button>
+                            </form>
+                          </div>
+                          
                           <p>Total Harga : {{ $details['price'] }}</p>
                         </div>
-                        <div class="col-md-2 d-flex">
-                          {{-- <button class="btn btn-danger mt-auto remove-from-cart" data-id={{ $id }}>Hapus</button> --}}
+                        <div class="col-md-2">
+                          
+                          <br><br>
+                          <button class="btn btn-danger mt-auto remove-from-cart" data-id={{ $id }}>Hapus</button>
                           {{-- <a href="{{ route('cart.destroy',['id' => $id]) }}" class="btn btn-danger mt-auto">Hapus</a> --}}
-                          <form action="{{ route('cart.destroy',['id' => $id]) }}" method="POST" class="mt-auto">
+                          {{-- <form action="{{ route('cart.destroy',['id' => $id]) }}" method="POST" class="mt-auto">
                               @csrf
                               @method('delete')
                               <button class="btn btn-danger">Hapus</button>
-                          </form>
+                          </form> --}}
                         </div>
                       </div>
                     </div>
@@ -74,20 +89,22 @@
 @section('script')
   <script type="text/javascript">
  
-      $(".update-cart").click(function (e) {
-         e.preventDefault();
+      // $(".update-cart").click(function (e) {
+      //   e.preventDefault();
  
-         var ele = $(this);
- 
-          $.ajax({
-             url: '{{ url('update-cart') }}',
-             method: "patch",
-             data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
-             success: function (response) {
-                 window.location.reload();
-             }
-          });
-      });
+      //   var ele = $(this);
+        
+      //   if(confirm("Are you sure")) {
+      //     $.ajax({
+      //        url: '{{ url('update-cart') }}',
+      //        method: "patch",
+      //        data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("input").find(".quantity").val()},
+      //        success: function (response) {
+      //            window.location.reload();
+      //        }
+      //     });
+      //   }
+      // });
  
       $(".remove-from-cart").click(function (e) {
           e.preventDefault();
@@ -96,7 +113,7 @@
  
           if(confirm("Are you sure")) {
               $.ajax({
-                  url: '',
+                  url: '{{ route("cart.destroy") }}',
                   method: "DELETE",
                   data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
                   success: function (response) {
