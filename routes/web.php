@@ -19,8 +19,9 @@ Route::get('/show/{id}','ProductsController@show')->name('show');
 
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::get('/cart/add/{id}', 'CartController@store')->name('cart.store');
-Route::patch('update-cart', 'CartController@update');
-Route::delete('/cart/delete/{id}', 'CartController@destroy')->name('cart.destroy');
+Route::patch('/cart/increase/{id}', 'CartController@increase')->name('cart.increase');
+Route::patch('/cart/decrease/{id}', 'CartController@decrease')->name('cart.decrease');
+Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout','HomeController@checkout');
 
