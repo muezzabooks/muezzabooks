@@ -48,14 +48,14 @@
             </ul>
             <div class="row">
               <div class="col-md-6">
-                Total Harga <br>
-                Biaya Kirim <br>
-                Diskon <br>
+                <p>Total Harga</p>
+                <p>Biaya Kirim</p> 
+                <p>Diskon</p> 
               </div>
               <div class="col-md-6">
-                Rp. 65000 <br>
-                Rp. 1000 <br>
-                Rp. 66000
+                <p>Rp. 65000</p> 
+                <p>Rp. 1000 </p>
+                <p>Rp. 66000</p>
               </div>
             </div>
             <h4>Grand Total : Rp 66000</h4>

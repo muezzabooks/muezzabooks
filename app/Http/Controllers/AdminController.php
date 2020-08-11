@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
 use Illuminate\Http\Request;
+use App\Product;
 
-class ProductsController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ProductsController extends Controller
     {
         $products = Product::all();
 
-        return view('home')->with('products', $products);
+        return view('admin.adminproduct')->with('products', $products);
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -37,15 +37,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $products = Product::create($request->all());
-
-        return redirect('/adminproduct');
-
-    
-        // return response()->json([
-        //     'message' => 'Data Berhasil Masuk',
-        //     'product' => $products
-        // ], 201);
+        //
     }
 
     /**
@@ -56,14 +48,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $products = Product::where('id', $id)->get();
-
-        // return response()->json([
-        //     'product' => $products
-        // ]);
-
-        return view('detail')
-        ->with('products', $products);
+        //
     }
 
     /**
@@ -86,25 +71,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product_name = $request->product_name;
-        $description = $request->description;
-        $stock = $request->stock;
-        $price = $request->price;
-        $image = $request->image;
-
-        $products = Product::find($id);
-        $products->product_name = $product_name;
-        $products->description = $description;
-        $products->stock = $stock;
-        $products->price = $price;
-        $products->image = $image;
-
-        $products->save();
-
-        return response()->json([
-            'message' => 'Data Berhasil Update',
-            'product' => $products
-        ], 200);
+        //
     }
 
     /**
@@ -115,11 +82,6 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $products = Product::find($id);
-        $products->delete();
-
-        return response()->json([
-            'message' => 'Berhasil Dihapus'
-        ]);
+        //
     }
 }

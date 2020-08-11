@@ -25,13 +25,6 @@
                         </div>
                         <div class="col-md-8">
                           <h4>{{ $details['product_name'] }}</h4>
-<<<<<<< HEAD
-                          <form>
-                            <div class="form-group">
-                              <input type="number" class="form-control" id="number" value="{{ $details['quantity'] }}" min="1">
-                            </div>
-                          </form>
-=======
                           <div class="form-inline">
                             <form action="{{ route('cart.increase',['id' => $id]) }}" method="POST" class="mt-auto">
                               @csrf
@@ -50,7 +43,6 @@
                             </form>
                           </div>
                           
->>>>>>> deb8f6c03676daa12fdf6fdfe904cb44a055ca43
                           <p>Total Harga : {{ $details['price'] }}</p>
                         </div>
                         <div class="col-md-2">

@@ -25,4 +25,7 @@ Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout','HomeController@checkout');
 
+Route::get('/adminproduct', 'AdminController@index');
+Route::post('/adminproduct','ProductsController@store');
+
 Auth::routes();
