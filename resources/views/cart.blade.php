@@ -27,7 +27,7 @@
                           <h4>{{ $details['product_name'] }}</h4>
                           <form>
                             <div class="form-group">
-                              <input type="number" class="form-control" id="number" value="{{ $details['quantity'] }}">
+                              <input type="number" class="form-control" id="number" value="{{ $details['quantity'] }}" min="1">
                             </div>
                           </form>
                           <p>Total Harga : {{ $details['price'] }}</p>
