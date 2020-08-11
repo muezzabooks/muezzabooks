@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -31,9 +34,49 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, $id)
+    {   
+        $product = Product::find($id);
+
+        if (Auth::check()) {
+            # code...
+        } else {
+            $cart = session()->get('cart');
+
+            //if cart is empty then add the product
+            if (!$cart) {
+                $cart = [
+                    $id = [
+                        "product_id" => $product->id,
+                        "product_name" => $product->product_name,
+                        "price" => $product->price,
+                        "quantity" => 1
+                    ]
+                ];
+
+                session()->put('cart', $cart);
+                return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');
+            }
+
+            //if product already exist in cart then increase the quantity
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+ 
+                session()->put('cart', $cart);
+                return redirect()->back()->with('success', 'Produk telah ditambahkan ke keranjang belanja anda');
+            }
+
+            //if product doesnt exist in cart then add the product
+            $cart[$id] = [
+                    "product_id" => $product->id,
+                    "product_name" => $product->product_name,
+                    "price" => $product->price,
+                    "quantity" => 1
+                ];
+            
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');
+        }
     }
 
     /**
@@ -65,9 +108,16 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($request->id && $request->quantity)
+        {
+            $cart = session()->get('cart');
+ 
+            $cart[$request->id]["quantity"] = $request->quantity;
+ 
+            session()->put('cart', $cart);
+        }
     }
 
     /**
@@ -76,8 +126,20 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if(isset($id)) {
+ 
+            $cart = session()->get('cart');
+ 
+            if(isset($cart[$id])) {
+ 
+                unset($cart[$id]);
+ 
+                session()->put('cart', $cart);
+            }
+            
+            return redirect()->back()->with('success','Berhasil dihapus dari keranjang');
+        }
     }
 }

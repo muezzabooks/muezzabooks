@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'ProductsController@index')->name('home');
-Route::get('/catalog', 'CatalogController@index');
-Route::get('/detail','HomeController@detail')->name('detail');
 Route::get('/show/{id}','ProductsController@show')->name('show');
+
 Route::get('/cart', 'CartController@index')->name('cart');
+Route::get('/cart/add/{id}', 'CartController@store')->name('cart.store');
+Route::patch('update-cart', 'CartController@update');
+Route::delete('/cart/delete/{id}', 'CartController@destroy')->name('cart.destroy');
+
 Route::get('/checkout','HomeController@checkout');
 
 Auth::routes();

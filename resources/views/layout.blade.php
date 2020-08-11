@@ -53,7 +53,7 @@
   </nav>
 
 
-		@yield('content')
+	@yield('content')
 
 
 
@@ -66,5 +66,7 @@
   </footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+  
+  @yield('script')
 </body>
 </html>
