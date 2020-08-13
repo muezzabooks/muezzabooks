@@ -6,6 +6,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="p-3">
+                  <h3>Create Product</h3>
+                  <hr>
                     <form action="{{ route('adminproducts.store') }}" method="POST" enctype="multipart/form-data">
 
                         @csrf
@@ -21,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <label for="stock" class="col-form-label">Stock</label>
-                            <input type="text" class="form-control" id="stock" name="stock">
+                            <input type="number" class="form-control" id="stock" name="stock">
                            
                           </div>
                           <div class="form-group">
@@ -36,7 +38,7 @@
                           </div> --}}
                     
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{ route('adminproducts.index') }}" class="btn btn-secondary">Close</a>
                         <button type="submit" class="btn btn-primary">Send message</button>
                         </div>
                     </form>

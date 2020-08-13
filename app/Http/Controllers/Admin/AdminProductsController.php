@@ -68,7 +68,8 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.update');
+        $product = Product::find($id);
+        return view('admin.update', compact('product'));
     }
 
     /**
@@ -80,7 +81,23 @@ class AdminProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_name = $request->product_name;
+        $description = $request->description;
+        $stock = $request->stock;
+        $price = $request->price;
+        $image = $request->image;
+
+        $products = Product::find($id);
+        $products->product_name = $product_name;
+        $products->description = $description;
+        $products->stock = $stock;
+        $products->price = $price;
+        $products->image = $image;
+
+        $products->save();
+
+        return redirect('admin/adminproducts');
+
     }
 
     /**
