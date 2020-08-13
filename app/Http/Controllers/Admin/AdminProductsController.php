@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 
-class AdminController extends Controller
+class AdminProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,7 +46,7 @@ class AdminController extends Controller
         // $product->price = $request->price;
         // $product->save;
 
-        return redirect('/adminproduct');
+        return redirect('/admin/adminproducts');
     }
 
     /**
@@ -67,7 +68,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.update');
     }
 
     /**

@@ -26,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-
+        return view('admin.createproduct');
     }
 
     /**
@@ -37,7 +37,30 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $products = Product::create($request->all());
+        // $request->validate([
+        //     'product_name' => 'required',
+        //     'description' => 'required',
+        //     'stock' => 'required',
+        //     'price' => 'required',
+        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        
+        $product = new Product;
+
+        // // if ($request->file('image')) {
+        // //     $imagePath = $request->file('image');
+        // //     $imageName = $imagePath->getClientOriginalName();
+  
+        // //     $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+        // //   }
+          $product->product_name = $request->product_name;
+          $product->description = $request->description;
+          $product->stock = $request->stock;
+          $product->price = $request->price;
+        // //   $product->image_name = $imageName;
+        // //   $product->path = '/storage/'.$path;
+          $product->save;
 
         return redirect('/adminproduct');
 
@@ -72,9 +95,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($product)
     {
-        //
+        $products = Product::find($product);
+        return view('admin.updateproduct')->with('product', $products);
     }
 
     /**

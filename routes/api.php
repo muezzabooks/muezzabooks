@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('products', 'ProductsController');
+Route::group(['namespace' => 'Api', 'prefix' => 'api'], function()
+{
+    Route::resource('apiproducts', 'ApiProductsController');
+});
 
 

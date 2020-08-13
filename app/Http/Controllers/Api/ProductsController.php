@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Product;
 
-class AdminController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -56,7 +56,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +67,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
