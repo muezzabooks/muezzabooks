@@ -24,12 +24,16 @@
                           <img src="{{ ('assets/images/cover-book.jpg') }}" class="img-fluid pb-3" style="max-height: 200px">
                         </div>
                         <div class="col-md-8">
-                          <h4>{{ $details['product_name'] }}</h4>
+                          <h3>
+                            <strong>{{ $details['product_name'] }}</strong>
+                          </h3>
                           <div class="form-inline">
                             <form action="{{ route('cart.increase',['id' => $id]) }}" method="POST" class="mt-auto">
                               @csrf
                               @method('patch')
-                              <button class="btn btn-success">+</button>
+                              <button class="btn btn-info">
+                                <i class="fa fa-plus"></i>
+                              </button>
                             </form>
 
                             <form class="col-3">
@@ -39,27 +43,23 @@
                             <form action="{{ route('cart.decrease',['id' => $id]) }}" method="POST" class="mt-auto">
                                 @csrf
                                 @method('patch')
-                                <button class="btn btn-secondary">-</button>
+                                <button class="btn btn-info">
+                                  <i class="fa fa-minus"></i>
+                                </button>
                             </form>
                           </div>
                           
-                          <p>Total Harga : {{ $details['price'] }}</p>
+                          <h5 class="pt-4">
+                            Total Harga : {{ $details['price'] * $details['quantity'] }}
+                          </h5>
+
                         </div>
-                        <div class="col-md-2">
-                          
-                          <br><br>
+                        <div class="col-md-2 d-flex">
                           <button class="btn btn-danger mt-auto remove-from-cart" data-id={{ $id }}>Hapus</button>
-                          {{-- <a href="{{ route('cart.destroy',['id' => $id]) }}" class="btn btn-danger mt-auto">Hapus</a> --}}
-                          {{-- <form action="{{ route('cart.destroy',['id' => $id]) }}" method="POST" class="mt-auto">
-                              @csrf
-                              @method('delete')
-                              <button class="btn btn-danger">Hapus</button>
-                          </form> --}}
                         </div>
                       </div>
                     </div>
                     <hr>
-
                     @endforeach
                     </div>
                     <div class="col-md-4">
@@ -70,15 +70,15 @@
                         </div>
                       </div>
                     </div>
-                  @else
-                  <div class="col-12">
-                    <h1>Keranjang belanja anda kosong !</h1>
-                  </div>
-                  @endif
+                    @else
+                </div>
               </div>
             </div>
+            <div class="col-12 p-5 h-100">
+              <h1 class="text-center">Keranjang belanja anda kosong !</h1>
+            </div>
+            @endif
           </div>
-          
         </div>
       </div>
     </div>

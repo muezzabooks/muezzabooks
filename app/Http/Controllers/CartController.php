@@ -59,7 +59,13 @@ class CartController extends Controller
             }
 
             //if product already exist in cart then increase the quantity
-            if (isset($cart[$id])) {
+            if ($cart[0]['product_name'] === $product->product_name) {
+                $cart[0]['quantity']++;
+ 
+                session()->put('cart', $cart);
+                return redirect()->back()->with('success', 'Produk telah ditambahkan ke keranjang belanja anda');
+            }
+            else if (isset($cart[$id])) {
                 $cart[$id]['quantity']++;
  
                 session()->put('cart', $cart);
@@ -113,9 +119,7 @@ class CartController extends Controller
         if(isset($id))
         {
             $cart = session()->get('cart');
-            $quantity = $cart[$id]["quantity"];
-
-            $cart[$id]["quantity"] = $quantity + 1;
+            $cart[$id]["quantity"]++;
 
             session()->put('cart', $cart);
             return redirect()->back();
