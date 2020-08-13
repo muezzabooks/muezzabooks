@@ -42,24 +42,45 @@
         <div class="card">
           <h5 class="card-header card-header-yellow">Order</h5>
           <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item">Judul Buku 1 Rp 29000</li>
-              <li class="list-group-item">Judul Buku 2 Rp 36000</li>
-            </ul>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Total Harga</p>
-                <p>Biaya Kirim</p> 
-                <p>Diskon</p> 
-              </div>
-              <div class="col-md-6">
-                <p>Rp. 65000</p> 
-                <p>Rp. 1000 </p>
-                <p>Rp. 66000</p>
-              </div>
-            </div>
-            <h4>Grand Total : Rp 66000</h4>
-            <a href="#" class="btn btn-block btn-primary">Pay</a>
+            <table class="table table-sm">
+              <tbody>
+                <thead>
+                  <tr>
+                    <th>Nama Buku</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+              <?php $total=0 ?>
+              @foreach (session('cart') as $id => $details)
+                <?php $total += $details['price'] * $details['quantity'] ?>
+                <tr>
+                  <td scope="row">{{ $details['product_name'] }}</td>
+                  <th>Rp {{ $details['price'] }}</th>
+                  <td>{{ $details['quantity'] }}</td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">Total Harga</th>
+                  <th colspan="2" class="text-center">Rp {{ $total }}</th>
+                </tr>
+                <tr>
+                  <th scope="row">Biaya Kirim</th>
+                  <th colspan="2" class="text-center">Mark</th>
+                </tr>
+                <tr>
+                  <th scope="row">Diskon</th>
+                  <th colspan="2" class="text-center">Mark</th>
+                </tr>
+              </tbody>
+            </table>
+            <h4 class="pb-2">Grand Total : Rp {{ $total }}</h4>
+            <a href="#" class="btn btn-block btn-primary">Validasi Pembayaran</a>
           </div>
         </div>
       </div>
