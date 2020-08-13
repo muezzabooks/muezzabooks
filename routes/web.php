@@ -25,7 +25,16 @@ Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
 
-Route::get('/adminproduct', 'AdminController@index');
-Route::post('/adminproduct','ProductsController@store');
+// Route::resource('/adminproduct', 'Admin\ProductController');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
+{
+    Route::resource('adminproducts', 'AdminProductsController');
+});
+
+// Route::get('/addproduct', 'ProductsController@create');
+// Route::post('/addproduct','ProductsController@store')->name('addproduct');
+
+Route::get('images', 'ImageController@index');
+Route::post('images', 'ImageController@store')->name('images.store');
 
 Auth::routes();

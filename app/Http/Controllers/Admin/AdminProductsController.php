@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Product;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Product;
 
-class ProductsController extends Controller
+class AdminProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class ProductsController extends Controller
     {
         $products = Product::all();
 
-        return view('home')->with('products', $products);
+        return view('admin.adminproduct')->with('products', $products);
     }
 
     /**
@@ -37,38 +38,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'product_name' => 'required',
-        //     'description' => 'required',
-        //     'stock' => 'required',
-        //     'price' => 'required',
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
+        $products = Product::create($request->all());
+        // $product = new Product;
+        // $product->product_name = $request->product_name;
+        // $product->description = $request->description;
+        // $product->stock = $request->stock;
+        // $product->price = $request->price;
+        // $product->save;
 
-        
-        $product = new Product;
-
-        // // if ($request->file('image')) {
-        // //     $imagePath = $request->file('image');
-        // //     $imageName = $imagePath->getClientOriginalName();
-  
-        // //     $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-        // //   }
-          $product->product_name = $request->product_name;
-          $product->description = $request->description;
-          $product->stock = $request->stock;
-          $product->price = $request->price;
-        // //   $product->image_name = $imageName;
-        // //   $product->path = '/storage/'.$path;
-          $product->save;
-
-        return redirect('/adminproduct');
-
-    
-        // return response()->json([
-        //     'message' => 'Data Berhasil Masuk',
-        //     'product' => $products
-        // ], 201);
+        return redirect('/admin/adminproducts');
     }
 
     /**
@@ -79,14 +57,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $products = Product::where('id', $id)->get();
-
-        // return response()->json([
-        //     'product' => $products
-        // ]);
-
-        return view('detail')
-        ->with('products', $products);
+        //
     }
 
     /**
@@ -95,10 +66,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($product)
+    public function edit($id)
     {
-        $products = Product::find($product);
-        return view('admin.updateproduct')->with('product', $products);
+        $product = Product::find($id);
+        return view('admin.update', compact('product'));
     }
 
     /**
@@ -125,10 +96,8 @@ class ProductsController extends Controller
 
         $products->save();
 
-        return response()->json([
-            'message' => 'Data Berhasil Update',
-            'product' => $products
-        ], 200);
+        return redirect('admin/adminproducts');
+
     }
 
     /**
@@ -142,8 +111,6 @@ class ProductsController extends Controller
         $products = Product::find($id);
         $products->delete();
 
-        return response()->json([
-            'message' => 'Berhasil Dihapus'
-        ]);
+        return redirect('admin/adminproducts');
     }
 }
