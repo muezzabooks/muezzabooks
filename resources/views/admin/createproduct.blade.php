@@ -1,4 +1,5 @@
 @extends('admin.adminlayout')
+@section('product','sidebar-active')
 
 @section('content')
 <section>
