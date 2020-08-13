@@ -108,6 +108,9 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = Product::find($id);
+        $products->delete();
+
+        return redirect('admin/adminproducts');
     }
 }

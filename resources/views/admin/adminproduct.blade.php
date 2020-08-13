@@ -26,16 +26,21 @@
                                 <td>{{ $p->description }}</td>
                                 <td>{{ $p->stock }}</td>
                                 <td>{{ $p->price }}</td>
-                                <td>
-                                    <a href="{{ route('adminproducts.edit', $p->id) }}" class="btn mr-2 mb-2 btn-primary">
-                                        <i class="fa fa-fw" aria-hidden="true"></i></a>
-                                    </td>
-                                    <td>                                        
-                                    <a href="/paket/delete/{{ $p->id }}" class="btn mr-2 mb-2 btn-danger" onClick="return confirm('Are you sure you want to delete?')">
-                                        <i class="fa fa-fw" aria-hidden="true"></i></a>
-                                </td>
+                                <form action="{{ route('adminproducts.destroy', $p->id) }}" method="POST">
+                                    <td>
+                                        <a href="{{ route('adminproducts.edit', $p->id) }}" class="btn mr-2 mb-2 btn-primary">
+                                            <i class="fa fa-fw" aria-hidden="true"></i></a>
+                                        </td> 
+                                    @csrf
+                
+                                    @method('DELETE')
+                                        <td>
+                                    <button type="submit" class="btn btn-danger" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-fw" aria-hidden="true"></i></button>
+                                        </td>
+                                </form>
                               </tr>
                             @endforeach
+                            
                           
                         </tbody>
                     </table>
