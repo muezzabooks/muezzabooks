@@ -40,3 +40,7 @@ Route::get('images', 'ImageController@index');
 Route::post('images', 'ImageController@store')->name('images.store');
 
 Auth::routes();
+
+Route::get('/test','ShipmentController@index');
+// Route::get('/est', 'ShipmentController@index');
+Route::get('/cari', 'ShipmentController@loadData');
