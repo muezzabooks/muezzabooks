@@ -11129,3 +11129,7 @@ section {
   }
 }
 
+.sidebar-active {
+  background-color: #dae0e5 !important;
+}
+

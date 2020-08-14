@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Image;
 
 class AdminProductsController extends Controller
 {
@@ -39,12 +40,19 @@ class AdminProductsController extends Controller
     public function store(Request $request)
     {
         $products = Product::create($request->all());
-        // $product = new Product;
-        // $product->product_name = $request->product_name;
-        // $product->description = $request->description;
-        // $product->stock = $request->stock;
-        // $product->price = $request->price;
-        // $product->save;
+
+        if ($request->file('file')) {
+            $imagePath = $request->file('file');
+            $imageName = $imagePath->getClientOriginalName();
+  
+            $path = $request->file('file')->storeAs('uploads', $imageName, 'public');
+          }
+
+        $answer = Image::create([
+            'name' => $imageName, 
+            'path' => '/storage/app/'.$path,
+            'product_id' => $products->id
+    ]);
 
         return redirect('/admin/adminproducts');
     }
@@ -92,11 +100,27 @@ class AdminProductsController extends Controller
         $products->description = $description;
         $products->stock = $stock;
         $products->price = $price;
-        $products->image = $image;
 
-        $products->save();
+        if($products->save()){
 
-        return redirect('admin/adminproducts');
+            if ($request->file('file')) {
+                $imagePath = $request->file('file');
+                $imageName = $imagePath->getClientOriginalName();
+      
+                $path = $request->file('file')->storeAs('uploads', $imageName, 'public');
+            }
+
+            $image = Image::find($id);
+            $image = Image::where('product_id',$id)->first();
+            $image->name = $imageName;
+            $image->path = "/storage/".$path;
+            $image->product_id = $id;
+
+            $image->save();
+            return redirect('admin/adminproducts');
+        }     
+        
+        dd($image);  
 
     }
 

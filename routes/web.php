@@ -29,7 +29,9 @@ Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
 {
     Route::resource('adminproducts', 'AdminProductsController');
+    Route::get('/transaction','AdminTransactionController@index')->name('transaction');
 });
+
 
 // Route::get('/addproduct', 'ProductsController@create');
 // Route::post('/addproduct','ProductsController@store')->name('addproduct');

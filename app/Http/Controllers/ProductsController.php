@@ -37,23 +37,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'product_name' => 'required',
-        //     'description' => 'required',
-        //     'stock' => 'required',
-        //     'price' => 'required',
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-
-        
+            
         $product = new Product;
-
-        // // if ($request->file('image')) {
-        // //     $imagePath = $request->file('image');
-        // //     $imageName = $imagePath->getClientOriginalName();
-  
-        // //     $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-        // //   }
           $product->product_name = $request->product_name;
           $product->description = $request->description;
           $product->stock = $request->stock;
@@ -61,14 +46,11 @@ class ProductsController extends Controller
         // //   $product->image_name = $imageName;
         // //   $product->path = '/storage/'.$path;
           $product->save;
-
-        return redirect('/adminproduct');
-
     
-        // return response()->json([
-        //     'message' => 'Data Berhasil Masuk',
-        //     'product' => $products
-        // ], 201);
+        return response()->json([
+            'message' => 'Data Berhasil Masuk',
+            'product' => $product
+        ], 201);
     }
 
     /**
@@ -80,10 +62,6 @@ class ProductsController extends Controller
     public function show($id)
     {
         $products = Product::where('id', $id)->get();
-
-        // return response()->json([
-        //     'product' => $products
-        // ]);
 
         return view('detail')
         ->with('products', $products);
