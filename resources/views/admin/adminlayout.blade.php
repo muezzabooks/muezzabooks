@@ -84,7 +84,7 @@
       <div class="sidebar-heading"><img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" > </div>
       <div class="list-group list-group-flush">
         <a href="{{ route('adminproducts.index') }}" class="list-group-item list-group-item-action bg-light @yield('product')">Product</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light" @yield('transaction')>Transaction</a>
+        <a href="{{ route('transaction') }}" class="list-group-item list-group-item-action bg-light @yield('transaction')">Transaction</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

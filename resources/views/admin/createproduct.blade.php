@@ -32,11 +32,10 @@
                             <input type="number" class="form-control" id="price" name="price">
                             
                           </div>
-                          {{-- <div class="form-group">
+                          <div class="form-group">
                             <label for="image" class="col-form-label">Image</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                            <span class="text-danger">{{ $errors->first('image') }}</span>
-                          </div> --}}
+                            <input type="file" class="form-control" id="image" name="file">                            
+                          </div>
                     
                         <div class="modal-footer">
                         <a href="{{ route('adminproducts.index') }}" class="btn btn-secondary">Close</a>
