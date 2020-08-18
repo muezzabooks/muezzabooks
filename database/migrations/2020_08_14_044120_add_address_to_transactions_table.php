@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ReplacePaymentMethodInTransactionsTable extends Migration
+class AddAddressToTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class ReplacePaymentMethodInTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('payment_method');
-            $table->string('account_number')->after('subtotal');
+            $table->unsignedBigInteger('address_id')->nullable()->after('user_id');
+
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 
@@ -27,8 +28,8 @@ class ReplacePaymentMethodInTransactionsTable extends Migration
     public function down()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('account_number');
-            $table->string('payment_method')->after('subtotal');
+            $table->dropForeign(['address_id']);
+            $table->dropColumn('address_id');
         });
     }
 }

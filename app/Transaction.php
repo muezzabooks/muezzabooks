@@ -15,4 +15,9 @@ class Transaction extends Model
     {
         return $this->hasMany('App\DetailTransaction');
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address');
+    }
 }

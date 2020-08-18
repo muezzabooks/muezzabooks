@@ -13,11 +13,11 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
             $table->string('phone', 20);
-            $table->string('city', 20);
+            $table->string('city');
             $table->string('zip_code', 5);
             $table->text('address');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('addresses');
     }
 }

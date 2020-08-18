@@ -13,7 +13,7 @@ class AddUserToAddressTable extends Migration
      */
     public function up()
     {
-        Schema::table('address', function (Blueprint $table) {
+        Schema::table('addresses', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -27,7 +27,7 @@ class AddUserToAddressTable extends Migration
      */
     public function down()
     {
-        Schema::table('address', function (Blueprint $table) {
+        Schema::table('addresses', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });

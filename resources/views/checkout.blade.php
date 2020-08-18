@@ -4,100 +4,10 @@
 @section('content')
 <div class="container">
   <div class="row">
-
+    
     <div class="col-md-8 col-sm-12">
-
-      <div class="row">
-        <div class="col-12 p-3">
-          <div class="card">
-            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
-            <div class="card-body">
-              <form>
-
-                {{-- Nama --}}
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label for="name">Nama Penerima</label>
-                      <input type="email" class="form-control" id="name">
-                    </div>
-                  </div>
-                </div>
-                {{-- Kota atau kecamatan --}}
-                <div class="row">
-                  <div class="col-8">
-                    <div class="form-group">
-                      <label for="city">Kota atau Kecamatan</label>
-                      <input type="email" class="form-control" id="city">
-                    </div>
-                  </div>
-                  {{-- Kode Pos --}}
-                  <div class="col-4">
-                    <div class="form-group">
-                      <label for="zip">Kode Pos</label>
-                      <input type="email" class="form-control" id="zip">
-                    </div>
-                  </div>
-                </div>
-                {{-- Alamat --}}
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label for="address">Alamat</label>
-                      <textarea class="form-control" id="address" rows="3"></textarea>
-                    </div>
-                  </div>
-                </div>
-                
-              </form>
-
-              {{-- <form class="form-horizontal">
-                <fieldset>
-             
-                  <!-- full-name input-->
-                  <div class="control-group">
-                    <label class="control-label">Nama Penerima</label>
-                    <div class="controls">
-                      <input id="full-name" name="full-name" type="text" placeholder=""
-                      class="input-xlarge">
-                      <p class="help-block"></p>
-                    </div>
-                  </div>
-                  <!--city input-->
-                  <div class="control-group">
-                    <label class="control-label">Kota atau Kecamatan</label>
-                    <div class="controls">
-                      <input id="address-line1" name="address-line1" type="text" placeholder=""
-                      class="input-xlarge">
-                      <p class="help-block"></p>
-                    </div>
-                  </div>
-                  <!-- address-line2 input-->
-                  <div class="control-group">
-                    <label class="control-label">Alamat</label>
-                    <div class="controls">
-                      <input id="address-line2" name="address-line2" type="text" placeholder=""
-                      class="input-xlarge">
-                      <p class="help-block"></p>
-                    </div>
-                  </div>
-                  <!-- postal-code input-->
-                  <div class="control-group">
-                      <label class="control-label">Kode Pos</label>
-                      <div class="controls">
-                          <input id="postal-code" name="postal-code" type="text" placeholder=""
-                          class="input-xlarge">
-                          <p class="help-block"></p>
-                      </div>
-                  </div>
-                </fieldset>
-              </form> --}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
+      
+      {{-- <div class="row">
         <div class="col-12 p-3">
           <div class="card">
             <h5 class="card-header card-header-yellow">Pembayaran</h5>
@@ -107,6 +17,64 @@
               <ul class="list-group">
                 <li class="list-group-item">XXXX-XXXX-XXXX</li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </div> --}}
+
+      <div class="row">
+        <div class="col-12 p-3">
+          <div class="card">
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
+            <div class="card-body">
+              <form action="{{ route('transaction.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                {{-- Nama --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="name">Nama Penerima</label>
+                      <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                  </div>
+                </div>
+                {{-- Kota atau kecamatan --}}
+                <div class="row">
+                  <div class="col-8">
+                    <div class="form-group">
+                      <label for="city">Kota atau Kecamatan</label>
+                      <input type="text" class="form-control" id="city" name="city">
+                    </div>
+                  </div>
+                  {{-- Kode Pos --}}
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="zip">Kode Pos</label>
+                      <input type="number" class="form-control" id="zip" name="zip">
+                    </div>
+                  </div>
+                </div>
+                {{-- HP --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="phone">Nomor Telepon</label>
+                      <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                  </div>
+                </div>
+                {{-- Alamat --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="address">Alamat</label>
+                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
+              
+              </form>
             </div>
           </div>
         </div>
@@ -161,13 +129,11 @@
               </tbody>
             </table>
             <h4 class="pb-2 text-center">Grand Total : Rp {{ $total }}</h4>
-            <a href="#" class="btn btn-block btn-primary disabled">Validasi Pembayaran</a>
           </div>
         </div>
       </div>
     </div>
-    
+  </form>
   </div>
 </div>
 @endsection
-
