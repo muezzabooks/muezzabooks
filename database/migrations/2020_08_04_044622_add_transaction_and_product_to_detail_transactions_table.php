@@ -18,7 +18,6 @@ class AddTransactionAndProductToDetailTransactionsTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable()->after('transaction_id');
 
             $table->foreign('transaction_id')->references('id')->on('transactions');
-            $table->foreign('product_id')->references('product_id')->on('carts');
         });
     }
 
@@ -31,7 +30,6 @@ class AddTransactionAndProductToDetailTransactionsTable extends Migration
     {
         Schema::table('detail_transactions', function (Blueprint $table) {
             $table->dropForeign(['transaction_id']);
-            $table->dropForeign(['product_id']);
             $table->dropColumn('transaction_id');
             $table->dropColumn('product_id');
         });

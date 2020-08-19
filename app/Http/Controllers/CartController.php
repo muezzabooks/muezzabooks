@@ -45,27 +45,19 @@ class CartController extends Controller
 
             //if cart is empty then add the product
             if (!$cart) {
-                $cart = [
-                    $id = [
+                $cart[$id] = [
                         "product_id" => $product->id,
                         "product_name" => $product->product_name,
                         "price" => $product->price,
                         "quantity" => 1
-                    ]
-                ];
+                    ];
 
                 session()->put('cart', $cart);
                 return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');
             }
 
             //if product already exist in cart then increase the quantity
-            if ($cart[0]['product_name'] === $product->product_name) {
-                $cart[0]['quantity']++;
- 
-                session()->put('cart', $cart);
-                return redirect()->back()->with('success', 'Produk telah ditambahkan ke keranjang belanja anda');
-            }
-            else if (isset($cart[$id])) {
+            if (isset($cart[$id])) {
                 $cart[$id]['quantity']++;
  
                 session()->put('cart', $cart);

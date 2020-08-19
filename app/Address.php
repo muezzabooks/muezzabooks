@@ -4,14 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DetailTransaction extends Model
+class Address extends Model
 {
-    protected $fillable = [
-        'transaction_id', 
-        'product_id', 
-        'quantity',
-        'price',
-    ];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     public function transaction()
     {

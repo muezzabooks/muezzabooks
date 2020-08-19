@@ -4,32 +4,77 @@
 @section('content')
 <div class="container">
   <div class="row">
-
+    
     <div class="col-md-8 col-sm-12">
-
-      <div class="row">
+      
+      {{-- <div class="row">
         <div class="col-12 p-3">
           <div class="card">
-            <h5 class="card-header card-header-yellow">Shipping</h5>
-            <div class="card-body">
-              <h5 class="card-title">Shipping Destination</h5>
-              <p class="card-text">Your address is empty</p>
-              <a href="#" class="btn btn-primary">add address</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 p-3">
-          <div class="card">
-            <h5 class="card-header card-header-yellow">Payment</h5>
+            <h5 class="card-header card-header-yellow">Pembayaran</h5>
             <div class="card-body">
               <h5 class="card-title">Cara pembayaran</h5>
               <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur quo doloremque aperiam corporis esse, quam, nisi maxime exercitationem, minima earum saepe. Laborum consequuntur, natus aspernatur ab ratione cumque eaque.</p>
               <ul class="list-group">
                 <li class="list-group-item">XXXX-XXXX-XXXX</li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </div> --}}
+
+      <div class="row">
+        <div class="col-12 p-3">
+          <div class="card">
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
+            <div class="card-body">
+              <form action="{{ route('transaction.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                {{-- Nama --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="name">Nama Penerima</label>
+                      <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                  </div>
+                </div>
+                {{-- Kota atau kecamatan --}}
+                <div class="row">
+                  <div class="col-8">
+                    <div class="form-group">
+                      <label for="city">Kota atau Kecamatan</label>
+                      <input type="text" class="form-control" id="city" name="city">
+                    </div>
+                  </div>
+                  {{-- Kode Pos --}}
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="zip">Kode Pos</label>
+                      <input type="number" class="form-control" id="zip" name="zip">
+                    </div>
+                  </div>
+                </div>
+                {{-- HP --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="phone">Nomor Telepon</label>
+                      <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                  </div>
+                </div>
+                {{-- Alamat --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="address">Alamat</label>
+                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
+              
+              </form>
             </div>
           </div>
         </div>
@@ -42,30 +87,53 @@
         <div class="card">
           <h5 class="card-header card-header-yellow">Order</h5>
           <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item">Judul Buku 1 Rp 29000</li>
-              <li class="list-group-item">Judul Buku 2 Rp 36000</li>
-            </ul>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Total Harga</p>
-                <p>Biaya Kirim</p> 
-                <p>Diskon</p> 
-              </div>
-              <div class="col-md-6">
-                <p>Rp. 65000</p> 
-                <p>Rp. 1000 </p>
-                <p>Rp. 66000</p>
-              </div>
-            </div>
-            <h4>Grand Total : Rp 66000</h4>
-            <a href="#" class="btn btn-block btn-primary">Pay</a>
+            <table class="table table-sm">
+              <tbody>
+                <thead>
+                  <tr>
+                    <th>Nama Buku</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+              <?php $total=0 ?>
+              @if (session('cart'))
+                @foreach (session('cart') as $id => $details)
+                  <?php $total += $details['price'] * $details['quantity'] ?>
+                  <tr>
+                    <td scope="row">{{ $details['product_name'] }}</td>
+                    <th>Rp {{ $details['price'] }}</th>
+                    <td>{{ $details['quantity'] }}</td>
+                  </tr>
+                @endforeach
+              @else
+                <script>window.location = "/";</script>
+              @endif
+              </tbody>
+            </table>
+
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">Total Harga</th>
+                  <th colspan="2" class="text-center">Rp {{ $total }}</th>
+                </tr>
+                <tr>
+                  <th scope="row">Biaya Kirim</th>
+                  <th colspan="2" class="text-center">Mark</th>
+                </tr>
+                <tr>
+                  <th scope="row">Diskon</th>
+                  <th colspan="2" class="text-center">Mark</th>
+                </tr>
+              </tbody>
+            </table>
+            <h4 class="pb-2 text-center">Grand Total : Rp {{ $total }}</h4>
           </div>
         </div>
       </div>
     </div>
-    
+  </form>
   </div>
 </div>
 @endsection
-

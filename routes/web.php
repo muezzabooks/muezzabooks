@@ -23,7 +23,8 @@ Route::patch('/cart/increase/{id}', 'CartController@increase')->name('cart.incre
 Route::patch('/cart/decrease/{id}', 'CartController@decrease')->name('cart.decrease');
 Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
-Route::get('/checkout','HomeController@checkout');
+Route::get('/checkout','TransactionController@index')->name('checkout');
+Route::post('/checkout/pay','TransactionController@store')->name('transaction.store');
 
 // Route::resource('/adminproduct', 'Admin\ProductController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
