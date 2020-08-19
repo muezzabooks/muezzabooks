@@ -1,58 +1,3 @@
-{{-- <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-        <div class="container">
-          <a class="navbar-brand" href="{{ route('home') }}">
-            <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
-         </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item pr-5">
-                <a class="nav-link" href="{{ route('cart') }}">
-                  <i class="fa fa-shopping-cart fa-lg"></i>
-                </a>
-              </li>
-              @guest
-    
-                @if (Route::has('register'))
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
-                  </li>
-                @endif
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('login') }}">Log In</a>
-                </li>
-                @else
-                  <li>
-                    <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
-                      @csrf
-                      <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
-                    </form>
-                  </li>
-              @endguest
-              
-            </ul>
-          </div>
-        </div>
-      </nav>
-    @yield('content')
-
-
-    <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-</body>
-
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,75 +11,84 @@
   <title>Simple Sidebar - Start Bootstrap Template</title>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="css/simple-sidebar.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" >
 
 </head>
 
 <body>
+  <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="{{ ('/assets/images/logo-muezza.png') }}" class="d-inline-block align-top img-nav" alt="" loading="lazy">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item @yield('home')">
+          <a class="nav-link" href="#">Home </a>
+        </li>
+        <li class="nav-item @yield('product')">
+          <a class="nav-link" href={{ route('adminproducts.index') }}>Product</a>
+        </li>
+        <li class="nav-item @yield('transaction')">
+          <a class="nav-link" href="{{ route('transaction') }}">Transaction</a>
+        </li>
+      </ul>
 
-  <div class="d-flex" id="wrapper">
+      @guest
 
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading"><img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" > </div>
-      <div class="list-group list-group-flush">
-        <a href="{{ route('adminproducts.index') }}" class="list-group-item list-group-item-action bg-light @yield('product')">Product</a>
-        <a href="{{ route('transaction') }}" class="list-group-item list-group-item-action bg-light @yield('transaction')">Transaction</a>
-      </div>
+      @if (Route::has('register'))
+          <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+      @endif
+        <a class="nav-link" href="{{ route('login') }}">Log In</a>
+      @else
+          <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
+            @csrf
+            <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
+          </form>
+    @endguest
     </div>
-    <!-- /#sidebar-wrapper -->
+  </nav>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="p-3">
+                  <h3>@yield('header')</h3>
+                  <hr>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn" id="menu-toggle"><i class="fa fa-navicon fa-lg"></i></button>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
+                  @yield('content')
+                </div>
+            </div>
         </div>
-      </nav>
-
-      @yield('content')
     </div>
-    <!-- /#page-content-wrapper -->
+</section>
 
-  </div>
-  <!-- /#wrapper -->
+
+
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
 
   <!-- Menu Toggle Script -->
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+  <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+  
+
+@yield('script')
 
 </body>
 

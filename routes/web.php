@@ -32,15 +32,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     Route::get('/transaction','AdminTransactionController@index')->name('transaction');
 });
 
-
-// Route::get('/addproduct', 'ProductsController@create');
-// Route::post('/addproduct','ProductsController@store')->name('addproduct');
-
 Route::get('images', 'ImageController@index');
 Route::post('images', 'ImageController@store')->name('images.store');
 
 Auth::routes();
 
-Route::get('/test','ShipmentController@index');
-// Route::get('/est', 'ShipmentController@index');
-Route::get('/cari', 'ShipmentController@loadData');
+Route::get('search', 'AutoCompleteController@index');
+Route::get('autocomplete', 'AutoCompleteController@search')->name('autocomplete');

@@ -16,9 +16,13 @@ class AdminProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('image')->get();
+        $imageproduct = Product::leftJoin('images','products.id', '=','images.product_id')
+        ->select('products.*','images.path')->get();
+        // dd($products);
+        // $products = Product::all();
 
-        return view('admin.adminproduct')->with('products', $products);
+        return view('admin.adminproduct')->with('products', $imageproduct);
     }
 
     /**
@@ -39,6 +43,14 @@ class AdminProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'product_name' => 'required',
+            'description' => 'required',
+            'stock' => 'required',
+            'price' => 'required|min:4',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
+        ]);
         $products = Product::create($request->all());
 
         if ($request->file('file')) {
@@ -50,7 +62,7 @@ class AdminProductsController extends Controller
 
         $answer = Image::create([
             'name' => $imageName, 
-            'path' => '/storage/app/'.$path,
+            'path' => '/storage/'.$path,
             'product_id' => $products->id
     ]);
 
@@ -67,7 +79,6 @@ class AdminProductsController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,8 +87,10 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return view('admin.update', compact('product'));
+        $product = Product::leftJoin('images','products.id', '=','images.product_id')
+        ->select('products.*','images.path','images.name')->find($id);
+
+        return view('admin.updateproduct', compact('product'));
     }
 
     /**
@@ -89,6 +102,14 @@ class AdminProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'product_name' => 'required',
+            'description' => 'required',
+            'stock' => 'required',
+            'price' => 'required|min:4',
+
+        ]);
+
         $product_name = $request->product_name;
         $description = $request->description;
         $stock = $request->stock;
@@ -108,19 +129,22 @@ class AdminProductsController extends Controller
                 $imageName = $imagePath->getClientOriginalName();
       
                 $path = $request->file('file')->storeAs('uploads', $imageName, 'public');
+                $imagePathh = "/storage/".$path;;
+            }
+            else{
+                $imagePathh = $request->path;
+                $imageName = $request->name;
             }
 
             $image = Image::find($id);
             $image = Image::where('product_id',$id)->first();
             $image->name = $imageName;
-            $image->path = "/storage/".$path;
+            $image->path = $imagePathh;
             $image->product_id = $id;
 
             $image->save();
             return redirect('admin/adminproducts');
-        }     
-        
-        dd($image);  
+        }      
 
     }
 
