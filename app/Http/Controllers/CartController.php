@@ -36,7 +36,8 @@ class CartController extends Controller
      */
     public function store(Request $request, $id)
     {   
-        $product = Product::find($id);
+        $product = Product::leftJoin('images','products.id', '=','images.product_id')
+        ->select('products.*','images.path','images.name')->find($id);
 
         if (Auth::check()) {
             # code...
@@ -49,7 +50,8 @@ class CartController extends Controller
                         "product_id" => $product->id,
                         "product_name" => $product->product_name,
                         "price" => $product->price,
-                        "quantity" => 1
+                        "quantity" => 1,
+                        "path" => $product->path
                     ];
 
                 session()->put('cart', $cart);
@@ -69,7 +71,8 @@ class CartController extends Controller
                     "product_id" => $product->id,
                     "product_name" => $product->product_name,
                     "price" => $product->price,
-                    "quantity" => 1
+                    "quantity" => 1,
+                    "path" => $product->path
                 ];
             
             session()->put('cart', $cart);
