@@ -50,7 +50,7 @@
       <div class="row align-items-center">
         <div class="col-lg-4 order-lg-2">
           <div class="p-5">
-            <img class="img-catalog" src="{{ ('assets/images/cover-book.jpg') }}" > 
+            <img class="img-catalog" src="{{ $p->path }}" > 
           </div>
         </div>
         <div class="col-lg-8 order-lg-1">

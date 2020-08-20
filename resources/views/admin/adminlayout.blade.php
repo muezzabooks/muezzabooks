@@ -41,19 +41,10 @@
           <a class="nav-link" href="{{ route('transaction') }}">Transaction</a>
         </li>
       </ul>
-
-      @guest
-
-      @if (Route::has('register'))
-          <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
-      @endif
-        <a class="nav-link" href="{{ route('login') }}">Log In</a>
-      @else
           <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
             @csrf
             <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
           </form>
-    @endguest
     </div>
   </nav>
 </div>
