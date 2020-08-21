@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\DetailTransaction;
+use App\Product;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -61,10 +62,11 @@ class TransactionController extends Controller
             $detailTransaction->transaction_id = $t;
             $detailTransaction->product_id = $details['product_id'];
             $detailTransaction->quantity = $details['quantity'];
-            $detailTransaction->price = $details['price'];
+            $detailTransaction->price = $details['price'] * $details['quantity'];
             $detailTransaction->save();
         }
-        dd('success');
+        
+        return redirect()->route('transaction.show.guest', ['id' => $t]);
     }
 
     /**
@@ -76,6 +78,19 @@ class TransactionController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function showGuest($id)
+    {
+        $transaction = Transaction::find($id);
+        $detailTransaction = DetailTransaction::where('transaction_id',$id)->get();
+        // dd($detailTransaction[0]['product_id']);
+        $address = Address::find($transaction['address_id']);
+        return view('transaction',[
+            'transaction' => $transaction, 
+            'detail' => $detailTransaction,
+            'address' => $address
+        ]);
     }
 
     /**
