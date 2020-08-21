@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Simple Sidebar - Start Bootstrap Template</title>
+  <title>Muezza Books | Admin</title>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
   <!-- Custom styles for this template -->
@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item @yield('home')">
-          <a class="nav-link" href="#">Home </a>
+          <a class="nav-link" href="{{ route('admin.home') }}">Home </a>
         </li>
         <li class="nav-item @yield('product')">
           <a class="nav-link" href={{ route('adminproducts.index') }}>Product</a>
