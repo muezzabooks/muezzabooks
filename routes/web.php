@@ -23,6 +23,9 @@ Route::patch('/cart/increase/{id}', 'CartController@increase')->name('cart.incre
 Route::patch('/cart/decrease/{id}', 'CartController@decrease')->name('cart.decrease');
 Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
+
+Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::post('/checkout/pay','TransactionController@store')->name('transaction.store');
 Route::get('/checkout/validate/{id}','TransactionController@showGuest')->name('transaction.show.guest');
@@ -30,15 +33,15 @@ Route::get('/checkout/validate/{id}','TransactionController@showGuest')->name('t
 // Route::resource('/adminproduct', 'Admin\ProductController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
 {
-    Route::resource('adminproducts', 'AdminProductsController');
+    // Route::get('adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+    Route::resource('adminproducts', 'AdminProductsController')->middleware('is_admin');
     Route::get('/transaction','AdminTransactionController@index')->name('transaction');
 });
-
-
-// Route::get('/addproduct', 'ProductsController@create');
-// Route::post('/addproduct','ProductsController@store')->name('addproduct');
 
 Route::get('images', 'ImageController@index');
 Route::post('images', 'ImageController@store')->name('images.store');
 
 Auth::routes();
+
+Route::get('search', 'AutoCompleteController@index');
+Route::get('autocomplete', 'AutoCompleteController@search')->name('autocomplete');

@@ -14,7 +14,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::leftJoin('images','products.id', '=','images.product_id')
+        ->select('products.*','images.path')->get();
 
         return view('home')->with('products', $products);
     }
@@ -61,7 +62,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $products = Product::where('id', $id)->get();
+        // $products = Product::where('id', $id)->get();
+        $products = Product::leftJoin('images','products.id', '=','images.product_id')
+        ->select('products.*','images.path','images.name')->find($id);
 
         return view('detail')
         ->with('products', $products);

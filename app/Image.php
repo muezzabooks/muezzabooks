@@ -9,4 +9,9 @@ class Image extends Model
     protected $table = 'images';
 
     protected $fillable = (['name','path','product_id']);
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
 }
