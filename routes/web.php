@@ -25,6 +25,7 @@ Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::post('/checkout/pay','TransactionController@store')->name('transaction.store');
+Route::get('/checkout/validate/{id}','TransactionController@showGuest')->name('transaction.show.guest');
 
 // Route::resource('/adminproduct', 'Admin\ProductController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()

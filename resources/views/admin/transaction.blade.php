@@ -25,12 +25,12 @@
                                 <th scope="row">{{ $no + 1 }}</th>
                                 <td>{{ $d->date }}</td>
                                 <td>{{ $d->user_name }}</td>
-                                <td>{{ $d->subtotal }}</td>
+                                <td>{{ $d->total }}</td>
                                 {{-- <td>{{ $d->account_number }}</td> --}}
                                 <td>{{ $d->status }}</td>
-                                <form action="{{ route('adminproducts.destroy', $p->id) }}" method="POST">
+                                <form action="{{ route('adminproducts.destroy', $d->id) }}" method="POST">
                                     <td>
-                                        <a href="{{ route('adminproducts.edit', $p->id) }}" class="btn mr-2 mb-2 btn-primary">
+                                        <a href="{{ route('adminproducts.edit', $d->id) }}" class="btn mr-2 mb-2 btn-primary">
                                             <i class="fa fa-fw" aria-hidden="true"></i></a>
                                         </td> 
                                     @csrf
