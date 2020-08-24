@@ -97,18 +97,36 @@
                   </tr>
                 </thead>
               <?php $total=0 ?>
-              @if (session('cart'))
-                @foreach (session('cart') as $id => $details)
-                  <?php $total += $details['price'] * $details['quantity'] ?>
-                  <tr>
-                    <td scope="row">{{ $details['product_name'] }}</td>
-                    <th>Rp {{ $details['price'] }}</th>
-                    <td>{{ $details['quantity'] }}</td>
-                  </tr>
-                @endforeach
-              @else
-                <script>window.location = "/";</script>
-              @endif
+              @guest
+                @if (session('cart'))
+                  @foreach (session('cart') as $id => $details)
+                    <?php $total += $details['price'] * $details['quantity'] ?>
+                    <tr>
+                      <td scope="row">{{ $details['product_name'] }}</td>
+                      <th>Rp {{ $details['price'] }}</th>
+                      <td>{{ $details['quantity'] }}</td>
+                    </tr>
+                  @endforeach
+                @else
+                  <script>window.location = "/";</script>
+                @endif
+              @endguest
+
+              @auth
+                @if (isset($products))
+                  @foreach ($products as $id => $details)
+                    <?php $total += \App\Product::where(['id' => $details->id])->pluck('price')->first() * $details->quantity ?>
+                    <tr>
+                      <td scope="row">{{ \App\Product::where(['id' => $details->id])->pluck('product_name')->first() }}</td>
+                      <th>Rp {{ \App\Product::where(['id' => $details->id])->pluck('price')->first() }}</th>
+                      <td>{{ $details->quantity }}</td>
+                    </tr>
+                  @endforeach
+                @else
+                  <script>window.location = "/";</script>
+                @endif
+              @endauth
+              
               </tbody>
             </table>
 

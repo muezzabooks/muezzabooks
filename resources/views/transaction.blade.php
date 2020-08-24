@@ -8,14 +8,14 @@
             <img class="img-fluid" src="{{ ('../../assets/images/payment.svg') }}" >
         </div>
         <div class="col-8">
-            <div class="card">
+          <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">DETAIL TRANSAKSI</h4>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Status transaksi : {{ $transaction['status'] }}</li>
                 </ul>
-                <div class="card-body">
+                <div class="card-body pb-0">
                   @foreach ($detail as $id => $d)
                     <p>
                       <strong>
@@ -26,16 +26,20 @@
                     </p>
                   @endforeach
                 </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <strong> Alamat : {{ $address['city'] }}, {{ $address['address'] }} </strong>
-                    </li>
-                  </ul>
+                <hr>
+                <div class="card-body mt-0 pt-0">
+                  <p>
+                    <strong> Alamat </strong>
+                  </p>
+                  <li class="list-group-item">
+                    {{ $address['city'] }}, {{ $address['address'] }}
+                  </li>
+                </div>
                 <div class="card-body">
                   <a href="#" class="btn btn-primary">Lampirkan Bukti Pembayaran</a>
                 </div>
-              </div>
         </div>
     </div>
+  </div>
 </div>
 @endsection

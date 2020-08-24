@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Cart;
 use App\DetailTransaction;
 use App\Product;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
     public function index()
     {
-        return view('checkout');
+        if (Auth::check()) {
+            $products = Cart::where('user_id',Auth::id())->get();
+            return view('checkout',[
+                'products' => $products
+            ]);
+        } else {
+            return view('checkout');
+        }
+
+        
     }
 
     /**

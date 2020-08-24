@@ -12,10 +12,15 @@ class CartController extends Controller
 {
     public function index()
     {
-        $products = Cart::all();
-        return view('cart',[
-            'products' => $products
-        ]);
+        if (Auth::check()) {
+            $products = Cart::where('user_id',Auth::id())->get();
+            return view('cart',[
+                'products' => $products
+            ]);
+        }
+
+        return view('cart');
+        
     }
 
     /**
@@ -40,7 +45,28 @@ class CartController extends Controller
         ->select('products.*','images.path','images.name')->find($id);
 
         if (Auth::check()) {
-            # code...
+
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$product->id)->first();
+
+            if ($cart === null) {
+                $cart = new Cart;
+
+                $cart->user_id = Auth::id();
+                $cart->product_id = $product->id;
+                $cart->quantity = 1;
+                $cart->save();
+
+                return redirect()->back();
+
+            } else {
+                $cart->quantity += 1;
+                $cart->save();
+
+                return redirect()->back();
+            }
+
+            
+
         } else {
             $cart = session()->get('cart');
 
@@ -111,32 +137,57 @@ class CartController extends Controller
      */
     public function increase(Request $request, $id)
     {
-        if(isset($id))
-        {
-            $cart = session()->get('cart');
-            $cart[$id]["quantity"]++;
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$request->id)->first();
+            $cart->quantity += 1;
+            $cart->save();
 
-            session()->put('cart', $cart);
             return redirect()->back();
+
+        } else {
+            if (isset($id)) {
+                $cart = session()->get('cart');
+                $cart[$id]["quantity"]++;
+            
+                session()->put('cart', $cart);
+                return redirect()->back();
+            }
         }
+        
     }
 
     public function decrease(Request $request, $id)
     {
-        if(isset($id))
-        {
-            $cart = session()->get('cart');
-            $quantity = $cart[$id]["quantity"];
-
-            if ($quantity === 1) {
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$request->id)->first();
+            
+            if ($cart->quantity === 1) {
                 return redirect()->back();
             }
 
-            $cart[$id]["quantity"] = $quantity - 1;
-
-            session()->put('cart', $cart);
+            $cart->quantity -= 1;
+            $cart->save();
+            
             return redirect()->back();
+
+        } else {
+            if(isset($id))
+            {
+                $cart = session()->get('cart');
+                $quantity = $cart[$id]["quantity"];
+
+                if ($quantity === 1) {
+                    return redirect()->back();
+                }
+
+                $cart[$id]["quantity"] = $quantity - 1;
+
+                session()->put('cart', $cart);
+                return redirect()->back();
+            }
         }
+
+        
     }
 
     /**
@@ -147,18 +198,28 @@ class CartController extends Controller
      */
     public function destroy(Request $request)
     {
-        if(isset($request->id)) {
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$request->id)->first();
+            $cart->delete();
+
+            return redirect()->back();
+
+        } else {
+
+            if(isset($request->id)) {
  
-            $cart = session()->get('cart');
- 
-            if(isset($cart[$request->id])) {
- 
-                unset($cart[$request->id]);
- 
-                session()->put('cart', $cart);
-            }
-            
-            session()->flash('success', 'Product removed successfully');
+                $cart = session()->get('cart');
+    
+                if(isset($cart[$request->id])) {
+    
+                    unset($cart[$request->id]);
+    
+                    session()->put('cart', $cart);
+                }
+                
+                session()->flash('success', 'Product removed successfully');
+            } 
         }
+        
     }
 }
