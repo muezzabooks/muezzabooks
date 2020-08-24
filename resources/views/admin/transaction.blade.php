@@ -27,21 +27,10 @@
             <th scope="row">{{ $no + 1 }}</th>
             <td>{{ $d->date }}</td>
             <td>{{ $d->user_name }}</td>
-            <td>{{ $d->subtotal }}</td>
+            <td>{{ $d->total }}</td>
             {{-- <td>{{ $d->account_number }}</td> --}}
             <td>{{ $d->status }}</td>
-            <form action="{{ route('adminproducts.destroy', $p->id) }}" method="POST">
-                <td>
-                    <a href="{{ route('adminproducts.edit', $p->id) }}" class="btn mr-2 mb-2 btn-primary">
-                        <i class="fa fa-fw" aria-hidden="true"></i></a>
-                    </td> 
-                @csrf
-
-                @method('DELETE')
-                    <td>
-                <button type="submit" class="btn btn-danger" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-fw" aria-hidden="true"></i></button>
-                    </td>
-            </form>
+            <td><a href="detail" class="btn btn-primary">Detail</a></td>
           </tr>
         @endforeach
         

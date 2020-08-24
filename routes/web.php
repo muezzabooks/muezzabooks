@@ -29,6 +29,7 @@ Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->m
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::post('/checkout/pay','TransactionController@store')->name('transaction.store');
 Route::get('/checkout/validate/{id}','TransactionController@showGuest')->name('transaction.show.guest');
+Route::post('/insertImage/{id}','TransactionController@insertImage')->name('transaction.insert.image');
 
 // Route::resource('/adminproduct', 'Admin\ProductController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()

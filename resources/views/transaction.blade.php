@@ -31,9 +31,16 @@
                       <strong> Alamat : {{ $address['city'] }}, {{ $address['address'] }} </strong>
                     </li>
                   </ul>
+
+                  <form action="{{ route('transaction.insert.image') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                 <div class="card-body">
-                  <a href="#" class="btn btn-primary">Lampirkan Bukti Pembayaran</a>
+                  <input type="hidden" name="id" value="{{ $transaction['id'] }}">
+                  <input type="file" name="image" class="form-control"><br>
+                  <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
+              </form>
+
               </div>
         </div>
     </div>

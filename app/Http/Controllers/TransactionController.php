@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\DetailTransaction;
 use App\Product;
+use App\Image;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -91,6 +92,26 @@ class TransactionController extends Controller
             'detail' => $detailTransaction,
             'address' => $address
         ]);
+    }
+
+
+    public function insertImage(Request $request){
+        $id = $request->id;
+        if ($request->file('image')) {
+            $imagePath = $request->file('image');
+            $imageName = $imagePath->getClientOriginalName();
+  
+            $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+          }
+
+        $answer = Image::create([
+            'name' => $imageName, 
+            'path' => '/storage/'.$path,
+            'transaction_id' => $id
+             ]);
+
+             dd($answer);
+        return redirect('/done');
     }
 
     /**
