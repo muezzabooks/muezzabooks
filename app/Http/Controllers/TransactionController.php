@@ -89,6 +89,7 @@ class TransactionController extends Controller
         $address->city = $request->city;
         $address->zip_code = $request->zip;
         $address->address = $request->address;
+        $address->user_id = Auth::id();
         $address->save();
 
         $a = Address::latest()->pluck('id')->first();
