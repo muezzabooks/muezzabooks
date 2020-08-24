@@ -27,18 +27,22 @@
                     </p>
                   @endforeach
                 </div>
-                <hr>
-                <div class="card-body mt-0 pt-0">
-                  <p>
-                    <strong> Alamat </strong>
-                  </p>
-                  <li class="list-group-item">
-                    {{ $address['city'] }}, {{ $address['address'] }}
-                  </li>
-                </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <strong> Alamat : {{ $address['city'] }}, {{ $address['address'] }} </strong>
+                    </li>
+                  </ul>
+
+                  <form action="{{ route('transaction.insert.image') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                 <div class="card-body">
-                  <a href="#" class="btn btn-primary">Lampirkan Bukti Pembayaran</a>
+                  <input type="hidden" name="id" value="{{ $transaction['id'] }}">
+                  <input type="file" name="image" class="form-control"><br>
+                  <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
+              </form>
+
+              </div>
         </div>
     </div>
   </div>

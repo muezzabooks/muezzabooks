@@ -6,6 +6,7 @@ use App\Address;
 use App\Cart;
 use App\DetailTransaction;
 use App\Product;
+use App\Image;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -139,6 +140,26 @@ class TransactionController extends Controller
             'detail' => $detailTransaction,
             'address' => $address
         ]);
+    }
+
+
+    public function insertImage(Request $request){
+        $id = $request->id;
+        if ($request->file('image')) {
+            $imagePath = $request->file('image');
+            $imageName = $imagePath->getClientOriginalName();
+  
+            $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+          }
+
+        $answer = Image::create([
+            'name' => $imageName, 
+            'path' => '/storage/'.$path,
+            'transaction_id' => $id
+             ]);
+
+             dd($answer);
+        return redirect('/done');
     }
 
     /**
