@@ -84,13 +84,19 @@
               @auth
                 @if (isset($products))
                   @foreach ($products as $id => $details)
+                    @php
+                      $img = \App\Product::leftJoin('images','products.id', '=','images.product_id')
+                                        ->select('images.path')
+                                        ->where('products.id','=',$details->id)
+                                        ->get();
+                    @endphp
                       
                     <?php $total += \App\Product::where(['id' => $details->id])->pluck('price')->first() * $details->quantity ?>
 
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-2 text-center">
-                          <img src="{{ $details['path'] }}" class="img-fluid pb-3" style="max-height: 200px">
+                          <img src="{{ $img['0']['path'] }}" class="img-fluid pb-3" style="max-height: 200px">
                         </div>
                         <div class="col-md-8">
                           <h3>

@@ -20,7 +20,7 @@ class CreateImagesTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -31,6 +31,11 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+            $table->dropColumn('product_id');
+        });
+
         Schema::dropIfExists('images');
     }
 }

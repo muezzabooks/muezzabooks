@@ -30,7 +30,7 @@
       <div class="row align-items-center">
         <div class="col-lg-4">
           <div class="p-5">
-            <img class="img-catalog" src="{{ $p->path }}" > 
+            <img class="img-catalog" src="{{ $p->path }}" >
           </div>
         </div>
         <div class="col-lg-8">

@@ -77,7 +77,48 @@ class TransactionController extends Controller
             $detailTransaction->save();
         }
         
-        return redirect()->route('transaction.show.guest', ['id' => $t]);
+        return redirect()->route('transaction.show', ['id' => $t]);
+    }
+
+    public function storeAuth(Request $request)
+    {
+        $address = new Address;
+
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->city = $request->city;
+        $address->zip_code = $request->zip;
+        $address->address = $request->address;
+        $address->save();
+
+        $a = Address::latest()->pluck('id')->first();
+        $cart = Cart::where('user_id',Auth::id())->get();
+        $total = 0;
+        foreach ($cart as $id => $details) {
+            $total += Product::where(['id' => $details->id])->pluck('price')->first();
+        }
+
+        $transaction = new Transaction;
+
+        $transaction->address_id = $a;
+        $transaction->total = $total;
+        $transaction->status = 'processing';
+        $transaction->date = date("Y-m-d H:i:s");
+        $transaction->save();
+
+        $t = Transaction::latest()->pluck('id')->first();
+        foreach ($cart as $id => $details) {
+            $price = Product::where(['id' => $details->id])->pluck('price')->first();
+
+            $detailTransaction = new DetailTransaction;
+            $detailTransaction->transaction_id = $t;
+            $detailTransaction->product_id = $details->product_id;
+            $detailTransaction->quantity = $details->quantity;
+            $detailTransaction->price = $price * $details['quantity'];
+            $detailTransaction->save();
+        }
+        
+        return redirect()->route('transaction.show', ['id' => $t]);
     }
 
     /**
@@ -87,11 +128,6 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    public function showGuest($id)
     {
         $transaction = Transaction::find($id);
         $detailTransaction = DetailTransaction::where('transaction_id',$id)->get();
