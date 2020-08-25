@@ -164,8 +164,7 @@
     <script>
       $(document).ready(function() {
     $('.js-example-basic-single').select2({
-      data: data,
-      maximumSelectionLength: 3
+      data: data
     });
 
     $(".js-example-data-array-selected").select2({
