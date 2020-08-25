@@ -30,7 +30,7 @@
             <td>{{ $d->total }}</td>
             {{-- <td>{{ $d->account_number }}</td> --}}
             <td>{{ $d->status }}</td>
-            <td><a href="detail" class="btn btn-primary">Detail</a></td>
+            <td><a href="detailtransaction/{{ $d->id }}" class="btn btn-primary">Detail</a></td>
           </tr>
         @endforeach
         

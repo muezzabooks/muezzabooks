@@ -47,10 +47,8 @@
                 {{-- Kota atau kecamatan --}}
                 <div class="row">
                   <div class="col-8">
-                    <div class="form-group">
-                      <label for="city">Kota atau Kecamatan</label>
-                      <input type="text" class="form-control" id="city" name="city">
-                    </div>
+                      <select class="js-example-basic-single" name="state" class="form-control" style="width: 100%">
+                      </select>
                   </div>
                   {{-- Kode Pos --}}
                   <div class="col-4">
@@ -160,4 +158,20 @@
   </form>
   </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+      $(document).ready(function() {
+    $('.js-example-basic-single').select2({
+      data: data,
+      maximumSelectionLength: 3
+    });
+
+    $(".js-example-data-array-selected").select2({
+      data: data
+    })
+    });
+
+    </script>
 @endsection
