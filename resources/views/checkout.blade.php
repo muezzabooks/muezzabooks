@@ -28,7 +28,7 @@
             <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
             <div class="card-body">
               @guest
-              <form action="{{ route('transaction.store') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('transaction.storeGuest') }}" method="POST" enctype="multipart/form-data">
               @endguest
 
               @auth

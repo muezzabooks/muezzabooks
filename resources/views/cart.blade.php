@@ -82,7 +82,7 @@
 
               @endguest
               @auth
-                @if (isset($products))
+                @if (!$products->isEmpty())
                   @foreach ($products as $id => $details)
                     @php
                       $img = \App\Product::leftJoin('images','products.id', '=','images.product_id')

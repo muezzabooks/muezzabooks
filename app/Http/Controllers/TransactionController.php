@@ -43,7 +43,7 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeGuest(Request $request)
     {
         $address = new Address;
 
@@ -64,7 +64,7 @@ class TransactionController extends Controller
 
         $transaction->address_id = $a;
         $transaction->total = $total;
-        $transaction->status = 'processing';
+        $transaction->status = 'waiting for validation';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->save();
 
@@ -104,8 +104,9 @@ class TransactionController extends Controller
 
         $transaction->address_id = $a;
         $transaction->total = $total;
-        $transaction->status = 'processing';
+        $transaction->status = 'waiting for validation';
         $transaction->date = date("Y-m-d H:i:s");
+        $transaction->user_id = Auth::id();
         $transaction->save();
 
         $t = Transaction::latest()->pluck('id')->first();
@@ -156,10 +157,12 @@ class TransactionController extends Controller
             'name' => $imageName, 
             'path' => '/storage/'.$path,
             'transaction_id' => $id
-             ]);
+        ]);
+        
+        $transaction = Transaction::find($id);
+        $transaction->status = 'processing';
 
-             dd($answer);
-        return redirect('/done');
+        return redirect()->route('transaction.show', ['id' => $id]);
     }
 
     /**
