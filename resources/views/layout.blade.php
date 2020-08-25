@@ -70,8 +70,9 @@
   </footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-  <script type="text/javascript" src="{{ URL::asset('js/si_cepat_fare.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/si_cepat_fare.js') }}"></script>
   @yield('script')
 </body>
 </html>
