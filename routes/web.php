@@ -47,3 +47,5 @@ Auth::routes();
 
 Route::get('search', 'AutoCompleteController@index');
 Route::get('autocomplete', 'AutoCompleteController@search')->name('autocomplete');
+
+Route::get('cekongkir','HomeController@cekongkir');
