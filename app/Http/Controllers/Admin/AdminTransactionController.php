@@ -13,4 +13,13 @@ class AdminTransactionController extends Controller
         $data = Transaction::all();
        return view('admin.transaction')->with('data', $data);
    }
+
+   public function show($id){
+
+    $transaction = Transaction::leftJoin('images','transactions.id', '=','images.transaction_id')
+    ->select('transactions.*','images.path')
+    ->where('transactions.id', $id)
+    ->first();
+    return view('admin.detailtransaction')->with('data', $transaction);
+   }
 }
