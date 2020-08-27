@@ -38,6 +38,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     Route::resource('adminproducts', 'AdminProductsController')->middleware('is_admin');
     Route::get('/transaction','AdminTransactionController@index')->name('transaction');
     Route::get('/detailtransaction/{id}','AdminTransactionController@show');
+    Route::put('/transaction/update/{id}','AdminTransactionController@update')->name('admintransaction.update');
 });
 
 Route::get('images', 'ImageController@index');
