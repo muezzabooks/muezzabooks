@@ -7751,8 +7751,8 @@ function convertSiCepatFareTableToJSON(resultFromSiCepat) {
 }
 
 var params = {
-  origin_id: 'BDO',
-  destination_id: 'BDO10000',
+  origin_code: 'BDO',
+  destination_code: 'CGK10000',
   weight: 1
 };
 
@@ -7760,7 +7760,7 @@ var headers = {
   "authority": 'www.sicepat.com',
   "accept": 'application/json, text/javascript, */*; q=0.01',
   "x-requested-with": 'XMLHttpRequest',
-  "content-type": 'application/x-www-form-urlenidd; charset=UTF-8',
+  "content-type": 'application/x-www-form-urlencoded; charset=UTF-8',
 }
 
 $.ajax({
@@ -7780,4 +7780,3 @@ $.ajax({
     console.log(xhr.status + " - " + xhr.statusText)
   },
 })
-

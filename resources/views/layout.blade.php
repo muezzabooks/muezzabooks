@@ -12,7 +12,7 @@
 
   <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
- 
+  
 </head>
 
 <body>
