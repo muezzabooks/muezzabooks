@@ -18,7 +18,7 @@
            {{ $products->description }}
          </h5>
          <h5>Stock : {{ $products->stock }}</h5>
-         <a href="#" class="btn btn-warning">Beli Sekarang</a>
+         <a href="{{ route('buy',['id' => $products->id]) }}" class="btn btn-warning">Beli Sekarang</a>
          <a href="{{ route('cart.store',['id' => $products->id]) }}" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
       </div>
     </div>

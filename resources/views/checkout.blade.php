@@ -47,8 +47,11 @@
                 {{-- Kota atau kecamatan --}}
                 <div class="row">
                   <div class="col-8">
-                      <select class="js-example-basic-single" name="state" class="form-control" style="width: 100%">
+                    <div class="form-group">
+                      <label for="city">Kota</label>
+                      <select class="js-example-basic-single" name="city" id="city" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
                       </select>
+                    </div>
                   </div>
                   {{-- Kode Pos --}}
                   <div class="col-4">
@@ -119,10 +122,10 @@
               @auth
                 @if (isset($products))
                   @foreach ($products as $id => $details)
-                    <?php $total += \App\Product::where(['id' => $details->id])->pluck('price')->first() * $details->quantity ?>
+                    <?php $total += \App\Product::where(['id' => $details->product_id])->pluck('price')->first() * $details->quantity ?>
                     <tr>
-                      <td scope="row">{{ \App\Product::where(['id' => $details->id])->pluck('product_name')->first() }}</td>
-                      <th>Rp {{ \App\Product::where(['id' => $details->id])->pluck('price')->first() }}</th>
+                      <td scope="row">{{ \App\Product::where(['id' => $details->product_id])->pluck('product_name')->first() }}</td>
+                      <th>Rp {{ \App\Product::where(['id' => $details->product_id])->pluck('price')->first() }}</th>
                       <td>{{ $details->quantity }}</td>
                     </tr>
                   @endforeach

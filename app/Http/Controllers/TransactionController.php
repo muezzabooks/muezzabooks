@@ -27,6 +27,22 @@ class TransactionController extends Controller
         
     }
 
+    public function indexBuy($id)
+    {
+
+        if (Auth::check()) {
+            $products = Cart::where('id','=',$id)->get();
+            return view('checkout',[
+                'products' => $products
+            ]);
+
+        } else {
+            return view('checkout');
+        }
+
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

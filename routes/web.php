@@ -23,10 +23,12 @@ Route::patch('/cart/increase/{id}', 'CartController@increase')->name('cart.incre
 Route::patch('/cart/decrease/{id}', 'CartController@decrease')->name('cart.decrease');
 Route::delete('/cart/remove', 'CartController@destroy')->name('cart.destroy');
 
+Route::get('/buy/{id}', 'CartController@buy')->name('buy');
 
 Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
+Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkout.buy');
 Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
 Route::post('/checkout/pay','TransactionController@storeAuth')->name('transaction.storeAuth');
 Route::get('/checkout/validate/{id}','TransactionController@show')->name('transaction.show');
