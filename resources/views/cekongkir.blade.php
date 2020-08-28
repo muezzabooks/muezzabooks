@@ -73,7 +73,7 @@ function convertSiCepatFareTableToJSON(resultFromSiCepat) {
   var finalResult = [];
 
   // Remove <div> that wrap <table> tag
-  var tableString = resultFromSiCepat.replace(/(?:^<div[^>]*>)|(?:<\/div>$)/g, '')
+  var tableString = resultFromSiCepat.replace(/(?:^<div[^>]*>)|(?:<\/div>$)/g, '');
   var tableDOM = $(tableString)[0];
 
   // first row needs to be headers
