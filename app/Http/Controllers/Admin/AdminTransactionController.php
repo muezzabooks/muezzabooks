@@ -10,16 +10,41 @@ class AdminTransactionController extends Controller
 {
     public function index(){
 
-        $data = Transaction::all();
+        $data = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name')
+        ->get();
        return view('admin.transaction')->with('data', $data);
    }
 
    public function show($id){
 
-    $transaction = Transaction::leftJoin('images','transactions.id', '=','images.transaction_id')
-    ->select('transactions.*','images.path')
+    $transaction = Transaction::join('images','transactions.id', '=','images.transaction_id')
+    ->join('addresses','transactions.address_id', '=','addresses.id')
+    ->select('transactions.*','images.path','addresses.name','addresses.phone',
+    'addresses.city','addresses.address')
     ->where('transactions.id', $id)
     ->first();
-    return view('admin.detailtransaction')->with('data', $transaction);
+
+    $product = \App\DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
+    ->join('products','products.id','=','detail_transactions.product_id')
+    ->select('products.product_name','products.price','detail_transactions.quantity')
+    ->where('transactions.id', $id)
+    ->get();
+    return view('admin.detailtransaction',[
+        'data'=> $transaction,
+        'product' => $product
+        ]);
    }
+   
+   public function update(Request $request, $id){
+       
+    $status = $request->status;
+
+        $transaction = Transaction::find($id);
+        $transaction->status = $status;
+        $transaction->save();
+
+       return redirect('admin/transaction');
+   }
+
 }

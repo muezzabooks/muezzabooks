@@ -26,10 +26,10 @@
         <tr>
             <th scope="row">{{ $no + 1 }}</th>
             <td>{{ $d->date }}</td>
-            <td>{{ $d->user_name }}</td>
+            <td>{{ $d->name }}</td>
             <td>{{ $d->total }}</td>
             {{-- <td>{{ $d->account_number }}</td> --}}
-            <td>{{ $d->status }}</td>
+            <td><span class="badge {{ $d->status }} ">{{ $d->status }}</span></td>
             <td><a href="detailtransaction/{{ $d->id }}" class="btn btn-primary">Detail</a></td>
           </tr>
         @endforeach
