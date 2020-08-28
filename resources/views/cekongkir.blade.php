@@ -15,11 +15,6 @@
                 {{-- Kota atau kecamatan --}}
                 <div class="row">
                   <div class="col-6">
-                      <select class="js-example-basic" name="state" class="form-control" id="origin" style="width: 100%">
-                      </select>
-                  </div>
-                  {{-- Kode Pos --}}
-                  <div class="col-6">
                     <select class="js-example-basic-single" name="state" class="form-control" id="destination" style="width: 100%">
                     </select>
                   </div>
@@ -30,7 +25,7 @@
                 <input id="cek" type="submit" value="Cek"/> 
               
             </div>
-            <div id="ongkir"></div> 
+            <pre id="ongkir"></pre> 
           </div>
         </div>
       </div>
@@ -54,11 +49,12 @@
     });
 
   });
+  
 
-  $("#cek").click(function() {
-
+  document.getElementById("destination").onchange = function(){
+    var finalResult = [];
     function convertSiCepatFareTableToJSON(resultFromSiCepat) {
-      var finalResult = [];
+      
 
       // Remove <div> that wrap <table> tag
       var tableString = resultFromSiCepat.replace(/(?:^<div[^>]*>)|(?:<\/div>$)/g, '')
@@ -89,12 +85,11 @@
 
     }
 
-    var asal = $('#origin').val(); 
     var kab = $('#destination').val(); 
     var berat = $('#berat').val(); 
 
     var params = {
-      origin_code: asal,
+      origin_code: 'BDO',
       destination_code: kab,
       weight: berat
     };
@@ -112,7 +107,7 @@
       url: 'https://cors-anywhere.herokuapp.com/https://www.sicepat.com/deliveryFee/fare',
       method: 'POST',
       data: params,
-      datatype: 'html',
+      datatype: 'json',
       headers: headers,
       beforeSend: function () {
         console.log('Please Wait..')
@@ -120,13 +115,29 @@
       success: function (data) {
         // Final JSON data you can manipulate as your desire.
         console.log(convertSiCepatFareTableToJSON(data.html))
+        // var json_data = convertSiCepatFareTableToJSON(data.html)
+        
+
+            console.log(finalResult);
+            var arrlength = finalResult.length;
+
+            if(arrlength == 4){
+              document.getElementById("ongkir").textContent = finalResult[3].tarif;
+            }
+            else if(arrlength == 5){
+              document.getElementById("ongkir").textContent = finalResult[4].tarif;
+            }
+
+           
+            // hasil.innerHTML = stringresult;
+        
       },
       error: function (xhr) {
         console.log(xhr.status + " - " + xhr.statusText)
       },
     })
 
-  });
+  }
 
 </script>
 @endsection
