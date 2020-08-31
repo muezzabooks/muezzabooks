@@ -18,12 +18,13 @@
            {{ $products->description }}
          </h5>
          <h5>Stock : {{ $products->stock }}</h5>
-         <a href="#" class="btn btn-warning">Beli Sekarang</a>
+         <a href="{{ route('buy',['id' => $products->id]) }}" class="btn btn-warning">Beli Sekarang</a>
          <a href="{{ route('cart.store',['id' => $products->id]) }}" class="btn btn-outline-dark">Tambahkan ke keranjang</a>
       </div>
     </div>
     {{-- end of row --}}
     <div class="row align-items-center pb-5">
+      
       <div class="col-lg-12">
        
           <h5>
@@ -45,7 +46,7 @@
        by Rahma
 
       </div>
-      
+    
     </div>
   </div>
 </section>  

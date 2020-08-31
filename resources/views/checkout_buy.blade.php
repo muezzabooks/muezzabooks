@@ -10,14 +10,14 @@
       <div class="row">
         <div class="col-12 p-3">
           <div class="card">
-            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman BUY</h5>
             <div class="card-body">
               @guest
-              <form action="{{ route('transaction.storeGuest') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('transaction.buyGuest') }}" method="POST" enctype="multipart/form-data">
               @endguest
 
               @auth
-              <form action="{{ route('transaction.storeAuth') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('transaction.buyAuth') }}" method="POST" enctype="multipart/form-data">
               @endauth
                 @csrf
                 {{-- Nama --}}
@@ -34,7 +34,7 @@
                   <div class="col-8">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="city" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
                       </select>
                     </div>
                   </div>
@@ -90,8 +90,8 @@
                 </thead>
               <?php $total=0 ?>
               @guest
-                @if (session('cart'))
-                  @foreach (session('cart') as $id => $details)
+                @if (session('cart_buy'))
+                  @foreach (session('cart_buy') as $id => $details)
                     <?php $total += $details['price'] * $details['quantity'] ?>
                     <tr>
                       <td scope="row">{{ $details['product_name'] }}</td>
