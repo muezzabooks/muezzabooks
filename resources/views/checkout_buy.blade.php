@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-12 p-3">
           <div class="card">
-            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman BUY</h5>
             <div class="card-body">
               @guest
               <form action="{{ route('transaction.buyGuest') }}" method="POST" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
                   <div class="col-8">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="city" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
                       </select>
                     </div>
                   </div>
@@ -138,7 +138,7 @@
                 </tr>
               </tbody>
             </table>
-            <h4 class="pb-2 text-center">Grand Total : Rp {{ $total }}</h4>
+            <h4 class="pb-2 text-center" id="total">Grand Total : Rp <span id="gtotal">{{ $total }}</span></h4>
           </div>
         </div>
       </div>
@@ -204,7 +204,7 @@
     var params = {
       origin_code: 'BDO',
       destination_code: kab,
-      weight: berat
+      weight: 1
     };
 
     console.log(params);
@@ -236,11 +236,27 @@
 
             if(arrlength == 4){
               document.getElementById("ongkos").textContent = finalResult[3].tarif;
+              var tarif = finalResult[3].tarif;
+              var sub = parseInt("{{ $total }}");
+              var intTarif = parseInt(tarif);
+              var total = intTarif + sub;
+              // console.log(total);
+              document.getElementById("gtotal").textContent = total;
+
+
             }
             else if(arrlength == 5){
               document.getElementById("ongkos").textContent = finalResult[4].tarif;
+              var tarif = finalResult[4].tarif;
+              var sub = parseInt("{{ $total }}");
+              var intTarif = parseInt(tarif);
+              var total = intTarif + sub;
+              // console.log(total);
+              document.getElementById("gtotal").textContent = total;
+
             }
 
+            
            
             // hasil.innerHTML = stringresult;
         

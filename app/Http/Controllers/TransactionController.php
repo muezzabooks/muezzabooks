@@ -43,7 +43,19 @@ class TransactionController extends Controller
             
         }
 
-        
+    }
+
+    public function indexBuyGuest()
+    {
+        if (Auth::check()) {
+
+            return redirect()->back();
+
+        } else {
+
+            return view('checkout_buy');
+            
+        }
     }
 
     /**
@@ -156,7 +168,7 @@ class TransactionController extends Controller
 
         $a = Address::latest()->pluck('id')->first();
         $total = 0;
-        foreach (session('cart') as $id => $details) {
+        foreach (session('cart_buy') as $id => $details) {
             $total+=$details['price'];
         }
 
@@ -169,7 +181,7 @@ class TransactionController extends Controller
         $transaction->save();
 
         $t = Transaction::latest()->pluck('id')->first();
-        foreach (session('cart') as $id => $details) {
+        foreach (session('cart_buy') as $id => $details) {
             $detailTransaction = new DetailTransaction;
             $detailTransaction->transaction_id = $t;
             $detailTransaction->product_id = $details['product_id'];

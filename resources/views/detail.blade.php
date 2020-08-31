@@ -24,6 +24,7 @@
     </div>
     {{-- end of row --}}
     <div class="row align-items-center pb-5">
+      
       <div class="col-lg-12">
         <h5>
           <strong>Username</strong>
@@ -46,7 +47,7 @@
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
         </p>
       </div>
-      
+    
     </div>
   </div>
 </section>  

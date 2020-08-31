@@ -148,7 +148,7 @@ class CartController extends Controller
 
         } else {
 
-            $cart[$id] = [
+            $cartBuy[$id] = [
                 "product_id" => $product->id,
                 "product_name" => $product->product_name,
                 "price" => $product->price,
@@ -156,7 +156,9 @@ class CartController extends Controller
                 "path" => $product->path
             ];
 
-            session()->put('cart_buy', $cart);
+            session()->put('cart_buy', $cartBuy);
+            
+            return redirect()->route('checkout.buyGuest',['id' => $id]);
         }
     }
 
