@@ -25,26 +25,25 @@
     {{-- end of row --}}
     <div class="row align-items-center pb-5">
       <div class="col-lg-12">
-        <h5>
-          <strong>Username</strong>
-        </h5>
-        <p class="pb-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
-        </p>
-        {{-- -- --}}
-        <h5>
-          <strong>Username</strong>
-        </h5>
-        <p class="pb-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
-        </p>
-        {{-- -- --}}
-        <h5>
-          <strong>Username</strong>
-        </h5>
-        <p class="pb-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit quae accusamus repellat. Sequi porro ducimus et aliquam placeat sunt doloremque eos similique eligendi cumque facere, asperiores libero deleniti earum tempore.
-        </p>
+       
+          <h5>
+            <strong>Comments</strong>
+          </h5>
+          @auth
+          <div class="form-group">
+            <textarea type="text" name="content" class="form-control"></textarea>
+        </div>
+
+          @else
+          <a class="" href="{{ route('login') }}">Log In</a> to comment this post!
+        @endauth
+       <hr>
+
+       <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+       </p>
+       by Rahma
+
       </div>
       
     </div>
