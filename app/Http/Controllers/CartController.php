@@ -146,6 +146,17 @@ class CartController extends Controller
 
             return redirect()->route('checkout.buy',['id' => $id]);
 
+        } else {
+
+            $cart[$id] = [
+                "product_id" => $product->id,
+                "product_name" => $product->product_name,
+                "price" => $product->price,
+                "quantity" => 1,
+                "path" => $product->path
+            ];
+
+            session()->put('cart_buy', $cart);
         }
     }
 
