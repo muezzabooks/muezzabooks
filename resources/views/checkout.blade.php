@@ -138,7 +138,7 @@
                 </tr>
               </tbody>
             </table>
-            <h4 class="pb-2 text-center">Grand Total : Rp {{ $total }}</h4>
+            <h4 class="pb-2 text-center" id="total">Grand Total : Rp <span id="gtotal">{{ $total }}</span></h4>
           </div>
         </div>
       </div>
@@ -204,7 +204,7 @@
     var params = {
       origin_code: 'BDO',
       destination_code: kab,
-      weight: berat
+      weight: 1
     };
 
     console.log(params);
@@ -236,11 +236,27 @@
 
             if(arrlength == 4){
               document.getElementById("ongkos").textContent = finalResult[3].tarif;
+              var tarif = finalResult[3].tarif;
+              var sub = parseInt("{{ $total }}");
+              var intTarif = parseInt(tarif);
+              var total = intTarif + sub;
+              // console.log(total);
+              document.getElementById("gtotal").textContent = total;
+
+
             }
             else if(arrlength == 5){
               document.getElementById("ongkos").textContent = finalResult[4].tarif;
+              var tarif = finalResult[4].tarif;
+              var sub = parseInt("{{ $total }}");
+              var intTarif = parseInt(tarif);
+              var total = intTarif + sub;
+              // console.log(total);
+              document.getElementById("gtotal").textContent = total;
+
             }
 
+            
            
             // hasil.innerHTML = stringresult;
         
