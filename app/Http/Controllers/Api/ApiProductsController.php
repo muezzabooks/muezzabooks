@@ -16,7 +16,9 @@ class ApiProductsController extends Controller
     {
         $products = Product::all();
 
-        return view('admin.adminproduct')->with('products', $products);
+        return response()->json([
+            'product' => $products
+        ]);
     }
 
     /**

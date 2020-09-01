@@ -32,7 +32,11 @@
               <i class="fa fa-shopping-cart fa-lg"></i>
             </a>
           </li>
-          @guest
+
+          <li class="nav-item">
+            <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
+          </li>  
+          @guest      
 
             @if (Route::has('register'))
               <li class="nav-item">
