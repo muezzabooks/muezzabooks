@@ -32,12 +32,12 @@ Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkou
 Route::get('/buy/{id}/checkout_guest','TransactionController@indexBuyGuest')->name('checkout.buyGuest');
 
 //PAY FROM CART
-Route::post('buy/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
-Route::post('buy/checkout/pay','TransactionController@storeAuth')->name('transaction.storeAuth');
+Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
+Route::post('/checkout/pay','TransactionController@storeAuth')->name('transaction.storeAuth');
 
 //BUY DIRECTLY
-Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.buyGuest');
-Route::post('/checkout/pay','TransactionController@storeAuth')->name('transaction.buyAuth');
+Route::post('buy/checkout/pay_guest','TransactionController@buyGuest')->name('transaction.buyGuest');
+Route::post('buy/checkout/pay','TransactionController@buyAuth')->name('transaction.buyAuth');
 Route::get('/checkout/validate/{id}','TransactionController@show')->name('transaction.show');
 Route::post('/insertImage/{id}','TransactionController@insertImage')->name('transaction.insert.image');
 
