@@ -236,6 +236,23 @@ class TransactionController extends Controller
         return redirect()->route('transaction.show', ['id' => $t]);
     }
 
+    public function checkTransaction(){
+        return view('checktransaction');
+    }
+
+    public function checkTransactionSearch(Request $request){
+        $kode = $request->kode;
+        $transaction = Transaction::join('images','transactions.id', '=','images.transaction_id')
+        ->join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','images.path','addresses.name','addresses.phone',
+        'addresses.city','addresses.address')
+        ->where('transactions.id', $kode)
+        ->first();
+
+        // $transaction = Transaction::find($kode);
+        return view('checktransactionbycode', ['data' => $transaction]);
+    }
+
     /**
      * Display the specified resource.
      *

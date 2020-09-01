@@ -39,6 +39,11 @@ Route::post('/checkout/pay','TransactionController@storeAuth')->name('transactio
 Route::get('/checkout/validate/{id}','TransactionController@show')->name('transaction.show');
 Route::post('/insertImage/{id}','TransactionController@insertImage')->name('transaction.insert.image');
 
+//CEK TRANSAKSI
+Route::get('/cektransaksi','TransactionController@checkTransaction')->name('transaction.check');
+Route::post('/cektransaksi/search','TransactionController@checkTransaction')->name('transaction.check.search');
+
+
 // Route::resource('/adminproduct', 'Admin\ProductController');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
 {
