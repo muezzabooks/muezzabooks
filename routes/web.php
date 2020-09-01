@@ -30,9 +30,11 @@ Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->m
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkout.buy');
 Route::get('/buy/{id}/checkout_guest','TransactionController@indexBuyGuest')->name('checkout.buyGuest');
+
 //PAY FROM CART
 Route::post('buy/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
 Route::post('buy/checkout/pay','TransactionController@storeAuth')->name('transaction.storeAuth');
+
 //BUY DIRECTLY
 Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.buyGuest');
 Route::post('/checkout/pay','TransactionController@storeAuth')->name('transaction.buyAuth');
