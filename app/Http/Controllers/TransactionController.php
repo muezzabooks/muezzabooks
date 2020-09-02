@@ -243,15 +243,22 @@ class TransactionController extends Controller
 
     public function checkTransactionSearch(Request $request){
         $kode = $request->kode;
-        $transaction = Transaction::join('images','transactions.id', '=','images.transaction_id')
-        ->join('addresses','transactions.address_id', '=','addresses.id')
-        ->select('transactions.*','images.path','addresses.name','addresses.phone',
+        $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name','addresses.phone',
         'addresses.city','addresses.address')
         ->where('transactions.id', $kode)
         ->first();
+        $product = DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
+        ->join('products','products.id','=','detail_transactions.product_id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('transactions.id', $kode)
+        ->get();
 
         // $transaction = Transaction::find($kode);
-        return view('checktransactionbycode', ['data' => $transaction]);
+        return view('checktransactionbycode', [
+            'data' => $transaction,
+            'product' => $product]);
     }
      public function myTransaction($id){
         $data = User::join('addresses','users.id', '=','addresses.user_id')
