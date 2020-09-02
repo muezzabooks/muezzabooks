@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-6">
-        <table class="table table-sm table-bordered">
+        {{-- <table class="table table-sm table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>No</th>
@@ -69,7 +69,7 @@
                 </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
         <p>Total : {{ $data->total }}</p>
     </div>
 

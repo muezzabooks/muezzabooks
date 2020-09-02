@@ -31,13 +31,11 @@
             <a class="nav-link" href="{{ route('cart') }}">
               <i class="fa fa-shopping-cart fa-lg"></i>
             </a>
-          </li>
-
+          </li> 
+          @guest    
           <li class="nav-item">
             <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
-          </li>  
-          @guest      
-
+          </li> 
             @if (Route::has('register'))
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
@@ -47,7 +45,10 @@
               <a class="nav-link" href="{{ route('login') }}">Log In</a>
             </li>
             @else
-              <li>
+              <li class="nav-item">
+                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-right: 1em" class="btn-outline-yellow btn">My Transaction</a>
+              </li>
+              <li class="nav-item">
                 <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
                   @csrf
                   <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">

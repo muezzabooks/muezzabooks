@@ -7,6 +7,7 @@ use App\Cart;
 use App\DetailTransaction;
 use App\Product;
 use App\Image;
+use App\User;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -252,6 +253,67 @@ class TransactionController extends Controller
         // $transaction = Transaction::find($kode);
         return view('checktransactionbycode', ['data' => $transaction]);
     }
+     public function myTransaction($id){
+        $data = User::join('addresses','users.id', '=','addresses.user_id')
+        ->select('users.*','addresses.phone','addresses.city','addresses.address')
+        ->where('users.id',$id)
+        ->first();
+
+        $waiting =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
+        ->join('users', 'transactions.user_id','=','users.id')
+        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('users.id', '=', $id)
+        ->where('transactions.status', '=', "waiting")
+        ->orderBy('transactions.id')
+        ->get();
+
+        $processing =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
+        ->join('users', 'transactions.user_id','=','users.id')
+        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('users.id', '=', $id)
+        ->where('transactions.status', '=', "processing")
+        ->orderBy('transactions.id')
+        ->get();
+
+        $confirmed =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
+        ->join('users', 'transactions.user_id','=','users.id')
+        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('users.id', '=', $id)
+        ->where('transactions.status', '=', "confirmed")
+        ->orderBy('transactions.id')
+        ->get();
+
+        $delivered =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
+        ->join('users', 'transactions.user_id','=','users.id')
+        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('users.id', '=', $id)
+        ->where('transactions.status', '=', "delivered")
+        ->orderBy('transactions.id')
+        ->get();  
+
+        $product = \App\DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
+        ->join('products','products.id','=','detail_transactions.product_id')
+        ->select('products.product_name','products.price','detail_transactions.quantity')
+        ->where('transactions.id', $id)
+        ->get();
+
+        return view('mytransaction',[
+            'waiting' => $waiting,
+            'processing' => $processing,
+            'confirmed' => $confirmed,
+            'delivered' =>$delivered,
+            'data'=> $data,
+            'product' => $product
+            ]);
+        }
 
     /**
      * Display the specified resource.

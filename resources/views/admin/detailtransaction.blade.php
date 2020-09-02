@@ -49,7 +49,7 @@
                 <img src="{{ $data->path }}" alt="Bukti Pembayaran" style="height: 100px"></a></th>
           </tr>
         </tbody>
-      </table>
+    </table>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-6">

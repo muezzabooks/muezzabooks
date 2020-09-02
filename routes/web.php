@@ -41,7 +41,8 @@ Route::post('/insertImage/{id}','TransactionController@insertImage')->name('tran
 
 //CEK TRANSAKSI
 Route::get('/cektransaksi','TransactionController@checkTransaction')->name('transaction.check');
-Route::post('/cektransaksi/search','TransactionController@checkTransaction')->name('transaction.check.search');
+Route::get('/cektransaksi/search','TransactionController@checkTransactionSearch')->name('transaction.check.search');
+Route::get('/mytransaction/{id}', 'TransactionController@myTransaction')->name('mytransaction');
 
 
 // Route::resource('/adminproduct', 'Admin\ProductController');

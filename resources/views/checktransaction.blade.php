@@ -10,8 +10,6 @@
 						<div class="col-12">
 							<h4 class="text-center">Cek transaksi</h4>
 							<form method="GET" action="{{ route('transaction.check.search') }}">
-								@csrf
-
 								<div class="form-group">
 									<label for="email" class="col-md-12 col-form-label">Kode Transaksi</label>
 
@@ -22,9 +20,8 @@
 
 								<div class="form-group">
 									<div class="col-md-12 offset-md-0">
-										<button type="submit" class="btn btn-primary btn-block">
-											Kirim
-										</button>
+										<input type="submit" class="btn btn-primary btn-block" value="Kirim">
+											
 									</div>
 								</div>
 							</form>
