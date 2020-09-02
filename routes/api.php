@@ -48,6 +48,7 @@ Route::prefix('v1')->name('api.v1.')->namespace('Api\V1')->group(function(){
         Route::post('/carts/decrease/{id}', 'CartsController@decrease')->name('carts.decrease');
         Route::post('/carts/delete/{id}', 'CartsController@destroy')->name('carts.delete');
 
+        Route::get('/transactions', 'TransactionsController@index')->name('transactions');
         Route::post('/transaction/create', 'TransactionsController@store')->name('transactions.create');
         Route::post('/transaction/create_one', 'TransactionsController@buy')->name('transactions.buy');
     });

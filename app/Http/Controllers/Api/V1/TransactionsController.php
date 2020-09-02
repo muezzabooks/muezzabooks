@@ -18,9 +18,11 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        
+        $transaction = Transaction::where('user_id',Auth::id())->get();
+
+        return response()->json($transaction);
     }
 
     /**
