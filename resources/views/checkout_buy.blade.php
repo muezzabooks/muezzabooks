@@ -12,13 +12,8 @@
           <div class="card">
             <h5 class="card-header card-header-yellow">Alamat Pengiriman BUY</h5>
             <div class="card-body">
-              @guest
-              <form action="{{ route('transaction.buyGuest') }}" method="POST" enctype="multipart/form-data">
-              @endguest
 
-              @auth
-              <form action="{{ route('transaction.buyAuth') }}" method="POST" enctype="multipart/form-data">
-              @endauth
+              <form action="{{ route('transaction.buy') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Nama --}}
                 <div class="row">
@@ -89,7 +84,6 @@
                   </tr>
                 </thead>
               <?php $total=0 ?>
-              @guest
                 @if (session('cart_buy'))
                   @foreach (session('cart_buy') as $id => $details)
                     <?php $total += $details['price'] * $details['quantity'] ?>
@@ -102,22 +96,6 @@
                 @else
                   <script>window.location = "/";</script>
                 @endif
-              @endguest
-
-              @auth
-                @if (isset($products))
-                  @foreach ($products as $id => $details)
-                    <?php $total += \App\Product::where(['id' => $details->product_id])->pluck('price')->first() * $details->quantity ?>
-                    <tr>
-                      <td scope="row">{{ \App\Product::where(['id' => $details->product_id])->pluck('product_name')->first() }}</td>
-                      <th>Rp {{ \App\Product::where(['id' => $details->product_id])->pluck('price')->first() }}</th>
-                      <td>{{ $details->quantity }}</td>
-                    </tr>
-                  @endforeach
-                @else
-                  <script>window.location = "/";</script>
-                @endif
-              @endauth
               
               </tbody>
             </table>

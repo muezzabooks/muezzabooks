@@ -133,33 +133,18 @@ class CartController extends Controller
         $product = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path','images.name')->find($id);
 
-        if (Auth::check()) {
+        $cartBuy[$id] = [
+            "product_id" => $product->id,
+            "product_name" => $product->product_name,
+            "price" => $product->price,
+            "quantity" => 1,
+            "path" => $product->path
+        ];
 
-            $cart = new Cart;
-
-            $cart->user_id = Auth::id();
-            $cart->product_id = $product->id;
-            $cart->quantity = 1;
-            $cart->save();
-
-            $id = Cart::latest()->pluck('id')->first();
-
-            return redirect()->route('checkout.buy',['id' => $id]);
-
-        } else {
-
-            $cartBuy[$id] = [
-                "product_id" => $product->id,
-                "product_name" => $product->product_name,
-                "price" => $product->price,
-                "quantity" => 1,
-                "path" => $product->path
-            ];
-
-            session()->put('cart_buy', $cartBuy);
-            
-            return redirect()->route('checkout.buyGuest',['id' => $id]);
-        }
+        session()->put('cart_buy', $cartBuy);
+        
+        return redirect()->route('checkout.buy',['id' => $id]);
+        
     }
 
     public function increase(Request $request, $id)
