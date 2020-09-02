@@ -39,5 +39,17 @@ Route::prefix('v1')->name('api.v1.')->namespace('Api\V1')->group(function(){
     })->name('status');
 
     Route::apiResource('products','ProductsController');
+
+    
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('/carts', 'CartsController@index')->name('carts');
+        Route::post('/carts/add/{id}', 'CartsController@store')->name('carts.add');
+        Route::post('/carts/increase/{id}', 'CartsController@increase')->name('carts.increase');
+        Route::post('/carts/decrease/{id}', 'CartsController@decrease')->name('carts.decrease');
+        Route::post('/carts/delete/{id}', 'CartsController@destroy')->name('carts.delete');
+
+        Route::post('/transaction/create', 'TransactionsController@store')->name('transactions.create');
+        Route::post('/transaction/create_one', 'TransactionsController@buy')->name('transactions.buy');
+    });
 });
 

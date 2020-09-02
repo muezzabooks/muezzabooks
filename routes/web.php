@@ -29,15 +29,13 @@ Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->m
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkout.buy');
-Route::get('/buy/{id}/checkout_guest','TransactionController@indexBuyGuest')->name('checkout.buyGuest');
 
 //PAY FROM CART
 Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
 Route::post('/checkout/pay','TransactionController@storeAuth')->name('transaction.storeAuth');
 
 //BUY DIRECTLY
-Route::post('buy/checkout/pay_guest','TransactionController@buyGuest')->name('transaction.buyGuest');
-Route::post('buy/checkout/pay','TransactionController@buyAuth')->name('transaction.buyAuth');
+Route::post('buy/checkout/pay','TransactionController@buy')->name('transaction.buy');
 Route::get('/checkout/validate/{id}','TransactionController@show')->name('transaction.show');
 Route::post('/insertImage/{id}','TransactionController@insertImage')->name('transaction.insert.image');
 

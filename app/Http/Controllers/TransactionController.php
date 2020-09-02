@@ -10,6 +10,7 @@ use App\Image;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -27,35 +28,9 @@ class TransactionController extends Controller
         
     }
 
-    public function indexBuy($id)
+    public function indexBuy()
     {
-
-        if (Auth::check()) {
-
-            $products = Cart::where('id','=',$id)->get();
-            return view('checkout_buy',[
-                'products' => $products
-            ]);
-
-        } else {
-
-            return redirect()->back();
-            
-        }
-
-    }
-
-    public function indexBuyGuest()
-    {
-        if (Auth::check()) {
-
-            return redirect()->back();
-
-        } else {
-
-            return view('checkout_buy');
-            
-        }
+        return view('checkout_buy');
     }
 
     /**
@@ -108,6 +83,8 @@ class TransactionController extends Controller
             $detailTransaction->price = $details['price'] * $details['quantity'];
             $detailTransaction->save();
         }
+
+        $request->session()->flush();
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }
@@ -128,7 +105,7 @@ class TransactionController extends Controller
         $cart = Cart::where('user_id',Auth::id())->get();
         $total = 0;
         foreach ($cart as $id => $details) {
-            $total += Product::where(['id' => $details->id])->pluck('price')->first();
+            $total += Product::where(['id' => $details->product_id])->pluck('price')->first();
         }
 
         $transaction = new Transaction;
@@ -142,7 +119,7 @@ class TransactionController extends Controller
 
         $t = Transaction::latest()->pluck('id')->first();
         foreach ($cart as $id => $details) {
-            $price = Product::where(['id' => $details->id])->pluck('price')->first();
+            $price = Product::where(['id' => $details->product_id])->pluck('price')->first();
 
             $detailTransaction = new DetailTransaction;
             $detailTransaction->transaction_id = $t;
@@ -150,12 +127,18 @@ class TransactionController extends Controller
             $detailTransaction->quantity = $details->quantity;
             $detailTransaction->price = $price * $details['quantity'];
             $detailTransaction->save();
+            
+            $details->delete();
         }
+
+        // foreach ($cart as $id => $details) {
+        //     $details->delete();
+        // }
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }
 
-    public function buyGuest(Request $request)
+    public function buy(Request $request)
     {
         $address = new Address;
 
@@ -187,49 +170,6 @@ class TransactionController extends Controller
             $detailTransaction->product_id = $details['product_id'];
             $detailTransaction->quantity = $details['quantity'];
             $detailTransaction->price = $details['price'] * $details['quantity'];
-            $detailTransaction->save();
-        }
-        
-        return redirect()->route('transaction.show', ['id' => $t]);
-    }
-
-    public function buyAuth(Request $request)
-    {
-        $address = new Address;
-
-        $address->name = $request->name;
-        $address->phone = $request->phone;
-        $address->city = $request->city;
-        $address->zip_code = $request->zip;
-        $address->address = $request->address;
-        $address->user_id = Auth::id();
-        $address->save();
-
-        $a = Address::latest()->pluck('id')->first();
-        $cart = Cart::where('user_id',Auth::id())->get();
-        $total = 0;
-        foreach ($cart as $id => $details) {
-            $total += Product::where(['id' => $details->id])->pluck('price')->first();
-        }
-
-        $transaction = new Transaction;
-
-        $transaction->address_id = $a;
-        $transaction->total = $total;
-        $transaction->status = 'waiting for validation';
-        $transaction->date = date("Y-m-d H:i:s");
-        $transaction->user_id = Auth::id();
-        $transaction->save();
-
-        $t = Transaction::latest()->pluck('id')->first();
-        foreach ($cart as $id => $details) {
-            $price = Product::where(['id' => $details->id])->pluck('price')->first();
-
-            $detailTransaction = new DetailTransaction;
-            $detailTransaction->transaction_id = $t;
-            $detailTransaction->product_id = $details->product_id;
-            $detailTransaction->quantity = $details->quantity;
-            $detailTransaction->price = $price * $details['quantity'];
             $detailTransaction->save();
         }
         

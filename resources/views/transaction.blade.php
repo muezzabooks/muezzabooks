@@ -15,6 +15,11 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Nama Penerima : {{ $address->name }}</li>
                   <li class="list-group-item">Status transaksi : {{ $transaction['status'] }}</li>
+                  <li class="list-group-item">
+                    <strong>
+                      ID transaksi : {{ $transaction['code'] }}
+                    </strong>
+                  </li>
                 </ul>
                 <div class="card-body pb-0">
                   @foreach ($detail as $id => $d)
