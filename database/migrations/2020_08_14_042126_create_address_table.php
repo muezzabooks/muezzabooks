@@ -18,7 +18,6 @@ class CreateAddressTable extends Migration
             $table->string('name', 20);
             $table->string('phone', 20);
             $table->string('city');
-            $table->string('zip_code', 5);
             $table->text('address');
             $table->timestamps();
         });
