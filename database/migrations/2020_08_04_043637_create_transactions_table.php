@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('no_resi');
+            $table->string('no_resi')->nullable();
             $table->integer('total')->length(20);
             $table->string('status');
             $table->date('date');

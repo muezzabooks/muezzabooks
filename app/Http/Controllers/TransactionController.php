@@ -8,6 +8,7 @@ use App\DetailTransaction;
 use App\Product;
 use App\Image;
 use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +19,10 @@ class TransactionController extends Controller
     {
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
+            $user = User::find(Auth::id())->pluck('name')->first();
             return view('checkout',[
-                'products' => $products
+                'products' => $products,
+                'user' => $user,
             ]);
         } else {
             return view('checkout');
@@ -30,7 +33,13 @@ class TransactionController extends Controller
 
     public function indexBuy()
     {
-        return view('checkout_buy');
+        if (Auth::check()) {
+            $user = User::find(Auth::id())->pluck('name')->first();
+            return view('checkout_buy',['user' => $user]);
+        } else {
+            return view('checkout_buy');
+        }
+        
     }
 
     /**
@@ -145,7 +154,6 @@ class TransactionController extends Controller
         $address->name = $request->name;
         $address->phone = $request->phone;
         $address->city = $request->city;
-        $address->zip_code = $request->zip;
         $address->address = $request->address;
         $address->save();
 
@@ -158,7 +166,8 @@ class TransactionController extends Controller
         $transaction = new Transaction;
 
         $transaction->address_id = $a;
-        $transaction->total = $total;
+        $transaction->shipping_cost = $request->ongkos;
+        $transaction->total = $total + $request->ongkos;
         $transaction->status = 'waiting for validation';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->save();
@@ -172,6 +181,8 @@ class TransactionController extends Controller
             $detailTransaction->price = $details['price'] * $details['quantity'];
             $detailTransaction->save();
         }
+        
+        $request->session()->flush();
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }
