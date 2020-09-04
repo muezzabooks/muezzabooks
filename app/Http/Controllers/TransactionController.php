@@ -19,8 +19,10 @@ class TransactionController extends Controller
     {
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
+            $user = User::find(Auth::id())->pluck('name')->first();
             return view('checkout',[
-                'products' => $products
+                'products' => $products,
+                'user' => $user,
             ]);
         } else {
             return view('checkout');
@@ -31,7 +33,13 @@ class TransactionController extends Controller
 
     public function indexBuy()
     {
-        return view('checkout_buy');
+        if (Auth::check()) {
+            $user = User::find(Auth::id())->pluck('name')->first();
+            return view('checkout_buy',['user' => $user]);
+        } else {
+            return view('checkout_buy');
+        }
+        
     }
 
     /**
@@ -146,7 +154,6 @@ class TransactionController extends Controller
         $address->name = $request->name;
         $address->phone = $request->phone;
         $address->city = $request->city;
-        $address->zip_code = $request->zip;
         $address->address = $request->address;
         $address->save();
 
@@ -173,6 +180,8 @@ class TransactionController extends Controller
             $detailTransaction->price = $details['price'] * $details['quantity'];
             $detailTransaction->save();
         }
+        
+        $request->session()->flush();
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }

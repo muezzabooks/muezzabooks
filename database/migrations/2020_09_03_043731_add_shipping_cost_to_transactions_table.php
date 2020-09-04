@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressTable extends Migration
+class AddShippingCostToTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 20);
-            $table->string('phone', 20);
-            $table->string('city');
-            $table->text('address');
-            $table->timestamps();
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->string('shipping_cost')->after('no_resi');
         });
     }
 
@@ -30,6 +25,8 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropColumn('shipping_cost');
+        });
     }
 }

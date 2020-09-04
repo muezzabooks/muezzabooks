@@ -25,7 +25,12 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="name">Nama Penerima</label>
-                      <input type="text" class="form-control" id="name" name="name">
+                      @auth
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $user }}">
+                      @endauth
+                      @guest
+                        <input type="text" class="form-control" id="name" name="name">
+                      @endguest
                     </div>
                   </div>
                 </div>
@@ -38,13 +43,7 @@
                       </select>
                     </div>
                   </div>
-                  {{-- Kode Pos --}}
-                  <div class="col-4">
-                    <div class="form-group">
-                      <label for="zip">Kode Pos</label>
-                      <input type="number" class="form-control" id="zip" name="zip">
-                    </div>
-                  </div>
+                  <input type="hidden" id="ongkos">
                 </div>
                 {{-- HP --}}
                 <div class="row">
@@ -130,7 +129,7 @@
                 </tr>
                 <tr>
                   <th scope="row">Biaya Kirim</th>
-                  <th colspan="2" class="text-center">Rp <span id="ongkos"></span> </th>
+                  <th colspan="2" class="text-center">Rp <span id="ongkos_display"></span> </th>
                 </tr>
                 <tr>
                   <th scope="row">Diskon</th>
@@ -235,6 +234,7 @@
             var arrlength = finalResult.length;
 
             if(arrlength == 4){
+              document.getElementById("ongkos_display").textContent = finalResult[3].tarif;
               document.getElementById("ongkos").textContent = finalResult[3].tarif;
               var tarif = finalResult[3].tarif;
               var sub = parseInt("{{ $total }}");
@@ -246,6 +246,7 @@
 
             }
             else if(arrlength == 5){
+              document.getElementById("ongkos_display").textContent = finalResult[4].tarif;
               document.getElementById("ongkos").textContent = finalResult[4].tarif;
               var tarif = finalResult[4].tarif;
               var sub = parseInt("{{ $total }}");
