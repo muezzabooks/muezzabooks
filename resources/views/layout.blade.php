@@ -33,16 +33,16 @@
             </a>
           </li> 
           @guest    
-          <li class="nav-item">
+          <li class="nav-item" style="margin-right: 1em">
             <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
           </li> 
             @if (Route::has('register'))
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                <a class="nav-link btn" href="{{ route('register') }}">Sign Up</a>
               </li>
             @endif
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">Log In</a>
+              <a class="nav-link btn" href="{{ route('login') }}">Log In</a>
             </li>
             @else
               <li class="nav-item">
@@ -67,12 +67,12 @@
 
 
 	 <!-- Footer -->
-	<footer class="py-5 btn-yellow">
-		<div class="container">
-		  <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
-		</div>
-		<!-- /.container -->
-  </footer>
+   <footer class="py-3 btn-yellow footer">
+    <div class="container">
+      <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

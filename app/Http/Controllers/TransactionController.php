@@ -160,7 +160,7 @@ class TransactionController extends Controller
 
         $transaction->address_id = $a;
         $transaction->total = $total;
-        $transaction->status = 'waiting for validation';
+        $transaction->status = 'waiting';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->save();
 
@@ -195,10 +195,23 @@ class TransactionController extends Controller
         ->where('transactions.id', $kode)
         ->get();
 
-        // $transaction = Transaction::find($kode);
-        return view('checktransactionbycode', [
-            'data' => $transaction,
-            'product' => $product]);
+        if($transaction->status == "waiting"){
+            $transaction = Transaction::find($kode);
+            $detailTransaction = DetailTransaction::where('transaction_id',$kode)->get();
+            // dd($detailTransaction[0]['product_id']);
+            $address = Address::find($transaction['address_id']);
+            return view('transaction',[
+                'transaction' => $transaction, 
+                'detail' => $detailTransaction,
+                'address' => $address
+            ]);
+        }
+        else{
+            return view('checktransactionbycode', [
+                'data' => $transaction,
+                'product' => $product]);
+        }
+        
     }
      public function myTransaction($id){
         $data = User::join('addresses','users.id', '=','addresses.user_id')
@@ -206,45 +219,19 @@ class TransactionController extends Controller
         ->where('users.id',$id)
         ->first();
 
-        $waiting =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
-        ->join('users', 'transactions.user_id','=','users.id')
-        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
-        ->join('images','images.product_id','=','products.id')
-        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        $transaction =Transaction::join('users', 'transactions.user_id','=','users.id')
+        ->select('transactions.*')
         ->where('users.id', '=', $id)
-        ->where('transactions.status', '=', "waiting")
         ->orderBy('transactions.id')
         ->get();
 
-        $processing =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
-        ->join('users', 'transactions.user_id','=','users.id')
-        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
+        $detail = Transaction::join('detail_transactions','transactions.id','=','detail_transactions.transaction_id')
+        ->join('users','users.id','=','transactions.user_id')
+        ->join('products','products.id' ,'=','detail_transactions.product_id')
         ->join('images','images.product_id','=','products.id')
-        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
-        ->where('users.id', '=', $id)
-        ->where('transactions.status', '=', "processing")
-        ->orderBy('transactions.id')
+        ->select('transactions.code','products.product_name','images.path','detail_transactions.quantity','products.price')
+        ->where('users.id','=', $id)
         ->get();
-
-        $confirmed =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
-        ->join('users', 'transactions.user_id','=','users.id')
-        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
-        ->join('images','images.product_id','=','products.id')
-        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
-        ->where('users.id', '=', $id)
-        ->where('transactions.status', '=', "confirmed")
-        ->orderBy('transactions.id')
-        ->get();
-
-        $delivered =Transaction::join('detail_transactions', 'transactions.id','=','detail_transactions.transaction_id')
-        ->join('users', 'transactions.user_id','=','users.id')
-        ->join('products', 'detail_transactions.product_id', '=', 'products.id')
-        ->join('images','images.product_id','=','products.id')
-        ->select('transactions.*','images.path','products.product_name','products.price', 'detail_transactions.quantity')
-        ->where('users.id', '=', $id)
-        ->where('transactions.status', '=', "delivered")
-        ->orderBy('transactions.id')
-        ->get();  
 
         $product = \App\DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
         ->join('products','products.id','=','detail_transactions.product_id')
@@ -253,12 +240,8 @@ class TransactionController extends Controller
         ->get();
 
         return view('mytransaction',[
-            'waiting' => $waiting,
-            'processing' => $processing,
-            'confirmed' => $confirmed,
-            'delivered' =>$delivered,
-            'data'=> $data,
-            'product' => $product
+            'data' => $transaction,
+            'detail' => $detail,
             ]);
         }
 

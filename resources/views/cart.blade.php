@@ -3,7 +3,7 @@
 @extends('layout')
 @section('content')
 <section>
-  <div class="container">
+  <div class="container page-wrap">
     <div class="row">
       <div class="col-md-12">
         <div class="p-3">

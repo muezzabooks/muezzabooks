@@ -4,7 +4,7 @@
 
 <section>
   <hr>
-  <div class="container">
+  <div class="container page-wrap">
     <div class="row align-items-center pb-5">
             
       <div class="col-lg-6 text-center pb-5">

@@ -26,7 +26,7 @@
   @foreach ($products as $no => $p)
   @if ($no % 2 == 0)
   <section id="catalog">
-    <div class="container">
+    <div class="container page-wrap">
       <div class="row align-items-center">
         <div class="col-lg-4">
           <div class="p-5">
@@ -36,7 +36,7 @@
         <div class="col-lg-8">
           <div class="p-5">
             <h4 class="display-4">{{ $p->product_name }}</h4>
-            <a href="show/{{ $p->id }}" class="btn btn-outline-yellow">detail</a>
+            <a href="show/{{ $p->id }}" class="btn btn-outline-yellow">Detail</a>
           </div>
         </div>
       </div>

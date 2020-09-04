@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container page-wrap">
     <div class="row justify-content-center p-5">
         <div class="col-md-8">
             <div class="card border-0">

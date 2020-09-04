@@ -2,7 +2,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container page-wrap">
   <div class="row">
     
     <div class="col-md-8 col-sm-12">

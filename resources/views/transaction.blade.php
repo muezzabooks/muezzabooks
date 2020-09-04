@@ -2,7 +2,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container page-wrap">
     <div class="row p-5">
         <div class="col-4">
             <img class="img-fluid" src="{{ ('../../assets/images/payment.svg') }}" >

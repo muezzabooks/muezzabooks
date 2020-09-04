@@ -2,7 +2,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container page-wrap">
   <div class="row">
     
     <div class="col-md-8 col-sm-12">
@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-12 p-3">
           <div class="card">
-            <h5 class="card-header card-header-yellow">Alamat Pengiriman BUY</h5>
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
             <div class="card-body">
 
               <form action="{{ route('transaction.buy') }}" method="POST" enctype="multipart/form-data">
