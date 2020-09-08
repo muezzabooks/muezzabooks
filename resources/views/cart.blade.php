@@ -3,7 +3,7 @@
 @extends('layout')
 @section('content')
 <section>
-  <div class="container page-wrap">
+  <div class="container full-height">
     <div class="row">
       <div class="col-md-12">
         <div class="p-3">
@@ -75,8 +75,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 p-5 h-100">
-                <h1 class="text-center">Keranjang belanja anda kosong !</h1>
+              <div class="col-12 p-5 h-100 text-center">
+                <img src="{{ ('assets/images/cart.svg') }}" style="height: 200px;
+                margin-top: -3em; margin-bottom: 3em">
+                <h3 class="text-center">Keranjang belanja anda kosong !</h3>
               </div>
               @endif
 

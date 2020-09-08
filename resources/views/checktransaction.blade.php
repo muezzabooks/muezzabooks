@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container page-wrap">
+<div class="container page-wrap full-height">
     <div class="row justify-content-center p-5">
         <div class="col-md-8">
             <div class="card border-0">
@@ -12,8 +12,14 @@
 							<form method="GET" action="{{ route('transaction.check.search') }}">
 								<div class="form-group">
 									<label for="email" class="col-md-12 col-form-label">Kode Transaksi</label>
-
 									<div class="col-md-12">
+										@if (count($errors) > 0)
+									<div class="alert alert-danger">
+											@foreach ($errors->all() as $error)
+												{{ $error }}
+											@endforeach
+									</div>
+									@endif
 										<input id="kode" type="text" class="form-control" name="kode" required>
 									</div>
 								</div>

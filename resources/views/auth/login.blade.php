@@ -1,24 +1,31 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container full-height">
     <div class="row justify-content-center p-5">
         <div class="col-md-8">
             <div class="card border-0">
                 <div class="card-body">
 					<div class="row">
-						<div class="col-5">
+						<div class="col-5 img-login">
 							<img class="img-fluid" src="{{ ('assets/images/login.svg') }}" >
 						</div>
-						<div class="col-7">
+						<div class="col-md-7 col-sm-12">
 							<h4 class="text-center">LOGIN</h4>
 							<form method="POST" action="{{ route('login') }}">
-								@csrf
-
+								@csrf							
 								<div class="form-group">
+									<div class="col-md-12">
+									@if (count($errors) > 0)
+									<div class="alert alert-danger">
+											@foreach ($errors->all() as $error)
+												{{ $error }}
+											@endforeach
+									</div>
+									@endif
 									<label for="email" class="col-md-12 col-form-label">{{ __('E-Mail Address') }}</label>
 
-									<div class="col-md-12">
+									
 										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
 										@error('email')

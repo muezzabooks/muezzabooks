@@ -67,9 +67,6 @@ header.masthead {
       .masthead-subheading {
         font-size: 2rem;
       }
-      .img-header{
-        height: 400px;
-      }
     }
   }
 }
@@ -156,6 +153,12 @@ section{
     .btn-delete{
       margin-top: 0;
     }
+    .display-4{
+      font-size: 16em;
+    }
+    .img-login{
+      display: none;
+    }
   }
 
   /*!
@@ -237,4 +240,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 
+}
+.full-height {
+  min-height: 76.7vh;
 }

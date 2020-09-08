@@ -191,6 +191,9 @@ class TransactionController extends Controller
     }
 
     public function checkTransactionSearch(Request $request){
+        $this->validate($request,[
+            'kode' => 'required|min:16|max:16'
+        ]);
         $kode = $request->kode;
         $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
         ->select('transactions.*','addresses.name','addresses.phone',
@@ -203,6 +206,11 @@ class TransactionController extends Controller
         ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
         ->where('transactions.id', $kode)
         ->get();
+
+        if($transaction == null){
+            return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
+        }
+        else{
 
         if($transaction->status == "waiting"){
             $transaction = Transaction::find($kode);
@@ -220,6 +228,7 @@ class TransactionController extends Controller
                 'data' => $transaction,
                 'product' => $product]);
         }
+    }
         
     }
      public function myTransaction($id){

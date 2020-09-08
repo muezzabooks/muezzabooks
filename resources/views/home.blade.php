@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-lg-6 order-lg-2 text-center">
             <div class="p-5">
-              <img class="img-fluid" src="{{ ('assets/images/read.svg') }}"> 
+              <img class="img-fluid img-header" src="{{ ('assets/images/read.svg') }}"> 
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">

@@ -38,20 +38,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-            
-        $product = new Product;
-          $product->product_name = $request->product_name;
-          $product->description = $request->description;
-          $product->stock = $request->stock;
-          $product->price = $request->price;
-        // //   $product->image_name = $imageName;
-        // //   $product->path = '/storage/'.$path;
-          $product->save;
-    
-        return response()->json([
-            'message' => 'Data Berhasil Masuk',
-            'product' => $product
-        ], 201);
     }
 
     /**
@@ -66,8 +52,13 @@ class ProductsController extends Controller
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path','images.name')->find($id);
 
-        return view('detail')
+        if($products == null){
+            return abort(404);
+        }
+        else{
+            return view('detail')
         ->with('products', $products);
+        }        
     }
 
     /**
