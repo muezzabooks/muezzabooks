@@ -38,7 +38,7 @@
                       </select>
                     </div>
                   </div>
-                  <input type="hidden" id="ongkos">
+                  <input type="hidden" name="shipping_cost" id="ongkos">
                 </div>
                 {{-- HP --}}
                 <div class="row">
