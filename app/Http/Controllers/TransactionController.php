@@ -214,10 +214,9 @@ class TransactionController extends Controller
         else{
 
         if($transaction->status == "waiting"){
-            $transaction = Transaction::find($kode);
-            $detailTransaction = DetailTransaction::where('transaction_id',$kode)->get();
+            $detailTransaction = DetailTransaction::where('transaction_id',$transaction->id)->get();
             // dd($detailTransaction[0]['product_id']);
-            $address = Address::find(8);
+            $address = Address::find($transaction->id);
             return view('transaction',[
                 'transaction' => $transaction, 
                 'detail' => $detailTransaction,
