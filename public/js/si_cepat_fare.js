@@ -1,7 +1,4 @@
 var data = [
-  { "text": "United Arab Emirates, United Arab Emirates", "id": "AE10000" },
-  { "text": "Afghanistan, Afghanistan", "id": "AF10000" },
-  { "text": "Armenia, Armenia", "id": "AM10000" },
   { "text": "Ambon, Kota Ambon", "id": "AMQ10000" },
   { "text": "Nusaniwe, Kota Ambon", "id": "AMQ10005" },
   { "text": "Sirimau, Kota Ambon", "id": "AMQ10006" },
@@ -7627,10 +7624,6 @@ var data = [
   { "text": "Dapurang, Kab. Mamuju Utara", "id": "UPG23509" },
   { "text": "Bulu Taba, Kab. Mamuju Utara", "id": "UPG23510" },
   { "text": "Bambaira, Kab. Mamuju Utara", "id": "UPG23511" },
-  { "text": "Uzbekistan, Uzbekistan", "id": "UZ10000" },
-  { "text": "Vietnam, Vietnam", "id": "VN100SF" },
-  { "text": "Pending, Pending", "id": "XXX10000" },
-  { "text": "Yemen, Yemen", "id": "YE10000"  }
 ];
 
 var origin = [

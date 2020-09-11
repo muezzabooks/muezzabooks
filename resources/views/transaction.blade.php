@@ -38,11 +38,11 @@
                     <strong> Alamat </strong>
                   </p>
                   <li class="list-group-item">
-                    {{ $address['city'] }}, {{ $address['address'] }}
+                    {{ $address['address'] }}, {{ $address['city'] }}
                   </li>
                 </div>
 
-                @if ($transaction['status']==='waiting for validation')
+                @if ($transaction['status']==='waiting')
                   <form action="{{ route('transaction.insert.image',['id' => $transaction['id']]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">

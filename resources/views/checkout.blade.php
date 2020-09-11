@@ -25,21 +25,26 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="name">Nama Penerima</label>
-                      @auth
+                      @auth                      
                         <input type="text" class="form-control" id="name" name="name" value="{{ $user }}">
                       @endauth
                       @guest
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" required class="form-control" id="name" name="name">
                       @endguest
+                      {{-- @if ($errors->has('name'))
+                        <p class="text-danger">{{ $errors->first('name') }}
+                        </p>
+                      @endif --}}
                     </div>
                   </div>
                 </div>
                 {{-- Kota atau kecamatan --}}
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="city" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      <select required class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                        <option></option>
                       </select>
                     </div>
                   </div>
@@ -50,7 +55,7 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="phone">Nomor Telepon</label>
-                      <input type="tel" class="form-control" id="phone" name="phone">
+                      <input type="tel" required class="form-control" id="phone" name="phone">
                     </div>
                   </div>
                 </div>
@@ -58,11 +63,12 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
-                      <label for="address">Alamat</label>
-                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                      <label for="address">Alamat Lengkap</label>
+                      <textarea class="form-control" required id="address" rows="3" name="address"></textarea>
                     </div>
                   </div>
                 </div>
+                <input type="hidden" name="ongkir" id="ongkir">
                 <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
               
               </form>
@@ -130,6 +136,7 @@
                 <tr>
                   <th scope="row">Biaya Kirim</th>
                   <th colspan="2" class="text-center">Rp <span id="ongkos_display"></span> </th>
+                  <th></th>
                 </tr>
                 <tr>
                   <th scope="row">Diskon</th>
@@ -153,7 +160,8 @@
   $(document).ready(function(){
 
     $('.js-example-basic-single').select2({
-      data: data
+      data: data,
+      placeholder: "Select a city",
     });
     
     $('.js-example-basic').select2({
@@ -240,6 +248,8 @@
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
               var total = intTarif + sub;
+              document.getElementById("ongkir").value = intTarif;
+              document.getElementById("grtotal").value = total;
               // console.log(total);
               document.getElementById("gtotal").textContent = total;
 

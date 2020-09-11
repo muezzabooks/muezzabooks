@@ -8,6 +8,7 @@ use App\DetailTransaction;
 use App\Product;
 use App\Image;
 use App\User;
+use App\Destination;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,12 +61,24 @@ class TransactionController extends Controller
      */
     public function storeGuest(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
+        ]);
+        if($request->city == 1){
+            return view('checkout')->withErrors('city','Pilih Kota yang benar!');
+        }
+        else{
+
+        
+        $destination = Destination::where('code',$request->city)->first();
         $address = new Address;
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $request->city;
-        $address->zip_code = $request->zip;
+        $address->city = $destination->label;
+        $address->zip_code = 2;
         $address->address = $request->address;
         $address->save();
 
@@ -97,18 +110,27 @@ class TransactionController extends Controller
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }
+    }
 
     public function storeAuth(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
+        ]);
+        $destination = Destination::where('code',$request->city)->first();
         $address = new Address;
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $request->city;
-        $address->zip_code = $request->zip;
+        $address->city = $destination->label;
+        $address->zip_code = 2;
         $address->address = $request->address;
         $address->user_id = Auth::id();
         $address->save();
+
+        
 
         $a = Address::latest()->pluck('id')->first();
         $cart = Cart::where('user_id',Auth::id())->get();
@@ -121,7 +143,7 @@ class TransactionController extends Controller
 
         $transaction->address_id = $a;
         $transaction->total = $total;
-        $transaction->status = 'waiting for validation';
+        $transaction->status = 'waiting';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->user_id = Auth::id();
         $transaction->save();
@@ -145,6 +167,7 @@ class TransactionController extends Controller
         // }
         
         return redirect()->route('transaction.show', ['id' => $t]);
+        
     }
 
     public function buy(Request $request)
@@ -271,15 +294,23 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
+        
         $transaction = Transaction::find($id);
         $detailTransaction = DetailTransaction::where('transaction_id',$id)->get();
         // dd($detailTransaction[0]['product_id']);
+        if($transaction == null){
+            return abort('404');
+        }
+        else{  
         $address = Address::find($transaction['address_id']);
+        
+              
         return view('transaction',[
             'transaction' => $transaction, 
             'detail' => $detailTransaction,
             'address' => $address
         ]);
+    }
     }
 
 
