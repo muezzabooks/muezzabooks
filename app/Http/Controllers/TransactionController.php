@@ -65,7 +65,6 @@ class TransactionController extends Controller
         $address->name = $request->name;
         $address->phone = $request->phone;
         $address->city = $request->city;
-        $address->zip_code = $request->zip;
         $address->address = $request->address;
         $address->save();
 
@@ -78,7 +77,8 @@ class TransactionController extends Controller
         $transaction = new Transaction;
 
         $transaction->address_id = $a;
-        $transaction->total = $total;
+        $transaction->shipping_cost = $request->shipping_cost;
+        $transaction->total = $total + $request->shipping_cost;
         $transaction->status = 'waiting for validation';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->save();
@@ -105,7 +105,6 @@ class TransactionController extends Controller
         $address->name = $request->name;
         $address->phone = $request->phone;
         $address->city = $request->city;
-        $address->zip_code = $request->zip;
         $address->address = $request->address;
         $address->user_id = Auth::id();
         $address->save();
@@ -120,7 +119,8 @@ class TransactionController extends Controller
         $transaction = new Transaction;
 
         $transaction->address_id = $a;
-        $transaction->total = $total;
+        $transaction->shipping_cost = $request->shipping_cost;
+        $transaction->total = $total + $request->shipping_cost;
         $transaction->status = 'waiting for validation';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->user_id = Auth::id();
@@ -182,7 +182,7 @@ class TransactionController extends Controller
             $detailTransaction->save();
         }
         
-        $request->session()->flush();
+        $request->session()->forget('cart_buy');
         
         return redirect()->route('transaction.show', ['id' => $t]);
     }
@@ -199,15 +199,15 @@ class TransactionController extends Controller
         $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
             ->select('transactions.*','addresses.name','addresses.phone',
             'addresses.city','addresses.address')
-            ->where('transactions.id', $kode)
+            ->where('transactions.code', $kode)
             ->first();
         $product = DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
             ->join('products','products.id','=','detail_transactions.product_id')
             ->join('images','images.product_id','=','products.id')
             ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
-            ->where('transactions.id', $kode)
+            ->where('transactions.code', $kode)
             ->get();
-
+        
         if($transaction == null){
             return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
         }
@@ -217,7 +217,7 @@ class TransactionController extends Controller
             $transaction = Transaction::find($kode);
             $detailTransaction = DetailTransaction::where('transaction_id',$kode)->get();
             // dd($detailTransaction[0]['product_id']);
-            $address = Address::find($transaction['address_id']);
+            $address = Address::find(8);
             return view('transaction',[
                 'transaction' => $transaction, 
                 'detail' => $detailTransaction,
@@ -241,7 +241,7 @@ class TransactionController extends Controller
         $transaction =Transaction::join('users', 'transactions.user_id','=','users.id')
             ->select('transactions.*')
             ->where('users.id', '=', $id)
-            ->orderBy('transactions.id')
+            ->orderBy('transactions.code')
             ->get();
 
         $detail = Transaction::join('detail_transactions','transactions.id','=','detail_transactions.transaction_id')
@@ -255,7 +255,7 @@ class TransactionController extends Controller
         $product = \App\DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
             ->join('products','products.id','=','detail_transactions.product_id')
             ->select('products.product_name','products.price','detail_transactions.quantity')
-            ->where('transactions.id', $id)
+            ->where('transactions.code', $id)
             ->get();
 
         return view('mytransaction',[

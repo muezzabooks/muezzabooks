@@ -39,11 +39,11 @@
                   <div class="col-8">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="city" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
                       </select>
                     </div>
                   </div>
-                  <input type="hidden" id="ongkos">
+                  <input type="hidden" name="shipping_cost" id="ongkos">
                 </div>
                 {{-- HP --}}
                 <div class="row">
@@ -234,8 +234,8 @@
             var arrlength = finalResult.length;
 
             if(arrlength == 4){
+              document.getElementById("ongkos").value = finalResult[3].tarif;
               document.getElementById("ongkos_display").textContent = finalResult[3].tarif;
-              document.getElementById("ongkos").textContent = finalResult[3].tarif;
               var tarif = finalResult[3].tarif;
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
@@ -246,8 +246,8 @@
 
             }
             else if(arrlength == 5){
+              document.getElementById("ongkos").value = finalResult[4].tarif;
               document.getElementById("ongkos_display").textContent = finalResult[4].tarif;
-              document.getElementById("ongkos").textContent = finalResult[4].tarif;
               var tarif = finalResult[4].tarif;
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
