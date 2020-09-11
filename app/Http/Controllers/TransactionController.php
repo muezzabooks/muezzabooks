@@ -166,9 +166,10 @@ class TransactionController extends Controller
         $transaction = new Transaction;
 
         $transaction->address_id = $a;
-        $transaction->total = $total;
+        $transaction->total = $total + $request->shipping_cost;
         $transaction->status = 'waiting';
         $transaction->date = date("Y-m-d H:i:s");
+        $transaction->shipping_cost = $request->shipping_cost;
         $transaction->save();
 
         $t = Transaction::latest()->pluck('id')->first();
@@ -196,16 +197,16 @@ class TransactionController extends Controller
         ]);
         $kode = $request->kode;
         $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
-        ->select('transactions.*','addresses.name','addresses.phone',
-        'addresses.city','addresses.address')
-        ->where('transactions.id', $kode)
-        ->first();
+            ->select('transactions.*','addresses.name','addresses.phone',
+            'addresses.city','addresses.address')
+            ->where('transactions.id', $kode)
+            ->first();
         $product = DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
-        ->join('products','products.id','=','detail_transactions.product_id')
-        ->join('images','images.product_id','=','products.id')
-        ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
-        ->where('transactions.id', $kode)
-        ->get();
+            ->join('products','products.id','=','detail_transactions.product_id')
+            ->join('images','images.product_id','=','products.id')
+            ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
+            ->where('transactions.id', $kode)
+            ->get();
 
         if($transaction == null){
             return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
@@ -233,35 +234,35 @@ class TransactionController extends Controller
     }
      public function myTransaction($id){
         $data = User::join('addresses','users.id', '=','addresses.user_id')
-        ->select('users.*','addresses.phone','addresses.city','addresses.address')
-        ->where('users.id',$id)
-        ->first();
+            ->select('users.*','addresses.phone','addresses.city','addresses.address')
+            ->where('users.id',$id)
+            ->first();
 
         $transaction =Transaction::join('users', 'transactions.user_id','=','users.id')
-        ->select('transactions.*')
-        ->where('users.id', '=', $id)
-        ->orderBy('transactions.id')
-        ->get();
+            ->select('transactions.*')
+            ->where('users.id', '=', $id)
+            ->orderBy('transactions.id')
+            ->get();
 
         $detail = Transaction::join('detail_transactions','transactions.id','=','detail_transactions.transaction_id')
-        ->join('users','users.id','=','transactions.user_id')
-        ->join('products','products.id' ,'=','detail_transactions.product_id')
-        ->join('images','images.product_id','=','products.id')
-        ->select('transactions.code','products.product_name','images.path','detail_transactions.quantity','products.price')
-        ->where('users.id','=', $id)
-        ->get();
+            ->join('users','users.id','=','transactions.user_id')
+            ->join('products','products.id' ,'=','detail_transactions.product_id')
+            ->join('images','images.product_id','=','products.id')
+            ->select('transactions.code','products.product_name','images.path','detail_transactions.quantity','products.price')
+            ->where('users.id','=', $id)
+            ->get();
 
         $product = \App\DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
-        ->join('products','products.id','=','detail_transactions.product_id')
-        ->select('products.product_name','products.price','detail_transactions.quantity')
-        ->where('transactions.id', $id)
-        ->get();
+            ->join('products','products.id','=','detail_transactions.product_id')
+            ->select('products.product_name','products.price','detail_transactions.quantity')
+            ->where('transactions.id', $id)
+            ->get();
 
         return view('mytransaction',[
             'data' => $transaction,
             'detail' => $detail,
-            ]);
-        }
+        ]);
+    }
 
     /**
      * Display the specified resource.
