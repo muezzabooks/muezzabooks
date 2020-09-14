@@ -171,13 +171,17 @@ class TransactionController extends Controller
     }
 
     public function buy(Request $request)
-    {
-        $destination = Destination::where('code',$request->city)->first();
+    {   
+        $path = public_path('destinations.json');
+        $destination = collect(json_decode(file_get_contents($path), true));
+
+        $data = $destination->where('code', $request->city)->first();
+        
         $address = new Address;
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $destination->label;
+        $address->city = $data['label'];
         $address->address = $request->address;
         $address->save();
 
@@ -186,7 +190,6 @@ class TransactionController extends Controller
         foreach (session('cart_buy') as $id => $details) {
             $total+=$details['price'];
         }
-
 
         $transaction = new Transaction;
 
