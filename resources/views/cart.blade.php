@@ -154,8 +154,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 p-5 h-100">
-                <h1 class="text-center">Keranjang belanja anda kosong !</h1>
+              <div class="col-12 p-5 h-100 text-center">
+                <img src="{{ ('assets/images/cart.svg') }}" style="height: 200px;
+                margin-top: -3em; margin-bottom: 3em">
+                <h3 class="text-center">Keranjang belanja anda kosong !</h3>
               </div>
               @endif
             @endauth

@@ -77,7 +77,7 @@ class TransactionController extends Controller
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $request->city;
+        $address->city = $destination->label;
         $address->address = $request->address;
         $address->save();
 
@@ -92,7 +92,7 @@ class TransactionController extends Controller
         $transaction->address_id = $a;
         $transaction->shipping_cost = $request->shipping_cost;
         $transaction->total = $total + $request->shipping_cost;
-        $transaction->status = 'waiting for validation';
+        $transaction->status = 'waiting';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->save();
 
@@ -124,7 +124,7 @@ class TransactionController extends Controller
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $request->city;
+        $address->city = $destination->label;
         $address->address = $request->address;
         $address->user_id = Auth::id();
         $address->save();
@@ -143,7 +143,7 @@ class TransactionController extends Controller
         $transaction->address_id = $a;
         $transaction->shipping_cost = $request->shipping_cost;
         $transaction->total = $total + $request->shipping_cost;
-        $transaction->status = 'waiting for validation';
+        $transaction->status = 'waiting';
         $transaction->date = date("Y-m-d H:i:s");
         $transaction->user_id = Auth::id();
         $transaction->save();
@@ -172,11 +172,12 @@ class TransactionController extends Controller
 
     public function buy(Request $request)
     {
+        $destination = Destination::where('code',$request->city)->first();
         $address = new Address;
 
         $address->name = $request->name;
         $address->phone = $request->phone;
-        $address->city = $request->city;
+        $address->city = $destination->label;
         $address->address = $request->address;
         $address->save();
 
@@ -185,6 +186,7 @@ class TransactionController extends Controller
         foreach (session('cart_buy') as $id => $details) {
             $total+=$details['price'];
         }
+
 
         $transaction = new Transaction;
 
@@ -316,6 +318,10 @@ class TransactionController extends Controller
 
     public function insertImage(Request $request){
         $id = $request->id;
+        $transaction = Transaction::find($id);
+        $transaction->status = 'processing';
+        $transaction->save();
+
         if ($request->file('image')) {
             $imagePath = $request->file('image');
             $imageName = $imagePath->getClientOriginalName();
@@ -329,8 +335,7 @@ class TransactionController extends Controller
             'transaction_id' => $id
         ]);
         
-        $transaction = Transaction::find($id);
-        $transaction->status = 'processing';
+        
 
         return redirect()->route('transaction.show', ['id' => $id]);
     }

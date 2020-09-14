@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container full-height">
   <div class="row">
     <div class="col-md-12">
       <div class="p-3">
@@ -106,7 +106,10 @@
                           
                           @endif
                       @endforeach
+
+                     
                     </table>
+                    <hr>
                         </div>
                         <div class="card-header">
                          <p class="text-right">Total : Rp. {{ $total }}</p>
