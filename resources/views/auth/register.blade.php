@@ -1,16 +1,16 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div class="container full-height">
     <div class="row justify-content-center p-5">
         <div class="col-md-8">
             <div class="card border-0">
                 <div class="card-body">
                     <div class="row d-flex flex-wrap align-items-center">
-                        <div class="col-5">
+                        <div class="col-5 desktop">
                             <img class="img-fluid" src="{{ ('assets/images/register.svg') }}" >
                         </div>
-                        <div class="col-7">
+                        <div class="col-lg-7 col-12">
                             <h4 class="text-center">SIGN UP</h4>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
