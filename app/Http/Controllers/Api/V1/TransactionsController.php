@@ -34,13 +34,16 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
+            $path = public_path('destinations.json');
+            $destination = collect(json_decode(file_get_contents($path), true));
+
+            $data = $destination->where('code', $request->city)->first();
             
             $address = new Address();
 
             $address->name = $request->name;
             $address->phone = $request->phone;
-            $address->city = $request->city;
-            $address->zip_code = $request->zip;
+            $address->city = $data['label'];
             $address->address = $request->address;
             $address->user_id = Auth::id();
             $address->save();
@@ -55,7 +58,8 @@ class TransactionsController extends Controller
             $transaction = new Transaction;
 
             $transaction->address_id = $a;
-            $transaction->total = $total;
+            $transaction->shipping_cost = $request->shipping_cost;
+            $transaction->total = $total + $request->shipping_cost;
             $transaction->status = 'waiting for validation';
             $transaction->date = date("Y-m-d H:i:s");
             $transaction->user_id = Auth::id();
@@ -77,6 +81,8 @@ class TransactionsController extends Controller
             
             return response()->json($transaction);
 
+        } else {
+            return response()->json('User is not logged in');
         }
         
     }
@@ -84,13 +90,16 @@ class TransactionsController extends Controller
     public function buy(Request $request)
     {
         if (Auth::check()) {
+            $path = public_path('destinations.json');
+            $destination = collect(json_decode(file_get_contents($path), true));
+
+            $data = $destination->where('code', $request->city)->first();
             
             $address = new Address();
 
             $address->name = $request->name;
             $address->phone = $request->phone;
-            $address->city = $request->city;
-            $address->zip_code = $request->zip;
+            $address->city = $data['label'];
             $address->address = $request->address;
             $address->user_id = Auth::id();
             $address->save();
@@ -103,7 +112,8 @@ class TransactionsController extends Controller
             $transaction = new Transaction;
 
             $transaction->address_id = $a;
-            $transaction->total = $total;
+            $transaction->shipping_cost = $request->shipping_cost;
+            $transaction->total = $total + $request->shipping_cost;
             $transaction->status = 'waiting for validation';
             $transaction->date = date("Y-m-d H:i:s");
             $transaction->user_id = Auth::id();
@@ -118,6 +128,10 @@ class TransactionsController extends Controller
             $detailTransaction->save();
             
             return response()->json($transaction);
+
+        } else {
+
+            return response()->json('User is not logged in');
 
         }
         
