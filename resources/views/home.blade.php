@@ -2,29 +2,7 @@
 
 @section('content')
 
-<header class="masthead desktop">
-  <div class="masthead-content">
-    <div class="container">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6 order-lg-2 text-center">
-          <div class="p-5">
-            <img class="img-fluid img-header" src="{{ ('assets/images/read.svg') }}"> 
-          </div>
-        </div>
-        <div class="col-lg-6 order-lg-1">
-          <div style="padding-top: 6em">
-        <div class="col-12 order-lg-1">
-            <h2 class="display-4 text-header">BBA - Bahagia Bersama AlQuran</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-            <a href="#catalog" class="btn btn-outline-grey">Get The Books!</a>
-          </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<header class="masthead mobile ">
+<header class="masthead ">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 order-lg-1">
@@ -45,7 +23,7 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-3">
+              <div class="col-4">
                 <img class="img-catalog-mobile" src="{{ $p->path }}" >
               </div>
               <div class="col-8">
