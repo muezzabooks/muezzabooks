@@ -28,17 +28,17 @@ Route::group([
     });
 });
 
-Route::group(['namespace' => 'Api', 'prefix' => 'api'], function()
-{
-    Route::resource('apiproducts', 'ApiProductsController');
-});
-
 Route::prefix('v1')->name('api.v1.')->namespace('Api\V1')->group(function(){
     Route::get('/status', function(){
         return response()->json(['status' => 'OK']);
     })->name('status');
 
-    Route::apiResource('products','ProductsController');
+    Route::apiResource('products','ProductsController')->only([
+        'index','show'
+    ]);
+
+    // Route::get('/products','ProductsController@index')->name('products');
+    // Route::get('/products','ProductsController@shw')->name('products.show');
 
     
     Route::group(['middleware' => 'auth:api'], function() {
