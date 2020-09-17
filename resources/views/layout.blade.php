@@ -45,12 +45,13 @@
             </li>
             @else
               <li class="nav-item">
-                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-right: 1em" class="btn-outline-yellow btn">My Transaction</a>
+                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-right: 1em" class="desktop btn-outline-yellow btn">My Transaction</a>
+                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-bottom: 1em" class="mobile btn-outline-yellow btn btn-block">My Transaction</a>
               </li>
               <li class="nav-item">
                 <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
                   @csrf
-                  <input type="submit" class="btn btn-danger" value="{{__('Logout')}}">
+                  <input type="submit" class="btn btn-block btn-danger" value="{{__('Logout')}}">
                 </form>
               </li>
           @endguest

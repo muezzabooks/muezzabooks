@@ -4,10 +4,10 @@
 @section('content')
 <div class="container page-wrap">
     <div class="row p-5">
-        <div class="col-4">
+        <div class="col-4 desktop">
             <img class="img-fluid" src="{{ ('../../assets/images/payment.svg') }}" >
         </div>
-        <div class="col-8">
+        <div class="col-lg-8 col-12">
           <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">DETAIL TRANSAKSI</h4>

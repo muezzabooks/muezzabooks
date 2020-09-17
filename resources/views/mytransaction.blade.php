@@ -106,10 +106,7 @@
                           
                           @endif
                       @endforeach
-
-                     
                     </table>
-                    <hr>
                         </div>
                         <div class="card-header">
                          <p class="text-right">Total : Rp. {{ $total }}</p>

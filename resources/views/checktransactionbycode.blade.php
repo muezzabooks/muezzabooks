@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container page-wrap">
+<div class="container full-height">
   <div class="row">
     <div class="col-md-6">
     <div class="p-3">

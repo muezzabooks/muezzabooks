@@ -2,13 +2,12 @@
 @extends('layout')
 
 @section('content')
-<div class="container page-wrap">
+<div class="container desktop">
   <div class="row">
     
-    <div class="col-md-8 col-sm-12">
+    <div class="col-md-7 col-sm-12">
 
-      <div class="row">
-        <div class="col-12 p-3">
+      <div class="p-3">
           <div class="card">
             <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
             <div class="card-body">
@@ -64,11 +63,10 @@
             </div>
           </div>
         </div>
-      </div>
 
     </div>
         
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-5 col-sm-12">
       <div class="p-3">
         <div class="card">
           <h5 class="card-header card-header-yellow">Order</h5>
@@ -120,6 +118,126 @@
         </div>
       </div>
     </div>
+  </form>
+  </div>
+</div>
+
+<div class="container mobile">
+  <div class="row">
+    <div class="col-md-5 col-sm-12">
+      <div class="p-3">
+        <div class="card">
+          <h5 class="card-header card-header-yellow">Order</h5>
+          <div class="card-body">
+            <table class="table table-sm">
+              <tbody>
+                <thead>
+                  <tr>
+                    <th>Nama Buku</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+              <?php $total=0 ?>
+                @if (session('cart_buy'))
+                  @foreach (session('cart_buy') as $id => $details)
+                    <?php $total += $details['price'] * $details['quantity'] ?>
+                    <tr>
+                      <td scope="row">{{ $details['product_name'] }}</td>
+                      <th>Rp {{ $details['price'] }}</th>
+                      <td>{{ $details['quantity'] }}</td>
+                    </tr>
+                  @endforeach
+                @else
+                  <script>window.location = "/";</script>
+                @endif
+              
+              </tbody>
+            </table>
+
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">Total Harga</th>
+                  <th colspan="2" class="text-center">Rp {{ $total }}</th>
+                </tr>
+                <tr>
+                  <th scope="row">Biaya Kirim</th>
+                  <th colspan="2" class="text-center">Rp <span id="ongkos_display"></span> </th>
+                </tr>
+                <tr>
+                  <th scope="row">Diskon</th>
+                  <th colspan="2" class="text-center">Mark</th>
+                </tr>
+              </tbody>
+            </table>
+            <h4 class="pb-2 text-center" id="total">Grand Total : Rp <span id="gtotal">{{ $total }}</span></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 col-sm-12">
+
+      <div class="p-3">
+          <div class="card">
+            <h5 class="card-header card-header-yellow">Alamat Pengiriman</h5>
+            <div class="card-body">
+
+              <form action="{{ route('transaction.buy') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                {{-- Nama --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="name">Nama Penerima</label>
+                      @auth
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $user }}">
+                      @endauth
+                      @guest
+                        <input type="text" class="form-control" id="name" name="name">
+                      @endguest
+                    </div>
+                  </div>
+                </div>
+                {{-- Kota atau kecamatan --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="city">Kota</label>
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      </select>
+                    </div>
+                  </div>
+                  <input type="hidden" name="shipping_cost" id="ongkos">
+                </div>
+                {{-- HP --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="phone">Nomor Telepon</label>
+                      <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                  </div>
+                </div>
+                {{-- Alamat --}}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="address">Alamat</label>
+                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
+              
+              </form>
+            </div>
+          </div>
+        </div>
+
+    </div>
+        
+    
   </form>
   </div>
 </div>
