@@ -48,7 +48,7 @@ class AdminProductsController extends Controller
             'description' => 'required',
             'stock' => 'required',
             'price' => 'required|min:4',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:750|dimensions:min_height=500'
 
         ]);
         $products = Product::create($request->all());
@@ -111,14 +111,31 @@ class AdminProductsController extends Controller
         ]);
 
         $product_name = $request->product_name;
+        $author = $request->author;
         $description = $request->description;
+        $page = $request->page;
+        $language = $request->language;
+        $cover = $request->cover;
+        $long = $request->long;
+        $wide = $request->wide;
+        $weight = $request->weight;
         $stock = $request->stock;
         $price = $request->price;
+        $discount = $request->discount;
         $image = $request->image;
+        
 
         $products = Product::find($id);
         $products->product_name = $product_name;
         $products->description = $description;
+        $products->author = $author;
+        $products->page = $page;
+        $products->cover = $cover;
+        $products->language = $language;
+        $products->long = $long;
+        $products->wide = $wide;
+        $products->weight = $weight;
+        $products->discount = $discount;
         $products->stock = $stock;
         $products->price = $price;
 

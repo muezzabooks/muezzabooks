@@ -38,6 +38,27 @@
       </div>
   </header>
 
+  {{-- <section>
+    <div class="container">
+      <div class="row">        
+          @foreach ($products as $p)
+          <div class="col-3 ml-3 mt-3">
+          <div class="card">
+            <div class="p-3 text-center">
+            <img class="img-catalog-mobile card-img-top" style="width: 5rem;" src="{{ $p->path }}" >
+          </div>
+            <div class="card-body">
+              <h5 class="card-title"><strong>{{ $p->product_name }}</strong></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+          @endforeach
+      </div>
+    </div>
+  </section> --}}
+
   <div class="mobile" id="catalog">
   @foreach ($products as $no => $p)
       <div class="masthead">
