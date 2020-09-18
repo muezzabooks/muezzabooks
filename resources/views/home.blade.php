@@ -31,8 +31,8 @@
           <div class="row">
           <?php $i = 0 ?>
         @endif
-        <div class="card shadow-sm m-3 mt-3">
-          <img class="card-img-top img-catalog" src="{{ $p->path }}" alt="Card image cap">
+        <div class="card shadow-sm m-auto mt-3">
+          <img class="card-img-top img-catalog" style="height: 15rem;" src="{{ $p->path }}" alt="Card image cap">
           <div class="card-body">
             <button class="mb-3 btn btn-sm btn-outline-secondary" disabled>Author</button>
             <h5 class="card-title text-uppercase" style="height: 2.5rem;">
@@ -52,6 +52,7 @@
 
         <?php $i++ ?>
       @endforeach
+    </div>
   </div>
   
 
