@@ -133,7 +133,7 @@ class CartsController extends Controller
             $cart = Cart::where('user_id', Auth::id())->where('product_id',$id)->first();
             $cart->delete();
 
-            return response()->json('Product removed from cart');
+            return response()->json(['message'=>'Product removed from cart']);
         }
     }
 }
