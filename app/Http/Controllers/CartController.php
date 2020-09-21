@@ -45,7 +45,6 @@ class CartController extends Controller
         ->select('products.*','images.path','images.name')->find($id);
 
         if (Auth::check()) {
-
             $cart = Cart::where('user_id', Auth::id())->where('product_id',$product->id)->first();
 
             if ($cart === null) {
@@ -68,17 +67,18 @@ class CartController extends Controller
             
 
         } else {
+
             $cart = session()->get('cart');
 
             //if cart is empty then add the product
             if (!$cart) {
                 $cart[$id] = [
-                        "product_id" => $product->id,
-                        "product_name" => $product->product_name,
-                        "price" => $product->price,
-                        "quantity" => 1,
-                        "path" => $product->path
-                    ];
+                    "product_id" => $product->id,
+                    "product_name" => $product->product_name,
+                    "price" => $product->price,
+                    "quantity" => 1,
+                    "path" => $product->path
+                ];
 
                 session()->put('cart', $cart);
                 return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');
@@ -94,12 +94,12 @@ class CartController extends Controller
 
             //if product doesnt exist in cart then add the product
             $cart[$id] = [
-                    "product_id" => $product->id,
-                    "product_name" => $product->product_name,
-                    "price" => $product->price,
-                    "quantity" => 1,
-                    "path" => $product->path
-                ];
+                "product_id" => $product->id,
+                "product_name" => $product->product_name,
+                "price" => $product->price,
+                "quantity" => 1,
+                "path" => $product->path
+            ];
             
             session()->put('cart', $cart);
             return redirect()->back()->with('success','Produk telah ditambahkan ke keranjang belanja anda');

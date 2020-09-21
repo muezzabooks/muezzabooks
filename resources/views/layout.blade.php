@@ -18,20 +18,20 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container">
-	  <a class="navbar-brand" href="{{ route('home') }}">
-		<img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
-	 </a>
+      <a class="navbar-brand" href="{{ route('home') }}">
+        <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item pr-5">
+          <li class="nav-item pr-4">
             <a class="nav-link" href="{{ route('cart') }}">
               <i class="fa fa-shopping-cart fa-lg"></i>
             </a>
           </li> 
-          @guest    
+          @guest
           <li class="nav-item" style="margin-right: 1em">
             <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
           </li> 
@@ -49,30 +49,43 @@
                 <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-bottom: 1em" class="mobile btn-outline-yellow btn btn-block">My Transaction</a>
               </li>
               <li class="nav-item">
-                <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
-                  @csrf
-                  <input type="submit" class="btn btn-block btn-danger" value="{{__('Logout')}}">
-                </form>
+                
               </li>
           @endguest
+
+          @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user fa-lg"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
+                @csrf
+                <input type="submit" class="text-decoration-none" value="{{__('Logout')}}">
+              </form>
+            </div>
+          </li>
+          @endauth
           
         </ul>
       </div>
     </div>
   </nav>
 
-
-	@yield('content')
-
-
+  <div class="container">
+    @yield('content')
+  </div>
+	
 
 	 <!-- Footer -->
    <footer class="py-3 btn-yellow footer">
-    <div class="container">
-      <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-</footer>
+      <div class="container-fluid">
+        <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
+      </div>
+      <!-- /.container -->
+    </footer>
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
