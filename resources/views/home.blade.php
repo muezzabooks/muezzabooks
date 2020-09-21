@@ -22,34 +22,6 @@
     </div>
   </header>
 
-<<<<<<< HEAD
-  {{-- <section>
-    <div class="container">
-      <div class="row">        
-          @foreach ($products as $p)
-          <div class="col-3 ml-3 mt-3">
-          <div class="card">
-            <div class="p-3 text-center">
-            <img class="img-catalog-mobile card-img-top" style="width: 5rem;" src="{{ $p->path }}" >
-          </div>
-            <div class="card-body">
-              <h5 class="card-title"><strong>{{ $p->product_name }}</strong></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-          @endforeach
-      </div>
-    </div>
-  </section> --}}
-
-  <div class="mobile" id="catalog">
-  @foreach ($products as $no => $p)
-      <div class="masthead">
-        <div class="pt-3 pb-3">
-        <div class="card">
-=======
   <div class="col-12 pt-4">
     <div class="row">
       <?php $i = 0 ?>
@@ -61,7 +33,6 @@
         @endif
         <div class="card shadow-sm m-auto mt-3">
           <img class="card-img-top img-catalog" style="height: 15rem;" src="{{ $p->path }}" alt="Card image cap">
->>>>>>> upstream/master
           <div class="card-body">
             <button class="mb-3 btn btn-sm btn-outline-secondary" disabled>Author</button>
             <h5 class="card-title text-uppercase" style="height: 2.5rem;">
