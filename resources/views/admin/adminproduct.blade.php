@@ -15,10 +15,10 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">Cover</th>
-        <th scope="col">Title Book</th>
-        <th  scope="col">Description</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Price</th>
+        <th scope="col">Judul Buku</th>
+        <th scope="col">Author</th>
+        <th scope="col">Stok</th>
+        <th scope="col">Harga</th>
         <th scope="col" colspan="2">Action</th>
       </tr>
     </thead>
@@ -29,7 +29,7 @@
             <td><img src="{{ $p->path }}" height="30" alt=""></td>
             {{-- <td>{{ $p->name }}</td> --}}
             <td>{{ $p->product_name }}</td>
-            <td>{{ $p->description }}</td>
+            <td>{{ $p->author }}</td>
             <td>{{ $p->stock }}</td>
             <td>{{ $p->price }}</td>
             <form action="{{ route('adminproducts.destroy', $p->id) }}" method="POST">
