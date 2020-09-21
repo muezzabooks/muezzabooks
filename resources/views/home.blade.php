@@ -23,15 +23,15 @@
   </header>
 
   <div class="col-12 pt-4">
-    <div class="row">
+    <div class="row justify-content-center">
       <?php $i = 0 ?>
       @foreach ($products as $no => $p)
         @if ($i === 4)
           </div>
-          <div class="row">
+          <div class="row justify-content-center">
           <?php $i = 0 ?>
         @endif
-        <div class="card shadow-sm m-auto mt-3">
+        <div class="card shadow-sm mb-4 mr-4" style="width: 15rem">
           <img class="card-img-top img-catalog" style="height: 15rem;" src="{{ $p->path }}" alt="Card image cap">
           <div class="card-body">
             <button class="mb-3 btn btn-sm btn-outline-secondary" disabled>Author</button>
