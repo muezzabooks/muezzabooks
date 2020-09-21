@@ -19,7 +19,8 @@ class Product extends Model
     protected $table = 'products';
 
     // protected $fillable = (['product_name','description','stock','price','image_name', 'image_path']);
-    protected $fillable = (['product_name','description','stock','price']);
+    protected $fillable = (['product_name','description','stock','price','author','page','language',
+    'cover','long','wide','weight','discount','publisher']);
 
     public function image()
     {
