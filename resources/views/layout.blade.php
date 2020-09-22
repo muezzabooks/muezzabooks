@@ -18,19 +18,43 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
+      <a class="navbar-brand order-first" href="{{ route('home') }}">
         <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      {{-- VISIBLE ONLY ON SM --}}
+      <div class="d-none d-sm-block d-md-none d-flex flex-row w-auto order-first ml-5">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item pr-4">
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('cart') }}">
               <i class="fa fa-shopping-cart fa-lg"></i>
             </a>
-          </li> 
+          </li>
+        </ul>
+      </div>
+      {{-- VISIBLE ONLY ON MD --}}
+      {{-- <div class="d-none d-md-block d-flex flex-row w-100 order-first">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('cart') }}">
+              <i class="fa fa-shopping-cart fa-lg"></i>
+            </a>
+          </li>
+        </ul>
+      </div> --}}
+      
+      <div class="collapse navbar-collapse order-last" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <div class="d-none d-md-block d-sm-none">
+            <li class="d-flex nav-item mr-4">
+              <a class="nav-link" href="{{ route('cart') }}">
+                <i class="fa fa-shopping-cart fa-lg"></i>
+              </a>
+            </li>
+          </div>
+          
           @guest
           <li class="nav-item" style="margin-right: 1em">
             <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
