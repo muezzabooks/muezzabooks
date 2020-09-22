@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('content')-
+@section('content')
     <div class="container full-height">
 
     <div class="row align-items-center pb-5">
