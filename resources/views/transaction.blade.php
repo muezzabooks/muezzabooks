@@ -20,6 +20,12 @@
                       ID transaksi : {{ $transaction['code'] }}
                     </strong>
                   </li>
+                  <li class="list-group-item">
+                    Biaya Ongkir : {{ $transaction['shipping_cost'] }}
+                  </li>
+                  <li class="list-group-item">
+                    Total Harga : {{ $transaction['total'] }}
+                  </li>
                 </ul>
                 <div class="card-body pb-0">
                   @foreach ($detail as $id => $d)
@@ -64,6 +70,20 @@
                     </h4>
                   </div>
                 @endif
+
+                <div class="card-body mt-0 pt-3 bg-warning">
+                  <p>
+                    <strong> CARA PEMBAYARAN </strong>
+                  </p>
+                  <p>
+                    Transfer ke rekening : 
+                    <br>
+                    <strong>Yayasan Zhillal Arifin Alquran Bank Syariah Mandiri (451) 7137254888</strong>
+                  </p>
+                  <p>
+                    Lalu upload foto atau screenshot bukti transaksi
+                  </p>
+                </div>
                 
         </div>
     </div>

@@ -16,7 +16,7 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+	<nav class="navbar navbar-expand-lg navbar-light navbar-custom shadow-sm">
     <div class="container">
       <a class="navbar-brand order-first" href="{{ route('home') }}">
         <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
