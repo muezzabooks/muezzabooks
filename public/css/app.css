@@ -10936,6 +10936,7 @@ html {
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: white;
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
 .navbar-custom .navbar-brand {
