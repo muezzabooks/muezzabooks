@@ -34,19 +34,10 @@
           </li>
         </ul>
       </div>
-      {{-- VISIBLE ONLY ON MD --}}
-      {{-- <div class="d-none d-md-block d-flex flex-row w-100 order-first">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('cart') }}">
-              <i class="fa fa-shopping-cart fa-lg"></i>
-            </a>
-          </li>
-        </ul>
-      </div> --}}
       
       <div class="collapse navbar-collapse order-last" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          {{-- VISIBLE ONLY ON MD --}}
           <div class="d-none d-md-block d-sm-none">
             <li class="d-flex nav-item mr-4">
               <a class="nav-link" href="{{ route('cart') }}">
