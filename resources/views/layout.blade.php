@@ -69,19 +69,31 @@
           @endguest
 
           @auth
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user fa-lg"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
+          {{-- VISIBLE ONLY ON SM --}}
+          <li class="nav-item">
+            <div class="d-sm-block d-md-none">
+              <form id="logout-btn" class="mobile d-inline" method="POST" action="{{ route('logout') }}">
                 @csrf
-                <input type="submit" class="text-decoration-none" value="{{__('Logout')}}">
+                <input type="submit" class="w-100 btn btn-outline-danger" value="{{__('Logout')}}">
               </form>
             </div>
           </li>
+          {{-- VISIBLE ONLY ON MD --}}
+          <div class="d-none d-md-block d-sm-none">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user fa-lg"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  Logout
+                </a>
+                <form id="logout-form" class="d-inline" method="POST" action="{{ route('logout') }}">
+                  @csrf
+                </form>
+              </div>
+            </li>
+          </div>
           @endauth
           
         </ul>
