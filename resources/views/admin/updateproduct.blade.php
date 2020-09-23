@@ -3,6 +3,14 @@
 @section('header','Products')
 
 @section('content')
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Order</h1>
+  
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
 <form action="{{ route('adminproducts.update',$product->id) }}" method="POST" enctype="multipart/form-data">
 
   @csrf
@@ -125,7 +133,9 @@
       <img src="{{ $product->path }}" height="70" alt=""><br>
       <input type="hidden" value="{{ $product->path }}" name="path">
       <input type="hidden" value="{{ $product->name }}" name="name">
-      <input type="file" class="form-control" id="image" name="file">                            
+      <input type="file" class="form-control" onchange="readURL(this);" id="image" name="file" style="display: none"> 
+      <label for="image" class="btn btn-block btn-primary">Pilih Gambar</label> 
+      <img id="blah" src="#" alt="your image" height="70" />    
     </div>
     </div>
     @error('file')
@@ -140,4 +150,23 @@
   <button type="submit" class="btn btn-primary">Update Data</button>
   </div>
 </form>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+              $('#blah').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+</script>
 @endsection

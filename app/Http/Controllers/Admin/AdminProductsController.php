@@ -48,7 +48,7 @@ class AdminProductsController extends Controller
             'description' => 'required',
             'stock' => 'required',
             'price' => 'required|min:4',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:750|dimensions:min_height=500'
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1500|dimensions:min_height=500'
 
         ]);
         $products = Product::create($request->all());
