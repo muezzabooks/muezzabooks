@@ -16,7 +16,7 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light navbar-custom shadow-sm">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-custom shadow-sm">
     <div class="container">
       <a class="navbar-brand order-first" href="{{ route('home') }}">
         <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
@@ -35,7 +35,7 @@
         </ul>
       </div>
       
-      <div class="collapse navbar-collapse order-last" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           {{-- VISIBLE ONLY ON MD --}}
           <div class="d-none d-md-block d-sm-none">
@@ -59,9 +59,9 @@
               <a class="nav-link btn" href="{{ route('login') }}">Log In</a>
             </li>
             @else
-              <li class="nav-item">
-                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-right: 1em" class="desktop btn-outline-yellow btn">My Transaction</a>
-                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-bottom: 1em" class="mobile btn-outline-yellow btn btn-block">My Transaction</a>
+              <li class="nav-item order-first">
+                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-right: 1em" class="desktop btn-outline-yellow btn">CEK TRANSAKSI</a>
+                <a href="{{ route('mytransaction',auth()->user()->id) }}" style="margin-bottom: 1em" class="mobile btn-outline-yellow btn btn-block">CEK TRANSAKSI</a>
               </li>
               <li class="nav-item">
                 
