@@ -2,8 +2,8 @@
 
 @section('content')
 
-  <header class="masthead ">
-    <div class="masthead-content">
+  
+    <div class="masthead-content bg-warning">
       <div class="row">
         <div class="col-lg-6 order-lg-2 text-center">
           <div class="p-5">
@@ -20,7 +20,6 @@
         </div>
       </div>
     </div>
-  </header>
 
   <div class="col-12 pt-4">
     <div class="row justify-content-center">

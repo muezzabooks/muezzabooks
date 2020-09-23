@@ -16,21 +16,36 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light navbar-custom shadow">
+	<nav class="navbar navbar-expand-lg navbar-light navbar-custom shadow-sm">
     <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
+      <a class="navbar-brand order-first" href="{{ route('home') }}">
         <img class="img-nav" src="{{ ('/assets/images/logo-muezza.png') }}" >
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      {{-- VISIBLE ONLY ON SM --}}
+      <div class="d-none d-sm-block d-md-none d-flex flex-row w-auto order-first ml-5">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item pr-4">
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('cart') }}">
               <i class="fa fa-shopping-cart fa-lg"></i>
             </a>
-          </li> 
+          </li>
+        </ul>
+      </div>
+      
+      <div class="collapse navbar-collapse order-last" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          {{-- VISIBLE ONLY ON MD --}}
+          <div class="d-none d-md-block d-sm-none">
+            <li class="d-flex nav-item mr-4">
+              <a class="nav-link" href="{{ route('cart') }}">
+                <i class="fa fa-shopping-cart fa-lg"></i>
+              </a>
+            </li>
+          </div>
+          
           @guest
           <li class="nav-item" style="margin-right: 1em">
             <a class="nav-link btn btn-sm btn-outline-yellow" href="{{ route('transaction.check') }}">Cek Transaksi</a>
@@ -54,19 +69,31 @@
           @endguest
 
           @auth
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user fa-lg"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <form id="logout-btn" class="d-inline" method="POST" action="{{ route('logout') }}">
+          {{-- VISIBLE ONLY ON SM --}}
+          <li class="nav-item">
+            <div class="d-sm-block d-md-none">
+              <form id="logout-btn" class="mobile d-inline" method="POST" action="{{ route('logout') }}">
                 @csrf
-                <input type="submit" class="text-decoration-none" value="{{__('Logout')}}">
+                <input type="submit" class="w-100 btn btn-outline-danger" value="{{__('Logout')}}">
               </form>
             </div>
           </li>
+          {{-- VISIBLE ONLY ON MD --}}
+          <div class="d-none d-md-block d-sm-none">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user fa-lg"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  Logout
+                </a>
+                <form id="logout-form" class="d-inline" method="POST" action="{{ route('logout') }}">
+                  @csrf
+                </form>
+              </div>
+            </li>
+          </div>
           @endauth
           
         </ul>
