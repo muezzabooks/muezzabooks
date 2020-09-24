@@ -96,16 +96,10 @@
 
   <div class="container">
     @yield('content')
+    <hr>
   </div>
 	
-
-	 <!-- Footer -->
-   <footer class="py-3 btn-yellow footer">
-      <div class="container-fluid">
-        <p class="m-0 text-center text-black large">Copyright &copy; Your Website 2020</p>
-      </div>
-      <!-- /.container -->
-    </footer>
+  @include('footer')
   
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
