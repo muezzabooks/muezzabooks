@@ -63,7 +63,7 @@
 										</button>
 									</form>
 								</div>
-								
+
 							</td>
 							{{-- HARGA --}}
 							<td class="align-middle">
@@ -89,7 +89,7 @@
 				<hr>
 				<div class="col-12">
 					<div class="row">
-						<a href="#" class="mr-auto text-decoration-none text-secondary"><i class="fa fa-arrow-left"></i> Kembali Belanja</a>
+						<a href="{{ route('home') }}" class="mr-auto text-decoration-none text-secondary"><i class="fa fa-arrow-left"></i> Kembali Belanja</a>
 						<h5>
 							SUBTOTAL : <strong>Rp. @convert($subtotal)</strong>
 						</h5>

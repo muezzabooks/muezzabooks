@@ -16,7 +16,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
-        ->select('products.*','images.path')->get();
+        ->select('products.*','images.path')->take(8)->get();
         $count = Cart::join('users','users.id','=','carts.user_id')->count();
 
         return view('home',[
