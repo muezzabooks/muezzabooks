@@ -27,7 +27,7 @@ Route::get('/buy/{id}', 'CartController@buy')->name('buy');
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkout.buy');
-Route::get('/counter','CartController@show')->name('counter');
+
 
 //PAY FROM CART
 Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
@@ -42,6 +42,8 @@ Route::post('/insertImage/{id}','TransactionController@insertImage')->name('tran
 Route::get('/cektransaksi','TransactionController@checkTransaction')->name('transaction.check');
 Route::get('/cektransaksi/search','TransactionController@checkTransactionSearch')->name('transaction.check.search');
 Route::get('/mytransaction/{id}', 'TransactionController@myTransaction')->name('mytransaction');
+
+
 Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
 // Route::resource('/adminproduct', 'Admin\ProductController');
@@ -53,6 +55,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     Route::get('/detailtransaction/{id}','AdminTransactionController@show');
     Route::put('/transaction/update/{id}','AdminTransactionController@update')->name('admintransaction.update');
     Route::get('/dashboard','AdminDashboardController@show')->name('admin.hom')->middleware('is_admin');
+    Route::get('/invoice/{id}','AdminTransactionController@invoice')->name('invoice');
 });
 
 Route::get('images', 'ImageController@index');

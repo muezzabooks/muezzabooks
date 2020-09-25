@@ -25,6 +25,7 @@
               <th scope="col">Subtotal</th>
               <th scope="col">Status</th>
               <th scope="col">Action</th>
+              <th scope="col">Cetak</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,7 @@
                 {{-- <td>{{ $d->account_number }}</td> --}}
                 <td><span class="badge {{ $d->status }} ">{{ $d->status }}</span></td>
                 <td><a href="detailtransaction/{{ $d->id }}" class="btn btn-primary">Detail</a></td>
+                <td><a href="invoice/{{ $d->id }}" class="btn btn-success">Cetak</a></td>
               </tr>
             @endforeach
             
