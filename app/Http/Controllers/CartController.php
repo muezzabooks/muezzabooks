@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if (Auth::check()) {
@@ -150,7 +155,7 @@ class CartController extends Controller
     public function increase(Request $request, $id)
     {
         if (Auth::check()) {
-            $cart = Cart::where('user_id', Auth::id())->where('product_id',$request->id)->first();
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$id)->first();
             $cart->quantity += 1;
             $cart->save();
 
@@ -171,7 +176,7 @@ class CartController extends Controller
     public function decrease(Request $request, $id)
     {
         if (Auth::check()) {
-            $cart = Cart::where('user_id', Auth::id())->where('product_id',$request->id)->first();
+            $cart = Cart::where('user_id', Auth::id())->where('product_id',$id)->first();
             
             if ($cart->quantity === 1) {
                 return redirect()->back();
