@@ -15,7 +15,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
-        ->select('products.*','images.path')->get();
+        ->select('products.*','images.path')->take(8)->get();
 
         return view('home')->with('products', $products);
     }

@@ -20,29 +20,34 @@
   </div>
 </footer>  --}}
 <!-- Footer -->
-<footer class="page-footer font-small blue pt-4">
+<footer class="footer font-small blue pt-4">
 
-  <!-- Footer Links -->
   <div class="container text-center text-md-left mb-4">
 
-    <!-- Grid row -->
     <div class="row">
 
-      <!-- Grid column -->
       <div class="col-md-3 mt-md-0 mt-3">
-
-        <!-- Content -->
         <img class="img-fluid" src="{{ ('/assets/images/logo-muezza.png') }}" style="max-width: 180px" >
-
       </div>
-      <!-- Grid column -->
 
       <hr class="clearfix w-100 d-md-none pb-3">
 
-      <!-- Grid column -->
       <div class="col-md-2 mb-md-0 mb-3">
+        <h5 class="text-uppercase font-weight-bold">FAQ</h5>
+        <ul class="list-unstyled">
+          <li class="pb-1">
+            <a href="#!" class="text-decoration-none text-dark">Pemesanan</a>
+          </li>
+          <li class="pb-1">
+            <a href="#!" class="text-decoration-none text-dark">Pembayaran</a>
+          </li>
+          <li class="pb-1">
+            <a href="#!" class="text-decoration-none text-dark">Pengiriman</a>
+          </li>
+        </ul>
+      </div>
 
-        <!-- Links -->
+      <div class="col-md-2 mb-md-0 mb-3">
         <h5 class="text-uppercase font-weight-bold">FAQ</h5>
 
         <ul class="list-unstyled">
@@ -56,31 +61,9 @@
             <a href="#!" class="text-decoration-none text-dark">Pengiriman</a>
           </li>
         </ul>
-
       </div>
-      <!-- Grid column -->
+
       <div class="col-md-2 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h5 class="text-uppercase font-weight-bold">FAQ</h5>
-
-        <ul class="list-unstyled">
-          <li class="pb-1">
-            <a href="#!" class="text-decoration-none text-dark">Pemesanan</a>
-          </li>
-          <li class="pb-1">
-            <a href="#!" class="text-decoration-none text-dark">Pembayaran</a>
-          </li>
-          <li class="pb-1">
-            <a href="#!" class="text-decoration-none text-dark">Pengiriman</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-      <div class="col-md-2 mb-md-0 mb-3">
-
-        <!-- Links -->
         <h5 class="text-uppercase font-weight-bold">Bantuan</h5>
 
         <ul class="list-unstyled">
@@ -94,21 +77,13 @@
             <a href="#!" class="text-decoration-none text-dark">Hubungi Kami</a>
           </li>
         </ul>
-
       </div>
-      <!-- Grid column -->
 
-			
-			<!-- Grid column -->
       <div class="col-md-3 mt-md-0 mt-3">
-
-        <!-- Content -->
         <p class="text-secondary">Dapatkan Aplikasi kami di :</p>
-
       </div>
 
     </div>
-    <!-- Grid row -->
 
   </div>
   <!-- Footer Links -->
