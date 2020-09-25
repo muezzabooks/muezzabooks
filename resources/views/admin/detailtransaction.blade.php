@@ -1,13 +1,19 @@
 @extends('admin.adminlayout')
-@section('transaction','active')
+@section('order','active')
 @section('header','Transaction')
 
 @section('content')
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Order</h1>
+  <div class="card shadow mb-4">
+    <div class="card-body">
 <form action="{{ route('admintransaction.update',$data->id) }}" method="POST">
   @csrf
   @method('PUT')
 <div class="row">
-    <div class="col-md-4">
+  <div class="col-md-4">
     <table class="table-sm">
         <tbody>
           <tr>
@@ -50,7 +56,7 @@
           </tr>
         </tbody>
     </table>
-    </div>
+  </div>
     <div class="col-md-2"></div>
     <div class="col-md-6">
         <table class="table table-sm table-bordered">
@@ -86,4 +92,7 @@
  </div>
 </div>
 </form>
+    </div>
+    </div>
+</div>
 @endsection

@@ -1,5 +1,5 @@
 @extends('admin.adminlayout')
-@section('home','active')
+@section('dashboard','active')
 @section('header','Home')
 
    

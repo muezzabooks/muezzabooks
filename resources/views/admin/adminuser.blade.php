@@ -1,5 +1,5 @@
 @extends('admin.adminlayout')
-@section('order','active')
+@section('transaction','active')
 @section('header','Transaction')
 
 @section('content')
@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Order List</h1>
+  <h1 class="h3 mb-2 text-gray-800">Order</h1>
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">

@@ -1,8 +1,16 @@
 @extends('admin.adminlayout')
-@section('product','active')
+@section('produk','active')
 @section('header','Products')
 
 @section('content')
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Produk</h1>
+  
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
 
 <form action="{{ route('adminproducts.store') }}" method="POST" enctype="multipart/form-data">
   @csrf
@@ -119,12 +127,12 @@
         </div>
     </div>
 <div class="col-md-6">
-
-
     <div class="form-group row">
       <label for="image" class="col-form-label col-sm-3 ">Image</label><br>
       <div class="col-sm-9"> 
-        <input type="file" class="form-control" id="image" name="file">                            
+        <input type="file" class="form-control" id="image" onchange="readURL(this);" style="display:none;" name="file"> 
+        <label for="image" class="btn btn-block btn-primary">Pilih Gambar</label> 
+        <img id="blah" src="#" alt="your image" height="70" />                
     </div>
     </div>
     @error('file')
@@ -139,5 +147,27 @@
   <button type="submit" class="btn btn-primary">Simpan Data</button>
   </div>
 </form>
+    </div>
+  </div>
+</div>
 
+
+@endsection
+
+
+@section('script')
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+  
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+  
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+  </script>
+  
 @endsection
