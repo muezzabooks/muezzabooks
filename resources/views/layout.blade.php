@@ -30,6 +30,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('cart') }}">
               <i class="fa fa-shopping-cart fa-lg"></i>
+              <span class="badge badge-danger badge-counter">{{ $count }}</span>
             </a>
           </li>
         </ul>
@@ -42,6 +43,7 @@
             <li class="d-flex nav-item mr-4 ml-4">
               <a class="nav-link" href="{{ route('cart') }}">
                 <i class="fa fa-shopping-cart fa-lg"></i>
+                <span class="badge badge-danger badge-counter">{{ $count }}</span>
               </a>
             </li>
           </div>

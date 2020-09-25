@@ -27,6 +27,7 @@ Route::get('/buy/{id}', 'CartController@buy')->name('buy');
 
 Route::get('/checkout','TransactionController@index')->name('checkout');
 Route::get('/buy/{id}/checkout','TransactionController@indexBuy')->name('checkout.buy');
+Route::get('/counter','CartController@show')->name('counter');
 
 //PAY FROM CART
 Route::post('/checkout/pay_guest','TransactionController@storeGuest')->name('transaction.storeGuest');
@@ -59,7 +60,5 @@ Route::post('images', 'ImageController@store')->name('images.store');
 
 Auth::routes();
 
-Route::get('search', 'AutoCompleteController@index');
-Route::get('autocomplete', 'AutoCompleteController@search')->name('autocomplete');
 
 Route::get('cekongkir','HomeController@cekongkir');
