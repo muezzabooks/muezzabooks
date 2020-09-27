@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -17,7 +18,11 @@ class ProductsController extends Controller
     {
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path')->take(8)->get();
-        $count = Cart::join('users','users.id','=','carts.user_id')->count();
+        if (Auth::check()) {
+            $count = Cart::join('users','users.id','=','carts.user_id')->where('carts.user_id',Auth::id())->count();
+        } else {
+            $count = null;
+        }
 
         return view('home',[
             'products' => $products,
