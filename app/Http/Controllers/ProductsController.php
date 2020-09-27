@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Cart;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -16,8 +17,12 @@ class ProductsController extends Controller
     {
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path')->take(8)->get();
+        $count = Cart::join('users','users.id','=','carts.user_id')->count();
 
-        return view('home')->with('products', $products);
+        return view('home',[
+            'products' => $products,
+            'count' => $count
+            ]);
     }
 
     /**

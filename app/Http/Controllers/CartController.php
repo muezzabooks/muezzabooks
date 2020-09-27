@@ -19,10 +19,13 @@ class CartController extends Controller
     {
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
+            $count = Cart::join('users','users.id','=','carts.user_id')->count();
             return view('cart',[
-                'products' => $products
+                'products' => $products,
+                'count' => $count
             ]);
         }
+        
 
         return view('cart');
         
@@ -117,9 +120,9 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        
     }
 
     /**

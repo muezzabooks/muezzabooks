@@ -26,9 +26,11 @@ class TransactionController extends Controller
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
             $user = User::find(Auth::id())->pluck('name')->first();
+            $count = Cart::join('users','users.id','=','carts.user_id')->count();
             return view('checkout',[
                 'products' => $products,
                 'user' => $user,
+                'count' => $count
             ]);
         } else {
             return view('checkout');
@@ -41,7 +43,8 @@ class TransactionController extends Controller
     {
         if (Auth::check()) {
             $user = User::find(Auth::id())->pluck('name')->first();
-            return view('checkout_buy',['user' => $user]);
+            $count = Cart::join('users','users.id','=','carts.user_id')->count();
+            return view('checkout_buy',['user' => $user,'count' => $count]);
         } else {
             return view('checkout_buy');
         }
@@ -229,7 +232,10 @@ class TransactionController extends Controller
     }
 
     public function checkTransaction(){
-        return view('checktransaction');
+        $count = Cart::join('users','users.id','=','carts.user_id')->count();
+        return view('checktransaction',[
+            'count' => $count
+        ]);
     }
 
     public function checkTransactionSearch(Request $request){
@@ -297,10 +303,11 @@ class TransactionController extends Controller
             ->select('products.product_name','products.price','detail_transactions.quantity')
             ->where('transactions.code', $id)
             ->get();
-
+        $count = Cart::join('users','users.id','=','carts.user_id')->count();
         return view('mytransaction',[
             'data' => $transaction,
             'detail' => $detail,
+            'count' => $count
         ]);
     }
 
@@ -321,12 +328,14 @@ class TransactionController extends Controller
         }
         else{  
         $address = Address::find($transaction['address_id']);
+        $count = Cart::join('users','users.id','=','carts.user_id')->count();
         
               
         return view('transaction',[
             'transaction' => $transaction, 
             'detail' => $detailTransaction,
-            'address' => $address
+            'address' => $address,
+            'count' => $count
         ]);
     }
     }

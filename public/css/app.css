@@ -11045,7 +11045,7 @@ section {
 
 .btn-yellow {
   background-color: #FFD801;
-  color: #3f3d56;
+  color: #000 !important;
 }
 
 .btn-outline-yellow {
@@ -11162,6 +11162,12 @@ input::-webkit-inner-spin-button {
   .img-catalog-mobile {
     height: 10em;
   }
+}
+
+.badge-counter {
+  position: absolute;
+  transform: scale(0.9);
+  transform-origin: top right;
 }
 
 /*!
