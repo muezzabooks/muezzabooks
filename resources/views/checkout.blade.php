@@ -217,22 +217,21 @@
         
             console.log(finalResult);
             var arrlength = finalResult.length;
-            if(arrlength == 4){
-              document.getElementById("ongkos").value = finalResult[3].tarif;
-              document.getElementById("ongkos_display").textContent = finalResult[3].tarif;
-              var tarif = finalResult[3].tarif;
+            if(arrlength == 3){
+              document.getElementById("ongkos").value = finalResult[2].tarif;
+              document.getElementById("ongkos_display").textContent = finalResult[2].tarif;
+              var tarif = finalResult[2].tarif;
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
               var total = intTarif + sub;
               document.getElementById("ongkir").value = intTarif;
-              document.getElementById("grtotal").value = total;
               // console.log(total);
               document.getElementById("gtotal").textContent = total;
             }
-            else if(arrlength == 5){
-              document.getElementById("ongkos").value = finalResult[4].tarif;
-              document.getElementById("ongkos_display").textContent = finalResult[4].tarif;
-              var tarif = finalResult[4].tarif;
+            else if(arrlength == 4){
+              document.getElementById("ongkos").value = finalResult[3].tarif;
+              document.getElementById("ongkos_display").textContent = finalResult[3].tarif;
+              var tarif = finalResult[3].tarif;
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
               var total = intTarif + sub;

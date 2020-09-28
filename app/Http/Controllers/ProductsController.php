@@ -19,15 +19,22 @@ class ProductsController extends Controller
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path')->take(8)->get();
         if (Auth::check()) {
-            $count = Cart::join('users','users.id','=','carts.user_id')->where('carts.user_id',Auth::id())->count();
-        } else {
-            $count = null;
-        }
-
+        $count = Cart::where('user_id',Auth::id())->count();
         return view('home',[
             'products' => $products,
             'count' => $count
             ]);
+        } 
+        else
+        {
+            $count = 0;
+            return view('home',[
+                'products' => $products,
+                'count' => $count
+                ]);
+        }
+
+        
     }
 
     /**
@@ -61,13 +68,16 @@ class ProductsController extends Controller
         // $products = Product::where('id', $id)->get();
         $products = Product::leftJoin('images','products.id', '=','images.product_id')
         ->select('products.*','images.path','images.name')->find($id);
+        $count = Cart::where('user_id',Auth::id())->count();
 
         if($products == null){
             return abort(404);
         }
         else{
-            return view('detail')
-        ->with('products', $products);
+            return view('detail',[
+                'products' => $products,
+                'count' => $count
+                ]);
         }        
     }
 
@@ -79,8 +89,7 @@ class ProductsController extends Controller
      */
     public function edit($product)
     {
-        $products = Product::find($product);
-        return view('admin.updateproduct')->with('product', $products);
+        
     }
 
     /**
@@ -92,25 +101,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product_name = $request->product_name;
-        $description = $request->description;
-        $stock = $request->stock;
-        $price = $request->price;
-        $image = $request->image;
-
-        $products = Product::find($id);
-        $products->product_name = $product_name;
-        $products->description = $description;
-        $products->stock = $stock;
-        $products->price = $price;
-        $products->image = $image;
-
-        $products->save();
-
-        return response()->json([
-            'message' => 'Data Berhasil Update',
-            'product' => $products
-        ], 200);
+        
     }
 
     /**
@@ -121,11 +112,5 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $products = Product::find($id);
-        $products->delete();
-
-        return response()->json([
-            'message' => 'Berhasil Dihapus'
-        ]);
     }
 }

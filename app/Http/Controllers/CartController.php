@@ -19,7 +19,7 @@ class CartController extends Controller
     {
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
-            $count = Cart::join('users','users.id','=','carts.user_id')->count();
+            $count = Cart::where('user_id',Auth::id())->count();
             return view('cart',[
                 'products' => $products,
                 'count' => $count
