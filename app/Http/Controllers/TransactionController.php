@@ -257,7 +257,7 @@ class TransactionController extends Controller
         $count = Cart::join('users','users.id','=','carts.user_id')->count();
         
         if($transaction == null){
-            return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
+            return view('checktransaction',['count' => $count])->withErrors('Kode yang dimasukkan salah!');
         }
         else{
 
@@ -356,7 +356,7 @@ class TransactionController extends Controller
             $imageName = $imagePath->getClientOriginalName();
   
             $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-          }
+        }
 
         $answer = Image::create([
             'name' => $imageName, 

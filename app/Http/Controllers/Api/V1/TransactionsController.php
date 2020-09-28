@@ -6,6 +6,7 @@ use App\Address;
 use App\Cart;
 use App\DetailTransaction;
 use App\Http\Controllers\Controller;
+use App\Image;
 use App\Product;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -180,6 +181,35 @@ class TransactionsController extends Controller
       ]);
     }
 
+    public function insertImage(Request $request,$id){
+      $transaction = Transaction::where('transactions.code', $id)->first();
+      $transaction_id = $transaction->id;
+
+      if ($request->file('image')) {
+          $imagePath = $request->file('image');
+          $imageName = $imagePath->getClientOriginalName();
+
+          $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+      } else {
+        return response()->json('Upload image failed');
+      }
+      
+      try {
+        $answer = Image::create([
+          'name' => $imageName, 
+          'path' => '/storage/'.$path,
+          'transaction_id' => $transaction_id
+      ]);
+      } catch (\Throwable $th) {
+        return response()->json('Upload image failed');
+      }
+      
+      
+      $transaction->status = 'processing';
+      $transaction->save();
+
+      return response()->json('Upload image success');
+  }
     /**
      * Update the specified resource in storage.
      *
