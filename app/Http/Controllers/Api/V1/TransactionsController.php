@@ -20,8 +20,13 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::where('user_id',Auth::id())->get();
-
+        // $transaction = Transaction::leftJoin('images','transactions.id', '=','images.transaction_id')
+        // ->select('transactions.*','images.path','images.name')->find(Auth::id());
+        $transaction =Transaction::join('users', 'transactions.user_id','=','users.id')
+            ->select('transactions.*')
+            ->where('users.id', '=', Auth::id())
+            ->orderBy('transactions.code')
+            ->get();
         return response()->json($transaction);
     }
 
@@ -145,7 +150,34 @@ class TransactionsController extends Controller
      */
     public function show($id)
     {
-        //
+      $status = Transaction::where('transactions.code', $id)->value('status');
+      $id_transaction = Transaction::where('transactions.code', $id)->pluck('id');
+      if ($status === "processing") {
+        $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+          ->join('images','images.transaction_id','=','transactions.id')
+          ->select('images.path','transactions.*','addresses.name','addresses.phone','addresses.city','addresses.address')
+          ->where('transactions.code', $id)
+          ->first();
+      } else {
+        $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+          ->select('transactions.*','addresses.name','addresses.phone',
+          'addresses.city','addresses.address')
+          ->where('transactions.code', $id)
+          ->first();
+      }
+      
+      $product = DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
+        ->join('products','products.id','=','detail_transactions.product_id')
+        ->join('images','images.product_id','=','products.id')
+        ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
+        ->where('transactions.code', $id)
+        ->get();
+
+      return response()->json([
+        'transaction :' => $transaction,
+        'details : ' => $product,
+        'status : ' => $status
+      ]);
     }
 
     /**

@@ -254,6 +254,7 @@ class TransactionController extends Controller
             ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
             ->where('transactions.code', $kode)
             ->get();
+        $count = Cart::join('users','users.id','=','carts.user_id')->count();
         
         if($transaction == null){
             return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
@@ -267,13 +268,16 @@ class TransactionController extends Controller
             return view('transaction',[
                 'transaction' => $transaction, 
                 'detail' => $detailTransaction,
-                'address' => $address
+                'address' => $address,
+                'count' => $count
             ]);
         }
         else{
             return view('checktransactionbycode', [
                 'data' => $transaction,
-                'product' => $product]);
+                'product' => $product,
+                'count' => $count
+            ]);
         }
     }
         
