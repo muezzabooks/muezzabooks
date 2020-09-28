@@ -63,27 +63,30 @@
                   </form>
                 @endif
                 
-                @if ($transaction['status']==='processing')
+                @if ($transaction['status']!=='processing')
+                  <div class="card-body mt-0 pt-3 bg-warning">
+                    <p>
+                      <strong> CARA PEMBAYARAN </strong>
+                    </p>
+                    <p>
+                      Transfer ke rekening : 
+                      <br>
+                      <strong>Yayasan Zhillal Arifin Alquran Bank Syariah Mandiri (451) 7137254888</strong>
+                    </p>
+                    <p>
+                      Lalu upload foto atau screenshot bukti transaksi
+                    </p>
+                  </div>
+                @else
                   <div class="card-body bg-success pt-4">
                     <h4 class="text-center text-white">
                       Pesanan Anda Sedang Diproses
                     </h4>
                   </div>
+                  
                 @endif
 
-                <div class="card-body mt-0 pt-3 bg-warning">
-                  <p>
-                    <strong> CARA PEMBAYARAN </strong>
-                  </p>
-                  <p>
-                    Transfer ke rekening : 
-                    <br>
-                    <strong>Yayasan Zhillal Arifin Alquran Bank Syariah Mandiri (451) 7137254888</strong>
-                  </p>
-                  <p>
-                    Lalu upload foto atau screenshot bukti transaksi
-                  </p>
-                </div>
+                
                 
         </div>
     </div>
