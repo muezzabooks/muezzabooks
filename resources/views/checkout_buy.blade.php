@@ -130,13 +130,6 @@
       data: data,
       placeholder: "Select a city",
     });
-<<<<<<< HEAD
-    
-    $('.js-example-basic').select2({
-      data: origin
-    });
-=======
->>>>>>> 9fc2c6fef6b2a4b3e72d38b088842a539beeaacd
   });
   
   document.getElementById("destination").onchange = function(){
@@ -194,17 +187,10 @@
         
             console.log(finalResult);
             var arrlength = finalResult.length;
-<<<<<<< HEAD
-            if(arrlength == 4){
-              document.getElementById("ongkos").value = finalResult[3].tarif;
-              document.getElementById("ongkos_display").textContent = finalResult[3].tarif;
-              var tarif = finalResult[3].tarif;
-=======
             if(arrlength == 3){
               document.getElementById("ongkos").value = finalResult[2].tarif;
               document.getElementById("ongkos_display").textContent = finalResult[2].tarif;
               var tarif = finalResult[2].tarif;
->>>>>>> 9fc2c6fef6b2a4b3e72d38b088842a539beeaacd
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
               var total = intTarif + sub;
