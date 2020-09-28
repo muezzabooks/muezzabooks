@@ -21,7 +21,7 @@ class TransactionController extends Controller
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
             $user = User::find(Auth::id())->pluck('name')->first();
-            $count = Cart::join('users','users.id','=','carts.user_id')->count();
+            $count = Cart::where('user_id',Auth::id())->count();
             return view('checkout',[
                 'products' => $products,
                 'user' => $user,
@@ -38,7 +38,7 @@ class TransactionController extends Controller
     {
         if (Auth::check()) {
             $user = User::find(Auth::id())->pluck('name')->first();
-            $count = Cart::join('users','users.id','=','carts.user_id')->count();
+            $count = Cart::where('user_id',Auth::id())->count();
             return view('checkout_buy',['user' => $user,'count' => $count]);
         } else {
             return view('checkout_buy');
@@ -227,7 +227,7 @@ class TransactionController extends Controller
     }
 
     public function checkTransaction(){
-        $count = Cart::join('users','users.id','=','carts.user_id')->count();
+        $count = Cart::where('user_id',Auth::id())->count();
         return view('checktransaction',[
             'count' => $count
         ]);
@@ -298,7 +298,7 @@ class TransactionController extends Controller
             ->select('products.product_name','products.price','detail_transactions.quantity')
             ->where('transactions.code', $id)
             ->get();
-        $count = Cart::join('users','users.id','=','carts.user_id')->count();
+            $count = Cart::where('user_id',Auth::id())->count();
         return view('mytransaction',[
             'data' => $transaction,
             'detail' => $detail,
@@ -323,7 +323,7 @@ class TransactionController extends Controller
         }
         else{  
         $address = Address::find($transaction['address_id']);
-        $count = Cart::join('users','users.id','=','carts.user_id')->count();
+        $count = Cart::where('user_id',Auth::id())->count();
         
               
         return view('transaction',[

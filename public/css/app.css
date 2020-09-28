@@ -11097,7 +11097,7 @@ input::-webkit-inner-spin-button {
 }
 
 .full-height {
-  min-height: 76.7vh;
+  min-height: 50vh;
 }
 
 .mobile {
