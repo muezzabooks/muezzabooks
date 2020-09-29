@@ -77,7 +77,7 @@
         <div class="card shadow-sm mb-4 mr-4" style="width: 15rem">
           <img class="card-img-top img-catalog" style="height: 15rem;" src="{{ $p->path }}" alt="Card image cap">
           <div class="card-body">
-            <button class="mb-3 btn btn-sm btn-outline-secondary" disabled>Author</button>
+            <button class="mb-3 btn btn-sm btn-outline-secondary" disabled>{{ $p->author }}</button>
             <h5 class="card-title text-uppercase" style="height: 2.5rem;">
               <a href="show/{{ $p->id }}" class="text-decoration-none text-dark">
                 <strong>{{ $p->product_name }}</strong>

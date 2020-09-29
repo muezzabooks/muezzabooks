@@ -33,9 +33,8 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" 
-                              style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
-                        <option value="0">Pilih kota destinasi</option>
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                        <option value="0">Pilih Kota</option>
                       </select>
                     </div>
                   </div>
