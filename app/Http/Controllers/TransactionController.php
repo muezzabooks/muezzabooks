@@ -19,16 +19,21 @@ class TransactionController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $products = Cart::where('user_id',Auth::id())->get();
-            $user = User::find(Auth::id())->pluck('name')->first();
-            $count = Cart::where('user_id',Auth::id())->count();
-            return view('checkout',[
-                'products' => $products,
-                'user' => $user,
-                'count' => $count
-            ]);
+          $products = Cart::where('user_id',Auth::id())->get();
+          $count = Cart::where('user_id',Auth::id())->count();
+          return view('checkout',[
+              'products' => $products,
+              'count' => $count
+          ]);
         } else {
-            return view('checkout');
+
+          if (session()->get('cart')) {
+            $count = count(session()->get('cart'));
+          } else {
+            $count = 0;
+          }
+          
+          return view('checkout',['count' => $count]);
         }
 
         
@@ -37,11 +42,18 @@ class TransactionController extends Controller
     public function indexBuy()
     {
         if (Auth::check()) {
-            $user = User::find(Auth::id())->pluck('name')->first();
-            $count = Cart::where('user_id',Auth::id())->count();
-            return view('checkout_buy',['user' => $user,'count' => $count]);
+          $user = User::find(Auth::id())->pluck('name')->first();
+          $count = Cart::where('user_id',Auth::id())->count();
+          return view('checkout_buy',['user' => $user,'count' => $count]);
         } else {
-            return view('checkout_buy');
+          
+          if (session()->get('cart')) {
+            $count = count(session()->get('cart'));
+          } else {
+            $count = 0;
+          }
+          
+          return view('checkout_buy',['count' => $count]);
         }
         
     }

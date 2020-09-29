@@ -20,10 +20,10 @@
                     <div class="form-group">
                       <label for="name">Nama Penerima</label>
                       @auth
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user }}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" onKeyup="checkform()">
                       @endauth
                       @guest
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" onKeyup="checkform()">
                       @endguest
                     </div>
                   </div>
@@ -33,7 +33,9 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="city">Kota</label>
-                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                      <select class="js-example-basic-single" name="city" id="destination" class="form-control" 
+                              style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                        <option value="0">Pilih kota destinasi</option>
                       </select>
                     </div>
                   </div>
@@ -44,7 +46,7 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="phone">Nomor Telepon</label>
-                      <input type="tel" class="form-control" id="phone" name="phone">
+                      <input type="tel" class="form-control" id="phone" name="phone" onKeyup="checkform()">
                     </div>
                   </div>
                 </div>
@@ -53,11 +55,11 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="address">Alamat</label>
-                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                      <textarea class="form-control" id="address" rows="3" name="address" onKeyup="checkform()"></textarea>
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
+                <button type="submit" class="btn btn-block btn-primary" id="submit-button" disabled="disabled">Lanjutkan ke Pembayaran</button>
               
               </form>
             </div>
@@ -105,11 +107,7 @@
                 </tr>
                 <tr>
                   <th scope="row">Biaya Kirim</th>
-                  <th colspan="2" class="text-center">Rp <span id="ongkos_display"></span> </th>
-                </tr>
-                <tr>
-                  <th scope="row">Diskon</th>
-                  <th colspan="2" class="text-center">Mark</th>
+                  <th colspan="2" class="text-center">Rp <span id="ongkos_display">0</span> </th>
                 </tr>
               </tbody>
             </table>
@@ -131,6 +129,26 @@
       placeholder: "Select a city",
     });
   });
+
+  $(function(){
+    $('#destination').change(function(){
+      checkform();
+    });
+  });
+
+  function checkform()
+  {
+    var n = document.getElementById('name').value;
+    var d = document.getElementById('destination').value;
+    var p = document.getElementById('phone').value;
+    var a = document.getElementById('address').value;
+
+    if ((n.length > 0) && (d != 0) && (p.length > 0) && (a.length > 0)) {
+      document.getElementById('submit-button').disabled = false;
+    } else {
+      document.getElementById('submit-button').disabled = true;
+    }
+  }
   
   document.getElementById("destination").onchange = function(){
     var finalResult = [];
