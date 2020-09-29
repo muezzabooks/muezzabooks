@@ -10,24 +10,30 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
         if (Auth::check()) {
             $products = Cart::where('user_id',Auth::id())->get();
             $count = Cart::where('user_id',Auth::id())->count();
+            
             return view('cart',[
                 'products' => $products,
                 'count' => $count
             ]);
         }
         
-
-        return view('cart');
+        if (session()->get('cart')) {
+          $count = count(session()->get('cart'));
+        } else {
+          $count = 0;
+        }
+        
+        $products = session()->get('cart');
+        return view('cart',[
+          'count' => $count,
+          'products' => $products
+        ]);
         
     }
 

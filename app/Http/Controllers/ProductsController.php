@@ -27,11 +27,15 @@ class ProductsController extends Controller
         } 
         else
         {
+          if (session()->get('cart')) {
+            $count = count(session()->get('cart'));
+          } else {
             $count = 0;
-            return view('home',[
-                'products' => $products,
-                'count' => $count
-                ]);
+          }
+          return view('home',[
+            'products' => $products,
+            'count' => $count
+          ]);
         }
 
         

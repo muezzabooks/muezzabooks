@@ -20,10 +20,10 @@
                     <div class="form-group">
                       <label for="name">Nama Penerima</label>
                       @auth
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user }}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" onKeyup="checkform()">
                       @endauth
                       @guest
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" onKeyup="checkform()">
                       @endguest
                     </div>
                   </div>
@@ -45,7 +45,7 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="phone">Nomor Telepon</label>
-                      <input type="tel" class="form-control" id="phone" name="phone">
+                      <input type="tel" class="form-control" id="phone" name="phone" onKeyup="checkform()">
                     </div>
                   </div>
                 </div>
@@ -54,11 +54,11 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label for="address">Alamat</label>
-                      <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+                      <textarea class="form-control" id="address" rows="3" name="address" onKeyup="checkform()"></textarea>
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-primary">Lanjutkan ke Pembayaran</button>
+                <button type="submit" class="btn btn-block btn-primary" id="submit-button" disabled="disabled">Lanjutkan ke Pembayaran</button>
               
               </form>
             </div>
@@ -108,10 +108,6 @@
                   <th scope="row">Biaya Kirim</th>
                   <th colspan="2" class="text-center">Rp <span id="ongkos_display">0</span> </th>
                 </tr>
-                <tr>
-                  <th scope="row">Diskon</th>
-                  <th colspan="2" class="text-center">Mark</th>
-                </tr>
               </tbody>
             </table>
             <h4 class="pb-2 text-center" id="total">Grand Total : Rp <span id="gtotal">{{ $total }}</span></h4>
@@ -132,6 +128,30 @@
       placeholder: "Select a city",
     });
   });
+
+  $(function(){
+    $('#destination').change(function(){
+      checkform();
+      
+      if (document.getElementById('destination').value == 0) {
+        document.getElementById("ongkos_display").textContent = 0;
+      }
+    });
+  });
+
+  function checkform()
+  {
+    var n = document.getElementById('name').value;
+    var d = document.getElementById('destination').value;
+    var p = document.getElementById('phone').value;
+    var a = document.getElementById('address').value;
+
+    if ((n.length > 0) && (d != 0) && (p.length > 0) && (a.length > 0)) {
+      document.getElementById('submit-button').disabled = false;
+    } else {
+      document.getElementById('submit-button').disabled = true;
+    }
+  }
   
   document.getElementById("destination").onchange = function(){
     var finalResult = [];
