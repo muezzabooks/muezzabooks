@@ -34,6 +34,7 @@
                     <div class="form-group">
                       <label for="city">Kota</label>
                       <select class="js-example-basic-single" name="city" id="destination" class="form-control" style="width: 100%; height: calc(1.6em + 0.75rem + 2px);">
+                        <option value="0">Pilih Kota</option>
                       </select>
                     </div>
                   </div>
@@ -105,7 +106,7 @@
                 </tr>
                 <tr>
                   <th scope="row">Biaya Kirim</th>
-                  <th colspan="2" class="text-center">Rp <span id="ongkos_display"></span> </th>
+                  <th colspan="2" class="text-center">Rp <span id="ongkos_display">0</span> </th>
                 </tr>
                 <tr>
                   <th scope="row">Diskon</th>
