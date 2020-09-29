@@ -162,6 +162,10 @@
   $(function(){
     $('#destination').change(function(){
       checkform();
+
+      if (document.getElementById('destination').value == 0) {
+        document.getElementById("ongkos_display").textContent = 0;
+      }
     });
   });
 
