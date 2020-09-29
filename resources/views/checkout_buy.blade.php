@@ -195,6 +195,8 @@
               var sub = parseInt("{{ $total }}");
               var intTarif = parseInt(tarif);
               var total = intTarif + sub;
+              document.getElementById("ongkir").value = intTarif;
+              document.getElementById("grtotal").value = total;
               // console.log(total);
               document.getElementById("gtotal").textContent = total;
             }
