@@ -42,6 +42,7 @@ Route::post('/insertImage/{id}','TransactionController@insertImage')->name('tran
 Route::get('/cektransaksi','TransactionController@checkTransaction')->name('transaction.check');
 Route::get('/cektransaksi/search','TransactionController@checkTransactionSearch')->name('transaction.check.search');
 Route::get('/mytransaction/{id}', 'TransactionController@myTransaction')->name('mytransaction');
+Route::get('/mytransaction/user/{id}','TransactionController@DetailMyTransaction')->name('mytransaction.user');
 
 
 Route::get('admin/adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');

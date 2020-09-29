@@ -30,7 +30,8 @@
                   <div class="tab-content">
                     <div id="belumbayar" class="container tab-pane active"><br>
                       @foreach ($data as $item)
-                      @if($item->status == "waiting")
+                      @if($item->status == "waiting")  
+                      <a href="{{ route('mytransaction.user',['id' => $item['id']]) }}" class="text-body text-decoration-none">                    
                         <div class="card">
                         <div class="card-header">
                           <div class="row">
@@ -64,18 +65,24 @@
                     </table>
                         </div>
                         <div class="card-header">
-                         <p class="text-right">Total : Rp. {{ $total }}</p>
+                          <div class="row">
+                            <div class="col-md-12 text-right">
+                              <p class=>Total : Rp. {{ $total }}</p>
+                            </div>
+                          </div>                    
+                         
                           </div>
                         </div>
                         
                         <br>
                         @endif
                       @endforeach  
-                    </div> 
+                    </div> </a>
 
                     <div id="proses" class="container tab-pane fade"><br>
                       @foreach ($data as $item)
                       @if($item->status == "processing")
+                      <a href="{{ route('mytransaction.user',['id' => $item['id']]) }}" class="text-body text-decoration-none">
                         <div class="card">
                         <div class="card-header">
                           <div class="row">
@@ -108,19 +115,21 @@
                       @endforeach
                     </table>
                         </div>
-                        <div class="card-header">
-                         <p class="text-right">Total : Rp. {{ $total }}</p>
+                        <div class="card-header text-right">
+                              <p class=>Total : Rp. {{ $total }}</p>
+                            </div>                      
+                         
                           </div>
-                        </div>
                         
                         <br>
                         @endif
                       @endforeach 
-                    </div>     
+                    </div> </a>    
                     
                     <div id="dikirim" class="container tab-pane fade"><br>
                       @foreach ($data as $item)
                       @if($item->status == "confirmed")
+                      <a href="{{ route('mytransaction.user',['id' => $item['id']]) }}" class="text-body text-decoration-none">
                         <div class="card">
                         <div class="card-header">
                           <div class="row">
@@ -161,11 +170,12 @@
                         <br>
                         @endif
                       @endforeach 
-                    </div> 
+                    </div> </a>
                     
                     <div id="selesai" class="container tab-pane fade"><br>
                       @foreach ($data as $item)
                       @if($item->status == "delivered")
+                      <a href="{{ route('mytransaction.user',['id' => $item['id']]) }}" class="text-body text-decoration-none">
                         <div class="card">
                         <div class="card-header">
                           <div class="row">
@@ -206,7 +216,7 @@
                         <br>
                         @endif
                       @endforeach 
-                    </div> 
+                    </div> </a>
                     </div>          
                              
               </div>

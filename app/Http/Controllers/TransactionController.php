@@ -249,27 +249,22 @@ class TransactionController extends Controller
             ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
             ->where('transactions.code', $kode)
             ->get();
+     $count = Cart::where('user_id',Auth::id())->count();
         
         if($transaction == null){
             return view('checktransaction')->withErrors('Kode yang dimasukkan salah!');
         }
-        else{
-
-        if($transaction->status == "waiting"){
+        else
+{
             $detailTransaction = DetailTransaction::where('transaction_id',$transaction->id)->get();
             // dd($detailTransaction[0]['product_id']);
             $address = Address::find($transaction->id);
             return view('transaction',[
                 'transaction' => $transaction, 
                 'detail' => $detailTransaction,
-                'address' => $address
+                'address' => $address,
+                'count' => $count
             ]);
-        }
-        else{
-            return view('checktransactionbycode', [
-                'data' => $transaction,
-                'product' => $product]);
-        }
     }
         
     }
@@ -304,6 +299,38 @@ class TransactionController extends Controller
             'detail' => $detail,
             'count' => $count
         ]);
+    }
+
+    public function DetailMyTransaction($id){
+        
+        $transaction = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+            ->select('transactions.*','addresses.name','addresses.phone',
+            'addresses.city','addresses.address')
+            ->where('transactions.id', $id)
+            ->first();
+        $product = DetailTransaction::join('transactions','transactions.id','=','detail_transactions.transaction_id')
+            ->join('products','products.id','=','detail_transactions.product_id')
+            ->join('images','images.product_id','=','products.id')
+            ->select('images.path','products.product_name','products.price', 'detail_transactions.quantity')
+            ->where('transactions.id', $id)
+            ->get();
+     $count = Cart::where('user_id',Auth::id())->count();
+        
+        if($transaction == null){
+            return abort('404');
+        }
+        else
+{
+            $detailTransaction = DetailTransaction::where('transaction_id',$transaction->id)->get();
+            // dd($detailTransaction[0]['product_id']);
+            $address = Address::find($transaction->id);
+            return view('mytransactionbyid',[
+                'transaction' => $transaction, 
+                'detail' => $detailTransaction,
+                'address' => $address,
+                'count' => $count
+            ]);
+    }
     }
 
     /**
@@ -357,7 +384,7 @@ class TransactionController extends Controller
         
         
 
-        return redirect()->route('transaction.show', ['id' => $id]);
+        return redirect()->back();
     }
 
     /**
