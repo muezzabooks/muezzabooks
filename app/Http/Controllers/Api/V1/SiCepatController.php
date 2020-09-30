@@ -58,20 +58,23 @@ class SiCepatController extends Controller
         $html = $response['html'];
         $crawler = new Crawler($html);
 
-        $result = $crawler->filter('table')->filter('tr')->each(function ($tr, $i){
+        $sicepat = $crawler->filter('table')->filter('tr')->each(function ($tr, $i){
           return $tr->filter('td')->each(function ($td, $i) {
             return trim($td->text());
           });
         });
 
+        if (count($sicepat) === 5) {
+          $result = $sicepat[4];
+        }
+
+        if (count($sicepat) === 4) {
+          $result = $sicepat[3];
+        }
+        
+
         return response()->json($result);
 
-      // } catch (\Throwable $th) {
-      //   return response()->json([
-      //     'message'=>'Failed to fetch data',
-      //     'error' => $th  
-      //   ]);
-      // }
         
     }
 
