@@ -55,22 +55,6 @@ class SiCepatController extends Controller
           'weight' => 1
         ]);
         
-        
-        // $result = str_replace(/(?:^<div[^>]*>)|(?:<\/div>$)/g, '',$response['html']);
-        // $result = strip_tags($response['html'],['table','thead','tr','th','td','tbody']);
-        // foreach ($response['html']->find('<tr>') as $row) {
-        //   $service = $row->find('td',0)->innertext;
-        //   $deskripsi = $row->find('td',1)->innertext;
-        //   $tarif = $row->find('td',2)->innertext;
-        //   $estimasi = $row->find('td',3)->innertext;
-  
-        //   $result = [
-        //     'service' => $service,
-        //     'deskripsi' => $deskripsi,
-        //     'tarif' => $tarif,
-        //     'estimasi' => $estimasi,
-        //   ];
-        // }
         $html = $response['html'];
         $crawler = new Crawler($html);
 
