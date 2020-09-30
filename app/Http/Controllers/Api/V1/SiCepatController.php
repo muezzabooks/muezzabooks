@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpClient\HttpClient;
 
 class SiCepatController extends Controller
 {
@@ -37,7 +40,8 @@ class SiCepatController extends Controller
      */
     public function show($id)
     {
-      try {
+      // try {
+
         $response = Http::withHeaders([
           'authority' => 'www.sicepat.com',
           'accept' => 'application/json, text/javascript, */*; q=0.01',
@@ -50,14 +54,40 @@ class SiCepatController extends Controller
           'destination_code' => $id,
           'weight' => 1
         ]);
+        
+        
+        // $result = str_replace(/(?:^<div[^>]*>)|(?:<\/div>$)/g, '',$response['html']);
+        // $result = strip_tags($response['html'],['table','thead','tr','th','td','tbody']);
+        // foreach ($response['html']->find('<tr>') as $row) {
+        //   $service = $row->find('td',0)->innertext;
+        //   $deskripsi = $row->find('td',1)->innertext;
+        //   $tarif = $row->find('td',2)->innertext;
+        //   $estimasi = $row->find('td',3)->innertext;
+  
+        //   $result = [
+        //     'service' => $service,
+        //     'deskripsi' => $deskripsi,
+        //     'tarif' => $tarif,
+        //     'estimasi' => $estimasi,
+        //   ];
+        // }
+        $html = $response['html'];
+        $crawler = new Crawler($html);
 
-        $result = $response['html'];
+        $result = $crawler->filter('table')->filter('tr')->each(function ($tr, $i){
+          return $tr->filter('td')->each(function ($td, $i) {
+            return trim($td->text());
+          });
+        });
 
-        return $result;
+        return response()->json($result);
 
-      } catch (\Throwable $th) {
-        return response()->json('Failed to fetch data');
-      }
+      // } catch (\Throwable $th) {
+      //   return response()->json([
+      //     'message'=>'Failed to fetch data',
+      //     'error' => $th  
+      //   ]);
+      // }
         
     }
 
