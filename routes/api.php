@@ -37,6 +37,10 @@ Route::prefix('v1')->name('api.v1.')->namespace('Api\V1')->group(function(){
         'index','show'
     ]);
 
+    Route::apiResource('sicepat','SiCepatController')->only([
+        'show'
+    ]);
+
     // Route::get('/products','ProductsController@index')->name('products');
     // Route::get('/products','ProductsController@shw')->name('products.show');
 
