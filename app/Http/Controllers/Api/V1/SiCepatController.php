@@ -73,8 +73,9 @@ class SiCepatController extends Controller
         }
         
 
-        return response()->json(['message' => 'hello']);
+        return response()->json(['message' => $result]);
 
+        
     }
 
     /**
