@@ -58,7 +58,7 @@ class TransactionsController extends Controller
             $cart = Cart::where('user_id',Auth::id())->get();
             $total = 0;
             foreach ($cart as $id => $details) {
-                $total += Product::where(['id' => $details->id])->pluck('price')->first();
+              $total += Product::where(['id' => $details->product_id])->pluck('price')->first() * $details->quantity;
             }
 
             $transaction = new Transaction;
