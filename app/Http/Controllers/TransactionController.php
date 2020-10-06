@@ -46,7 +46,7 @@ class TransactionController extends Controller
           $count = Cart::where('user_id',Auth::id())->count();
           return view('checkout_buy',['user' => $user,'count' => $count]);
         } else {
-          
+
           if (session()->get('cart')) {
             $count = count(session()->get('cart'));
           } else {
@@ -102,7 +102,7 @@ class TransactionController extends Controller
         $a = Address::latest()->pluck('id')->first();
         $total = 0;
         foreach (session('cart') as $id => $details) {
-            $total+=$details['price'];
+            $total+=$details['price'] * $details['quantity'];
         }
 
         $transaction = new Transaction;
@@ -158,7 +158,7 @@ class TransactionController extends Controller
         $cart = Cart::where('user_id',Auth::id())->get();
         $total = 0;
         foreach ($cart as $id => $details) {
-            $total += Product::where(['id' => $details->product_id])->pluck('price')->first();
+            $total += Product::where(['id' => $details->product_id])->pluck('price')->first() * $details->quantity;
         }
 
         $transaction = new Transaction;
@@ -211,7 +211,7 @@ class TransactionController extends Controller
         $a = Address::latest()->pluck('id')->first();
         $total = 0;
         foreach (session('cart_buy') as $id => $details) {
-            $total+=$details['price'];
+            $total+=$details['price'] * $details['quantity'];
         }
 
         $transaction = new Transaction;
