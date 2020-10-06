@@ -86,7 +86,7 @@ html{
                     <tfoot>
                         <tr>
                             <td colspan="3">Subtotal</td>
-                            <td>Rp. {{ $data->total }}</td>
+                            <td>Rp. {{ $data->total - $data->shipping_cost }}</td>
                         </tr>
                     </tfoot>
                   </table>                  
@@ -116,7 +116,7 @@ html{
                                 <p><strong>Grand Total</strong> </p>
                             </div>
                             <div class="col-md-6 text-right">
-                                <p>Rp. {{ $data->shipping_cost + $data->total }} </p>
+                                <p>Rp. {{ $data->total }} </p>
                             </div>
                         </div>
                      <hr>

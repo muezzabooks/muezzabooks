@@ -45,6 +45,7 @@
                 <option value="processing" {{ $data->status == 'processing'? 'selected' : '' }}>processing</option>
                 <option value="confirmed" {{ $data->status == 'confirmed'? 'selected' : '' }}>confirmed</option>
                 <option value="delivered" {{ $data->status == 'delivered'? 'selected' : '' }}>delivered</option>
+                <option value="closed" {{ $data->status == 'closed'? 'closed' : '' }}>closed</option>
             </select></th>
           </tr>
           <tr>
