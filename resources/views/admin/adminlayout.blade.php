@@ -50,11 +50,21 @@
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
-      <!-- Nav Item - Dashboard -->
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item @yield('order')">
-        <a class="nav-link" href="{{ route('transaction') }}">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Order</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-credit-card"></i>
+          <span>Transaksi</span>
+        </a>
+        <div id="collapseTwo" class="collapse @yield('show')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item @yield('allorder')" href="{{ route('transaction') }}">Semua Transaksi</a>
+            <a class="collapse-item @yield('waiting')" href="{{ route('waiting') }}">Belum Bayar</a>
+            <a class="collapse-item @yield('processing')" href="{{ route('processing') }}">Proses</a>
+            <a class="collapse-item @yield('confirmed')" href="{{ route('confirmed') }}">Dalam Pengiriman</a>
+            <a class="collapse-item @yield('done')" href="{{ route('done') }}">Transaksi Selesai</a>
+          </div>
+        </div>
       </li>
 
       <!-- Divider -->
@@ -63,7 +73,7 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item @yield('produk')">
         <a class="nav-link" href="{{ route('adminproducts.index') }}">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-fw fa-book"></i>
           <span>Produk</span></a>
       </li>
 

@@ -17,24 +17,29 @@
     <table class="table-sm">
         <tbody>
           <tr>
-            <th scope="row">Date </th>
+            <th scope="row">Tanggal </th>
             <th scope="row">:</th>
             <th colspan="2" class="text-left">{{ $data->date }}</th>
           </tr>
           <tr>
-            <th scope="row">Costumer</th>
+            <th scope="row">Kostumer</th>
             <th scope="row">:</th>
             <th colspan="2" class="text-left">{{ $data->name }}</th>
           </tr>
           <tr>
-            <th scope="row">Address</th>
+            <th scope="row">Alamat</th>
             <th scope="row">:</th>
             <th colspan="2" class="text-left">{{ $data->address }},{{ $data->city }}</th>
           </tr>
           <tr>
-            <th scope="row">Phone</th>
+            <th scope="row">Telepon</th>
             <th scope="row">:</th>
             <th colspan="2" class="text-left">{{ $data->phone }}</th>
+          </tr>
+          <tr>
+            <th scope="row">No Resi</th>
+            <th scope="row">:</th>
+            <th colspan="2" class="text-left"><input type="text" name="resi" value="{{ $data->no_resi }}"></th>
           </tr>
           <tr>
             <th scope="row">Status</th>
@@ -50,10 +55,11 @@
           </tr>
           <tr>
             <th scope="row" colspan="2">Bukti Pembayaran</th>
+            <th colspan="2" class="text-left"><a href="{{ $data->path }}" target="_blank">
+              <img src="{{ $data->path }}" style="height: 100px"></a></th>
           </tr>
           <tr>
-            <th colspan="2" class="text-left"><a href="{{ $data->path }}" target="_blank">
-                <img src="{{ $data->path }}" alt="Bukti Pembayaran" style="height: 100px"></a></th>
+           
           </tr>
         </tbody>
     </table>

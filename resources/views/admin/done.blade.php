@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 @section('order','active')
 @section('header','Transaction')
-@section('allorder','active')
+@section('done','active')
 @section('show','show')
 
 @section('content')

@@ -53,6 +53,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     // Route::get('adminhome', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
     Route::resource('adminproducts', 'AdminProductsController')->middleware('is_admin');
     Route::get('/transaction','AdminTransactionController@index')->name('transaction');
+    Route::get('/waiting','AdminTransactionController@waiting')->name('waiting');
+    Route::get('/processing','AdminTransactionController@processing')->name('processing');
+    Route::get('/confirmed','AdminTransactionController@confirmed')->name('confirmed');
+    Route::get('/done','AdminTransactionController@done')->name('done');
     Route::get('/detailtransaction/{id}','AdminTransactionController@show');
     Route::put('/transaction/update/{id}','AdminTransactionController@update')->name('admintransaction.update');
     Route::get('/dashboard','AdminDashboardController@show')->name('admin.hom')->middleware('is_admin');

@@ -8,6 +8,8 @@ use Alfa6661\AutoNumber\AutoNumberTrait;
 class Transaction extends Model
 {
     use AutoNumberTrait;
+    protected $fillable = (['code','user_id','address_id','no_resi','shipping_cost','total','language',
+    'status','date']);
     public function user()
     {
         return $this->belongsTo('App\User');

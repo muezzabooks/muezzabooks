@@ -30,7 +30,7 @@ class AdminTransactionController extends Controller
       else {
           $transaction = Transaction::join('images','transactions.id', '=','images.transaction_id')
           ->join('addresses','transactions.address_id', '=','addresses.id')
-          ->select('transactions.*','addresses.name','addresses.phone',
+          ->select('transactions.*','addresses.name','addresses.phone', 'images.path',
           'addresses.city','addresses.address')
           ->where('transactions.id', $id)
           ->first();
@@ -47,13 +47,49 @@ class AdminTransactionController extends Controller
           'product' => $product
           ]);
     }
+
+    public function waiting(){
+        $data = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name')
+        ->where('transactions.status','waiting')
+        ->orWhere('transactions.status','waiting for validation')
+        ->get();
+       return view('admin.waiting')->with('data', $data);
+    }
+
+    public function processing(){
+        $data = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name')
+        ->where('transactions.status','processing')
+        ->get();
+       return view('admin.processing')->with('data', $data);
+    }
+
+    public function confirmed(){
+        $data = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name')
+        ->where('transactions.status','confirmed')
+        ->get();
+       return view('admin.confirmed')->with('data', $data);
+    }
+
+    public function done(){
+        $data = Transaction::join('addresses','transactions.address_id', '=','addresses.id')
+        ->select('transactions.*','addresses.name')
+        ->where('transactions.status','delivered')
+        ->orWhere('transactions.status','closed')
+        ->get();
+       return view('admin.done')->with('data', $data);
+    }
    
    public function update(Request $request, $id){
        
     $status = $request->status;
+    $resi = $request->resi;
 
         $transaction = Transaction::find($id);
         $transaction->status = $status;
+        $transaction->no_resi = $resi;
         $transaction->save();
 
        return redirect('admin/transaction');
